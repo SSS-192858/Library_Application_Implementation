@@ -1,13 +1,19 @@
 package com.library.library.entity;
 
 import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "")
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
+    private Integer id;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "")
@@ -18,6 +24,28 @@ public class Student {
 
     @Column(name = "")
     private String phone;
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
+    public List<BookStudent> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<BookStudent> books) {
+        this.books = books;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Request> requests;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student", cascade = CascadeType.ALL)
+    private List<BookStudent> books;
 
     public Student(String studentName, String email, String phone) {
         this.studentName = studentName;

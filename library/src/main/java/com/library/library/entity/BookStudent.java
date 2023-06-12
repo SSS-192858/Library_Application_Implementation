@@ -12,11 +12,13 @@ public class BookStudent {
     @Column(name = "")
     private int slno;
 
-    @JoinColumn()
-    private int student_id;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-    @JoinColumn()
-    private int book_code;
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "book_code")
+    private Book book;
 
     @Column(name="")
     private Date start_date;
@@ -33,16 +35,20 @@ public class BookStudent {
         return start_date;
     }
 
-    public int getBook_code() {
-        return book_code;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setBook_code(int book_code) {
-        this.book_code = book_code;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public int getStudent_id() {
-        return student_id;
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public int getSlno() {
@@ -55,10 +61,6 @@ public class BookStudent {
 
     public void setSlno(int slno) {
         this.slno = slno;
-    }
-
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
     }
 
     public void setStart_date(Date start_date) {

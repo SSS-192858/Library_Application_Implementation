@@ -13,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
-    private UUID id;
+    private Integer id;
 
     @Column(name = "username")
     private String username;
@@ -31,11 +31,11 @@ public class User {
                     @JoinColumn(name = "role_id") })
     private Set<Role> roles;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

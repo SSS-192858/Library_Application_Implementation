@@ -1,8 +1,18 @@
 package com.library.library.dao;
 
 import com.library.library.entity.Student;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import java.util.*;
 
-public interface StudentDAO extends CrudRepository<Student, Long> {
-    Student findStudentByName(String name);
+@Repository
+public interface StudentDAO {
+    public void saveStudent(Student student);
+
+    public void deleteStudentById(Integer id);
+
+    public void updateStudent(Student student);
+
+    public List<Student> findAllStudents();
+
+    public Student getStudentById(Integer id);
 }

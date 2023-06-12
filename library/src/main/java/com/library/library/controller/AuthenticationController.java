@@ -55,18 +55,16 @@ public class AuthenticationController {
         return ResponseEntity.ok(userDetailsService.saveAdmin(user));
     }
 
-    @RequestMapping(value = "/dummy_users", method = RequestMethod.GET)
+    @RequestMapping(value = "/dummy_students", method = RequestMethod.GET)
     public String userPage(){
-        return "Hello User";
+        return "Hello Student";
     }
-    @RequestMapping(value = "/dummy_docs", method = RequestMethod.GET)
-    public String doctorPage(){
-        return "Hello Doc";
-    }
+
     @RequestMapping(value = "/dummy_admin", method = RequestMethod.GET)
     public String adminPage(){
         return "Hello Admin";
     }
+
 
     private void authenticate(String username, String password) throws Exception {
         try {

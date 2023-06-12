@@ -21,6 +21,7 @@ CREATE TABLE user_roles (
 
 CREATE TABLE student(
     student_id INTEGER,
+    user_id INTEGER,
     student_name varchar(100) DEFAULT NULL,
     student_email varchar(100) DEFAULT NULL,
     student_phno varchar(100) DEFAULT NULL,
@@ -63,7 +64,7 @@ FOREIGN KEY (role_id) REFERENCES role(role_id);
 
 ALTER TABLE student
 ADD CONSTRAINT fk_student_user
-FOREIGN KEY (student_id) REFERENCES user(user_id);
+FOREIGN KEY (user_id) REFERENCES user(user_id);
 
 ALTER TABLE request
 ADD CONSTRAINT fk_book_request

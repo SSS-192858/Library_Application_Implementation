@@ -83,7 +83,7 @@ FOREIGN KEY (book_code) REFERENCES book(book_code);
 
 INSERT INTO role values (1,'ADMIN'),(2,'STUDENT');
 INSERT INTO user values (1,"admin","$2a$12$5Y0GaYPjhBTO7ueSN3OFc.Xhi72L6Uk3ebhTp7YXVf2ldCiHsoThS");
---test123
+-- test123
 INSERT INTO user values (2,"student","$2a$10$GCdiAz.35tPgpxlD.iRsSOkxDNGkBVJLvdDvSorbc/CSnXJoQkDAa");
 
 INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 1 FROM user WHERE user.username = "admin";

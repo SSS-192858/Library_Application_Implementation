@@ -12,17 +12,25 @@ public class Student {
     @Column(name = "student_id")
     private Integer id;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "")
+    @Column(name = "student_name")
     private String studentName;
 
-    @Column(name = "")
+    @Column(name = "student_email")
     private String email;
 
-    @Column(name = "")
+    @Column(name = "student_phno")
     private String phone;
 
     public List<Request> getRequests() {

@@ -8,16 +8,16 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "")
+    @Column(name = "book_code")
     private int book_code;
 
-    @Column(name = "")
+    @Column(name = "book_title")
     private String book_title;
 
-    @Column(name = "")
+    @Column(name = "book_author")
     private String author;
 
-    @Column(name = "")
+    @Column(name = "book_desc")
     private String book_desc;
 
     public Book() {}
@@ -33,6 +33,22 @@ public class Book {
     public int getBook_code()
     {
         return this.book_code;
+    }
+
+    public void setBook_code(int book_code) {
+        this.book_code = book_code;
+    }
+
+    public void setBook_title(String book_title) {
+        this.book_title = book_title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setBook_desc(String book_desc) {
+        this.book_desc = book_desc;
     }
 
     public String getBook_title()

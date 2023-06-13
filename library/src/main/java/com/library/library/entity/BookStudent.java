@@ -9,7 +9,7 @@ public class BookStudent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "")
+    @Column(name = "slno")
     private int slno;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
@@ -20,10 +20,10 @@ public class BookStudent {
     @JoinColumn(name = "book_code")
     private Book book;
 
-    @Column(name="")
+    @Column(name="start_date")
     private Date start_date;
 
-    @Column(name = "")
+    @Column(name = "end_date")
     private Date end_date;
 
 

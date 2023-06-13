@@ -8,7 +8,7 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "")
+    @Column(name = "slno")
     private int slno;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -18,14 +18,14 @@ public class Request {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "book_code")
     private Book book;
+//
+//    @JoinColumn()
+//    private int book_code;
 
-    @JoinColumn()
-    private int book_code;
-
-    @Column(name = "")
+    @Column(name = "start_date")
     private Date start_date;
 
-    @Column(name = "")
+    @Column(name = "end_date")
     private Date end_date;
 
     public int getSlno() {
@@ -52,13 +52,6 @@ public class Request {
         this.book = book;
     }
 
-    public int getBook_code() {
-        return book_code;
-    }
-
-    public void setBook_code(int book_code) {
-        this.book_code = book_code;
-    }
 
     public Date getStart_date() {
         return start_date;

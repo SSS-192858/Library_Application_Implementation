@@ -30,9 +30,9 @@ CREATE TABLE student(
 
 CREATE TABLE book(
     book_code INTEGER,
-    book_name varchar(100) DEFAULT NULL,
-    book_email varchar(100) DEFAULT NULL,
-    book_phno varchar(100) DEFAULT NULL,
+    book_title varchar(100) DEFAULT NULL,
+    book_author varchar(100) DEFAULT NULL,
+    book_desc varchar(100) DEFAULT NULL,
     constraint pk_book PRIMARY KEY (book_code)
 );
 

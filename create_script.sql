@@ -1,8 +1,9 @@
+drop database if exists Library;
 create database Library;
 use Library;
 
 create table user(
-    user_id INTEGER PRIMARY KEY,
+    user_id INTEGER auto_increment PRIMARY KEY,
     username varchar(100) NOT NULL,
     password char(68) NOT NULL
 );
@@ -20,7 +21,7 @@ CREATE TABLE user_roles (
 );
 
 CREATE TABLE student(
-    student_id INTEGER,
+    student_id INTEGER auto_increment,
     user_id INTEGER,
     student_name varchar(100) DEFAULT NULL,
     student_email varchar(100) DEFAULT NULL,
@@ -29,7 +30,7 @@ CREATE TABLE student(
 );
 
 CREATE TABLE book(
-    book_code INTEGER,
+    book_code INTEGER auto_increment,
     book_title varchar(100) DEFAULT NULL,
     book_author varchar(100) DEFAULT NULL,
     book_desc varchar(100) DEFAULT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE book(
 );
 
 CREATE TABLE request(
-    slno INTEGER,
+    slno INTEGER auto_increment,
     student_id INTEGER,
     book_code INTEGER,
     start_date timestamp NOT NULL DEFAULT current_timestamp(),
@@ -46,7 +47,7 @@ CREATE TABLE request(
 );
 
 create table student_book(
-    slno INTEGER,
+    slno INTEGER auto_increment,
     student_id INTEGER,
     book_code INTEGER,
     start_date timestamp NOT NULL DEFAULT current_timestamp(),
@@ -89,3 +90,4 @@ INSERT INTO user values (2,"student","$2a$10$GCdiAz.35tPgpxlD.iRsSOkxDNGkBVJLvdD
 
 INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 1 FROM user WHERE user.username = "admin";
 INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 2 FROM user WHERE user.username = "student";
+INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 2 FROM user WHERE user.username = "admin";

@@ -1,5 +1,6 @@
 package com.library.library.dao;
 
+import com.library.library.entity.Request;
 import com.library.library.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -22,7 +23,7 @@ public class StudentDAOImpl implements StudentDAO{
     @Override
     @Transactional
     public void saveStudent(Student student) {
-        entityManager.persist(student);
+        entityManager.merge(student);
     }
 
     @Override
@@ -53,4 +54,5 @@ public class StudentDAOImpl implements StudentDAO{
     public Student getStudentById(Integer id) {
         return entityManager.find(Student.class, id);
     }
+
 }

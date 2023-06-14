@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "request")
 public class Request {
 
     @Id
@@ -18,9 +20,6 @@ public class Request {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "book_code")
     private Book book;
-//
-//    @JoinColumn()
-//    private int book_code;
 
     @Column(name = "start_date")
     private Date start_date;

@@ -47,8 +47,9 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     @Transactional
-    public void saveBook(Book book) {
+    public Book saveBook(Book book) {
         this.entityManager.persist(book);
+        return book;
     }
 
     @Override

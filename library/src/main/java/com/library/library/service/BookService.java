@@ -24,9 +24,9 @@ public class BookService {
         return this.bookDAO.findBookById(book_code);
     }
 
-    public void addBook(Book book)
+    public Book addBook(Book book)
     {
-        this.bookDAO.saveBook(book);
+        return this.bookDAO.saveBook(book);
     }
 
     public void deleteBookByCode(int book_code)

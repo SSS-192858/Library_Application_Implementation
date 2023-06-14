@@ -20,7 +20,7 @@ public class RequestDAOImpl implements RequestDAO {
 
     @Override
     public void saveRequest(Request request) {
-        entityManager.persist(request);
+        entityManager.merge(request);
     }
 
     @Override
@@ -47,14 +47,14 @@ public class RequestDAOImpl implements RequestDAO {
 
     @Override
     public List<Request> getRequestByStudentId(Integer id) {
-        TypedQuery<Request> tpq = this.entityManager.createQuery("FROM Request where student_id = :student_id", Request.class);
+        TypedQuery<Request> tpq = this.entityManager.createQuery("FROM Request where student.id = :student_id", Request.class);
         tpq.setParameter("student_id", id);
         return tpq.getResultList();
     }
 
     @Override
     public List<Request> getRequestByBookId(Integer id) {
-        TypedQuery<Request> tpq = this.entityManager.createQuery("FROM Request where book_code = :code", Request.class);
+        TypedQuery<Request> tpq = this.entityManager.createQuery("FROM Request where book.book_code = :code", Request.class);
         tpq.setParameter("code", id);
         return tpq.getResultList();
     }

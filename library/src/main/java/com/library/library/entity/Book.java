@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.JoinColumnOrFormula;
 
 @Entity
+@Table(name = "book")
 public class Book {
 
     @Id

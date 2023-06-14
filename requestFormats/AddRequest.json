@@ -1,0 +1,17 @@
+{
+    "student": {
+        "id":1,
+        "studentName":"siddharth",
+        "email":"siddharthvatps@gmail.com",
+        "phone":"9461481568"
+    },
+    "book": {
+        "book_code":2,
+        "book_title": "jifnijifjifu",
+        "author": "wiwin3g",
+        "book_desc": "huiefhiuehfi"
+    },
+    "start_date": "2012-04-23T18:25:43.511Z",
+    "end_date": "2013-04-23T18:25:43.511Z"
+    
+}

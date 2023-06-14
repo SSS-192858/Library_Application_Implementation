@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookDAO  {
-    public void saveBook(Book book);
+    public Book saveBook(Book book);
 
     public Book findBookById(int book_code);
 

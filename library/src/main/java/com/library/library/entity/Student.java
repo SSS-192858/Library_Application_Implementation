@@ -1,10 +1,11 @@
 package com.library.library.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "")
+@Table(name = "student")
 public class Student {
 
     @Id
@@ -20,7 +21,7 @@ public class Student {
         this.id = id;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -50,9 +51,11 @@ public class Student {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Request> requests;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<BookStudent> books;
 
     public Student(String studentName, String email, String phone) {
@@ -95,6 +98,14 @@ public class Student {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void addRequest(Request request){
+        if (requests == null){
+            requests = new ArrayList<Request>();
+        }
+        this.requests.add(request);
+        request.setStudent(this);
     }
 
 }

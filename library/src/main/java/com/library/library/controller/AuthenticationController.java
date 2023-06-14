@@ -40,14 +40,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    @RequestMapping(value = "/register_user", method = RequestMethod.POST)
+    @RequestMapping(value = "/register_student", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         return ResponseEntity.ok(userDetailsService.saveUser(user));
-    }
-
-    @RequestMapping(value = "/register_doctor", method = RequestMethod.POST)
-    public ResponseEntity<?> saveDoctor(@RequestBody UserDTO user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.saveDoctor(user));
     }
 
     @RequestMapping(value = "/register_admin", method = RequestMethod.POST)

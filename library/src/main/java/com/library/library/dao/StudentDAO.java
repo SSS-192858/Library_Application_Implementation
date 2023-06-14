@@ -1,5 +1,6 @@
 package com.library.library.dao;
 
+import com.library.library.entity.Request;
 import com.library.library.entity.Student;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -15,4 +16,6 @@ public interface StudentDAO {
     public List<Student> findAllStudents();
 
     public Student getStudentById(Integer id);
+
+
 }

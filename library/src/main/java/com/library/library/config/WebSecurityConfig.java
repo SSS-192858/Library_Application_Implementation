@@ -49,20 +49,20 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((configurer)->{
-            configurer.requestMatchers("/authenticate","/register_user").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/register_doctor","/register_admin").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET,"/dummy_users").hasRole("USER")
+            configurer.requestMatchers("/authenticate","/register_student").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/register_admin").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET,"/dummy_students").hasRole("STUDENT")
                     .requestMatchers(HttpMethod.GET,"/dummy_admin").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/books/save/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT,"/books/updateBook/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/books/deleteBook/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/books/getAll/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/books/getBook/**").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/student/save/**").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/student/save/**", "/student/save").hasRole("STUDENT")
                     .requestMatchers(HttpMethod.DELETE,"/student/deleteStudent/**").permitAll()
                     .requestMatchers(HttpMethod.PUT,"/student/updateStudent/**").permitAll()
-                    .requestMatchers(HttpMethod.GET,"student/getAll/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET,"student/getStudent/**").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/student/getAll/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET,"/student/getStudent/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/requests/allRequests/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/requests/student/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/requests/**").permitAll()
@@ -76,8 +76,6 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.POST,"/bookStudent/save/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/bookStudent/delete/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/bookStudent/accept").hasRole("ADMIN")
-                    .requestMatchers("/send-mail").permitAll()
-
                     .anyRequest().authenticated();
         }).exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

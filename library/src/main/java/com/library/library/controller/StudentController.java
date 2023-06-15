@@ -28,7 +28,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/deleteStudent/{student_id}")
-    public void deleteStudentbyID(@PathVariable int student_id)
+    public void deleteStudentByID(@PathVariable int student_id)
     {
         Student tempEmployee = this.studentService.findStudentById(student_id);
         if(tempEmployee==null)
@@ -39,23 +39,22 @@ public class StudentController {
     }
 
     @PutMapping("/updateStudent")
-    public void updateStudent(@RequestBody Student student, @RequestHeader String Authorization)
+    public Student updateStudent(@RequestBody Student student, @RequestHeader String Authorization)
     {
         String username = jwtTokenUtil.getUsernameFromToken(Authorization.substring(7));
         User user = jwtUserDetailsService.getUserByUsername(username);
         student.setUser(user);
-        this.studentService.updateStudent(student);
+        return this.studentService.updateStudent(student);
     }
 
     @GetMapping("/getAll")
     public List<Student> findAll()
     {
         return this.studentService.findAll();
-
     }
 
     @GetMapping("/getStudent/{student_id}")
-    public Student findStudentbyID(@PathVariable int student_id)
+    public Student findStudentByID(@PathVariable int student_id)
     {
         return this.studentService.findStudentById(student_id);
     }

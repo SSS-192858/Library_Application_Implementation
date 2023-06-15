@@ -54,7 +54,7 @@ public class BookStudentDAOImpl implements BookStudentDAO{
     }
 
     @Override
-    public void makeBookStudent(BookStudent bookStudent) {
-        entityManager.persist(bookStudent);
+    public BookStudent makeBookStudent(BookStudent bookStudent) {
+        return entityManager.merge(bookStudent);
     }
 }

@@ -33,7 +33,7 @@ public class StudentService {
         studentDAO.deleteStudentById(id);
     }
 
-    public void updateStudent(Student student){
-        studentDAO.updateStudent(student);
+    public Student updateStudent(Student student){
+        return studentDAO.updateStudent(student);
     }
 }

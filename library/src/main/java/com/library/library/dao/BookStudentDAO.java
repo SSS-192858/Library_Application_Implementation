@@ -10,7 +10,7 @@ public interface BookStudentDAO {
 
     public void deleteBookStudentById(int id);
 
-    public void makeBookStudent(BookStudent bookStudent);
+    public BookStudent makeBookStudent(BookStudent bookStudent);
 
     public List<BookStudent> findAllBookStudent();
 

@@ -19,8 +19,8 @@ public class RequestDAOImpl implements RequestDAO {
     }
 
     @Override
-    public void saveRequest(Request request) {
-        entityManager.merge(request);
+    public Request saveRequest(Request request) {
+        return entityManager.merge(request);
     }
 
     @Override

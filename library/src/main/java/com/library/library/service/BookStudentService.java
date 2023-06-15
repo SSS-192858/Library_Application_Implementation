@@ -37,8 +37,8 @@ public class BookStudentService {
         return bookStudentDAO.findAllBookStudent();
     }
 
-    public void addNewBookStudentPair(BookStudent bookStudent){
-        bookStudentDAO.makeBookStudent(bookStudent);
+    public BookStudent addNewBookStudentPair(BookStudent bookStudent){
+        return bookStudentDAO.makeBookStudent(bookStudent);
     }
 
     public void deleteById(Integer id){

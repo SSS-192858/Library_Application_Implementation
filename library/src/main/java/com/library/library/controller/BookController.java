@@ -28,7 +28,7 @@ public class BookController {
 
     @PostMapping("/save")
     public Book saveBook(@RequestBody Book book){
-        book.setBook_code(0);
+        book.setBookCode(0);
         return bookService.addBook(book);
     }
 

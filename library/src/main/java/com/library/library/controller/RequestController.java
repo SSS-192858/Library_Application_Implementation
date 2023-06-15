@@ -51,20 +51,19 @@ public class RequestController {
     }
 
     @PostMapping("/requests/save")
-    public void saveRequest(@RequestBody Request request, @RequestHeader String Authorization){
+    public Request saveRequest(@RequestBody Request request, @RequestHeader String Authorization){
         request.setSlno(0);
         String username = jwtTokenUtil.getUsernameFromToken(Authorization.substring(7));
         User user = jwtUserDetailsService.getUserByUsername(username);
         request.getStudent().setUser(user);
         request.getStudent().addRequest(request);
-        requestService.saveRequest(request);
+        return requestService.saveRequest(request);
     }
 
     @DeleteMapping("/requests/delete/{id}")
-    public Request deleteRequest(@PathVariable Integer id){
-        return requestService.deleteRequestbyId(id);
+    public void deleteRequest(@PathVariable Integer id){
+        requestService.deleteRequestbyId(id);
     }
-
 
     @GetMapping("/bookStudent/getAll")
     public List<BookStudent> getAllBooksOfStudent(){
@@ -87,9 +86,9 @@ public class RequestController {
     }
     
     @PostMapping("/bookStudent/save")
-    public void saveBookStudent(@RequestBody BookStudent bookStudent){
+    public BookStudent saveBookStudent(@RequestBody BookStudent bookStudent){
         bookStudent.setSlno(0);
-        bookStudentService.addNewBookStudentPair(bookStudent);
+        return bookStudentService.addNewBookStudentPair(bookStudent);
     }
 
     @DeleteMapping("/bookStudent/delete/{id}")
@@ -98,7 +97,7 @@ public class RequestController {
     }
 
     @PostMapping("/bookStudent/accept")
-    public void accept(@RequestBody Request request){
+    public BookStudent accept(@RequestBody Request request){
         deleteRequest(request.getSlno());
         if(bookStudentService.doesRequestOverlap(request)){
             throw new UnavailableForGivenDatesException();
@@ -108,7 +107,7 @@ public class RequestController {
             bs.setStart_date(request.getStart_date());
             bs.setBook(request.getBook());
             bs.setStudent(request.getStudent());
-            saveBookStudent(bs);
+            return saveBookStudent(bs);
         }
     }
 }

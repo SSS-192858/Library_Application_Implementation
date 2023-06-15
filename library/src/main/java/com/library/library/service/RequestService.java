@@ -20,14 +20,14 @@ public class RequestService {
     }
 
     @Transactional
-    public void saveRequest(Request request)
+    public Request saveRequest(Request request)
     {
-        this.requestDAO.saveRequest(request);
+        return this.requestDAO.saveRequest(request);
     }
 
     @Transactional
-    public Request deleteRequestbyId(int theID) {
-        return this.requestDAO.deleteRequestById(theID);
+    public void deleteRequestbyId(int theID) {
+        this.requestDAO.deleteRequestById(theID);
     }
 
     public List<Request> findAllRequests()

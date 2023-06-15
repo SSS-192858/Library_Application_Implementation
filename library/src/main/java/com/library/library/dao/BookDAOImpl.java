@@ -23,8 +23,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book findBookById(int book_code) {
-        Book book  = this.entityManager.find(Book.class,book_code);
-        return book;
+        return this.entityManager.find(Book.class,book_code);
     }
 
     @Override

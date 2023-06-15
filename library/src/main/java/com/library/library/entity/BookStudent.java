@@ -20,20 +20,19 @@ public class BookStudent {
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "book_code")
     private Book book;
-
     @Column(name="start_date")
-    private Date start_date;
+    private Date startDate;
 
     @Column(name = "end_date")
-    private Date end_date;
+    private Date endDate;
 
 
     public Date getEnd_date() {
-        return end_date;
+        return endDate;
     }
 
     public Date getStart_date() {
-        return start_date;
+        return startDate;
     }
 
     public Student getStudent() {
@@ -57,7 +56,7 @@ public class BookStudent {
     }
 
     public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+        this.endDate = end_date;
     }
 
     public void setSlno(int slno) {
@@ -65,7 +64,7 @@ public class BookStudent {
     }
 
     public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+        this.startDate = start_date;
     }
 }
 

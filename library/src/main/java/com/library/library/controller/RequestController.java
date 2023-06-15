@@ -3,12 +3,12 @@ package com.library.library.controller;
 import com.library.library.config.JwtTokenUtil;
 import com.library.library.entity.BookStudent;
 import com.library.library.entity.Request;
-import com.library.library.entity.Student;
 import com.library.library.entity.User;
 import com.library.library.exception.UnavailableForGivenDatesException;
 import com.library.library.service.BookStudentService;
 import com.library.library.service.JwtUserDetailsService;
 import com.library.library.service.RequestService;
+import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -97,17 +97,23 @@ public class RequestController {
     }
 
     @PostMapping("/bookStudent/accept")
+    @Transactional
     public BookStudent accept(@RequestBody Request request){
-        deleteRequest(request.getSlno());
         if(bookStudentService.doesRequestOverlap(request)){
             throw new UnavailableForGivenDatesException();
         }else{
             BookStudent bs = new BookStudent();
-            bs.setEnd_date(request.getEnd_date());
-            bs.setStart_date(request.getStart_date());
+            bs.setEnd_date(request.getEndDate());
+            bs.setStart_date(request.getStartDate());
             bs.setBook(request.getBook());
             bs.setStudent(request.getStudent());
-            return saveBookStudent(bs);
+
+            User user = jwtUserDetailsService.getUserByUsername(request.getStudent().getUser().getUsername());
+            bs.getStudent().setUser(user);
+
+            BookStudent bs1 = saveBookStudent(bs);
+            requestService.deleteRequestbyId(request.getSlno());
+            return bs1;
         }
     }
 }

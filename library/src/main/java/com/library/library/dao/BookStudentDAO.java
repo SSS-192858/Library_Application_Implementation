@@ -19,4 +19,6 @@ public interface BookStudentDAO {
     public List<BookStudent> findBookStudentByBook(int book_code);
 
     public BookStudent findBookStudentById(int id);
+
+    public boolean checkOverlap(Request request);
 }

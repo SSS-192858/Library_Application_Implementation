@@ -2,6 +2,7 @@ package com.library.library.service;
 
 import com.library.library.dao.BookDAO;
 import com.library.library.entity.Book;
+import com.library.library.exception.BookNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,13 @@ public class BookService {
         this.bookDAO = bookDAO;
     }
 
-    public Book findBookByCode(int book_code)
+    public Book findBookByCode(int book_code) throws BookNotFoundException
     {
-        return this.bookDAO.findBookById(book_code);
+        Book book = this.bookDAO.findBookById(book_code);
+        if (book == null){
+            throw new BookNotFoundException();
+        }
+        return book;
     }
 
     public Book addBook(Book book)

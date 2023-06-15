@@ -22,7 +22,7 @@ CREATE TABLE user_roles (
 
 CREATE TABLE student(
     student_id INTEGER auto_increment,
-    user_id INTEGER,
+    user_id INTEGER UNIQUE NOT NULL,
     student_name varchar(100) DEFAULT NULL,
     student_email varchar(100) DEFAULT NULL,
     student_phno varchar(100) DEFAULT NULL,

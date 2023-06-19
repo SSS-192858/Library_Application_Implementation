@@ -66,9 +66,10 @@ public class BookStudentDAOImpl implements BookStudentDAO{
 
     @Override
     @Transactional
-    public void deleteBookStudentById(int id) {
+    public BookStudent deleteBookStudentById(int id) {
         BookStudent bookStudent = this.entityManager.find(BookStudent.class,id);
         this.entityManager.remove(bookStudent);
+        return bookStudent;
     }
 
     @Override

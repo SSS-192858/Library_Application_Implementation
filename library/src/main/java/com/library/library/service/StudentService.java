@@ -28,12 +28,16 @@ public class StudentService {
         return studentDAO.findAllStudents();
     }
 
-    public void saveStudent(Student student){
-        studentDAO.saveStudent(student);
+    public Student saveStudent(Student student){
+        return studentDAO.saveStudent(student);
     }
 
-    public void deleteStudent(Integer id){
-        studentDAO.deleteStudentById(id);
+    public Student deleteStudent(Integer id) throws StudentNotFoundException{
+        Student s = this.studentDAO.getStudentById(id);
+        if(s == null){
+            throw new StudentNotFoundException();
+        }
+        return studentDAO.deleteStudentById(id);
     }
 
     public Student updateStudent(Student student) throws StudentNotFoundException{

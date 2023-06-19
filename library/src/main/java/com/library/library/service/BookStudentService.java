@@ -54,12 +54,12 @@ public class BookStudentService {
         return bookStudentDAO.makeBookStudent(bookStudent);
     }
 
-    public void deleteById(Integer id) throws BookStudentNotFound{
+    public BookStudent deleteById(Integer id) throws BookStudentNotFound{
         BookStudent bs = bookStudentDAO.findBookStudentById(id);
         if(bs==null){
             throw new BookStudentNotFound();
         }else {
-            bookStudentDAO.deleteBookStudentById(id);
+            return bookStudentDAO.deleteBookStudentById(id);
         }
     }
 

@@ -60,7 +60,7 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.GET,"/books/getBook/**").permitAll()
                     .requestMatchers(HttpMethod.POST,"/student/save/**", "/student/save").hasRole("STUDENT")
                     .requestMatchers(HttpMethod.DELETE,"/student/deleteStudent/**").permitAll()
-                    .requestMatchers(HttpMethod.PUT,"/student/updateStudent/**").permitAll()
+                    .requestMatchers(HttpMethod.PUT,"/student/updateStudent/**").hasRole("STUDENT")
                     .requestMatchers(HttpMethod.GET,"/student/getAll/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/student/getStudent/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/requests/allRequests/**").hasRole("ADMIN")

@@ -21,10 +21,10 @@ public class RequestService {
     @Autowired
     public RequestService(RequestDAO requestDAO,StudentDAO studentDAO)
     {
-
         this.requestDAO = requestDAO;
         this.studentDAO = studentDAO;
     }
+
     @Transactional
     public Request saveRequest(Request request) throws StudentNotFoundException
     {
@@ -38,12 +38,12 @@ public class RequestService {
     }
 
     @Transactional
-    public void deleteRequestbyId(int theID) throws RequestNotFoundException{
+    public Request deleteRequestbyId(int theID) throws RequestNotFoundException{
         Request request = requestDAO.getRequestById(theID);
         if (request == null){
             throw new RequestNotFoundException();
         }else{
-            this.requestDAO.deleteRequestById(theID);
+            return this.requestDAO.deleteRequestById(theID);
         }
     }
 

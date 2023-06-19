@@ -34,14 +34,15 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     @Transactional
-    public void deleteById(int book_code) {
+    public Book deleteById(int book_code) {
         Book book = this.entityManager.find(Book.class,book_code);
         if(book == null)
         {
             System.out.println("Not found");
-            return;
+            return null;
         }
         this.entityManager.remove(book);
+        return book;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     @Transactional
-    public void updateBook(Book book) {
-        this.entityManager.merge(book);
+    public Book updateBook(Book book) {
+        return this.entityManager.merge(book);
     }
 }

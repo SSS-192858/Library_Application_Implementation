@@ -28,14 +28,14 @@ public class StudentController {
     }
 
     @DeleteMapping("/deleteStudent/{student_id}")
-    public void deleteStudentByID(@PathVariable int student_id)
+    public Student deleteStudentByID(@PathVariable int student_id)
     {
         Student tempEmployee = this.studentService.findStudentById(student_id);
         if(tempEmployee==null)
         {
             throw new RuntimeException("Student id not found "+student_id);
         }
-        this.studentService.deleteStudent(student_id);
+        return this.studentService.deleteStudent(student_id);
     }
 
     @PutMapping("/updateStudent")

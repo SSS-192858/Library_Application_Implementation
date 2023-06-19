@@ -61,8 +61,8 @@ public class RequestController {
     }
 
     @DeleteMapping("/requests/delete/{id}")
-    public void deleteRequest(@PathVariable Integer id){
-        requestService.deleteRequestbyId(id);
+    public Request deleteRequest(@PathVariable Integer id){
+        return requestService.deleteRequestbyId(id);
     }
 
     @GetMapping("/bookStudent/getAll")

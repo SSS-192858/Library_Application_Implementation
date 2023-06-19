@@ -9,9 +9,9 @@ public interface BookDAO  {
 
     public Book findBookById(int book_code);
 
-    public void deleteById(int book_code);
+    public Book deleteById(int book_code);
 
-    public void updateBook(Book book);
+    public Book updateBook(Book book);
 
     public List<Book> findAllbooks();
 

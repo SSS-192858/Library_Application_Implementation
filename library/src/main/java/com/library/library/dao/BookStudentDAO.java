@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BookStudentDAO {
 
-    public void deleteBookStudentById(int id);
+    public BookStudent deleteBookStudentById(int id);
 
     public BookStudent makeBookStudent(BookStudent bookStudent);
 

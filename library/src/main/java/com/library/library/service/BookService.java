@@ -34,16 +34,24 @@ public class BookService {
         return this.bookDAO.saveBook(book);
     }
 
-    public void deleteBookByCode(int book_code)
+    public Book deleteBookByCode(int book_code) throws BookNotFoundException
     {
-        this.bookDAO.deleteById(book_code);
+        Book book = this.bookDAO.findBookById(book_code);
+        if(book==null){
+            throw new BookNotFoundException();
+        }
+        return this.bookDAO.deleteById(book_code);
     }
 
     public List<Book> findAllBooks(){
         return bookDAO.findAllbooks();
     }
     
-    public void updateBook(Book book){
-        bookDAO.updateBook(book);
+    public Book updateBook(Book book) throws BookNotFoundException{
+        Book b = this.bookDAO.findBookById(book.getBookCode());
+        if(b == null){
+            throw new BookNotFoundException();
+        }
+        return bookDAO.updateBook(book);
     }
 }

@@ -33,12 +33,13 @@ public class BookController {
     }
 
     @PutMapping("/updateBook")
-    public void updateBook(@RequestBody Book book){
+    public Book updateBook(@RequestBody Book book){
         bookService.updateBook(book);
+        return book;
     }
 
     @DeleteMapping("/deleteBook/{book_code}")
-    public void deleteBook(@PathVariable Integer book_code){
-        bookService.deleteBookByCode(book_code);
+    public Book deleteBook(@PathVariable Integer book_code){
+        return bookService.deleteBookByCode(book_code);
     }
 }

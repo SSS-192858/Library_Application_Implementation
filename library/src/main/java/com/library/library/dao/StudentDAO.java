@@ -7,9 +7,9 @@ import java.util.*;
 
 @Repository
 public interface StudentDAO {
-    public void saveStudent(Student student);
+    public Student saveStudent(Student student);
 
-    public void deleteStudentById(Integer id);
+    public Student deleteStudentById(Integer id);
 
     public Student updateStudent(Student student);
 

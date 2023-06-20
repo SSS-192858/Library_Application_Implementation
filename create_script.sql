@@ -90,4 +90,3 @@ INSERT INTO user values (2,"student","$2a$10$GCdiAz.35tPgpxlD.iRsSOkxDNGkBVJLvdD
 
 INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 1 FROM user WHERE user.username = "admin";
 INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 2 FROM user WHERE user.username = "student";
-INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 2 FROM user WHERE user.username = "admin";

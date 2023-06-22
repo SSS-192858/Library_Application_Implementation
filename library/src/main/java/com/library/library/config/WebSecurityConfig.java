@@ -15,7 +15,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -58,7 +65,7 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.DELETE,"/books/deleteBook/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/books/getAll/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/books/getBook/**").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/student/save/**", "/student/save").hasRole("STUDENT")
+                    .requestMatchers(HttpMethod.POST,"/student/save").permitAll()
                     .requestMatchers(HttpMethod.DELETE,"/student/deleteStudent/**").permitAll()
                     .requestMatchers(HttpMethod.PUT,"/student/updateStudent/**").hasRole("STUDENT")
                     .requestMatchers(HttpMethod.GET,"/student/getAll/**").hasRole("ADMIN")
@@ -81,6 +88,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CorsFilterConfig(), ChannelProcessingFilter.class);
 
         return http.build();
     }

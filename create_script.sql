@@ -4,13 +4,13 @@ use Library;
 
 create table user(
     user_id INTEGER auto_increment PRIMARY KEY,
-    username varchar(100) NOT NULL,
+    username varchar(100) UNIQUE NOT NULL,
     password char(68) NOT NULL
 );
 
 CREATE TABLE role (
     role_id INTEGER NOT NULL,
-    role_name varchar(100) NOT NULL,
+    role_name varchar(100) UNIQUE NOT NULL,
     constraint pk_role PRIMARY KEY (role_id)
 );
 

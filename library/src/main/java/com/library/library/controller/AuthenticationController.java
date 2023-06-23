@@ -7,12 +7,14 @@ import com.library.library.model.JwtResponse;
 import com.library.library.model.UserDTO;
 import com.library.library.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,9 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         final String token = tokenGenerator(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         User user = this.userDetailsService.getUserByUsername(authenticationRequest.getUsername());
+        if (user == null){
+            throw new UsernameNotFoundException("Invalid username or password");
+        }
         return ResponseEntity.ok(new JwtResponse(token, user));
     }
 

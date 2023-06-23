@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @ControllerAdvice
 @CrossOrigin(origins = "*")
 public class ExceptionController {
@@ -34,5 +36,10 @@ public class ExceptionController {
     @ExceptionHandler(value = RequestNotFoundException.class)
     public ResponseEntity<Object> requestNotFound(RequestNotFoundException requestNotFoundException){
         return new ResponseEntity<>("No request exists with the given id", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<Object> duplicateValueError(SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException){
+        return new ResponseEntity<>("Username already taken", HttpStatus.CONFLICT);
     }
 }

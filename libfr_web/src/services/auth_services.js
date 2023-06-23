@@ -19,7 +19,7 @@ export const logout = () => {
   };
 
 export const registerAdmin = async (username, password) => {
-    await axios.post(API_URL + "register_student", {
+    await axios.post(API_URL + "register_admin", {
       username,
       password
     });
@@ -52,6 +52,3 @@ export const registerStudent = async (username, password, studentName, email, ph
 export const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem('user'));
   }
-
-
-

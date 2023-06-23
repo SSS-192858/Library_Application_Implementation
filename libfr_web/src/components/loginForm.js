@@ -43,8 +43,6 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
           setIsStudent(true)
           navigate("/user")
         }
-
-        
       },
       error => {
         const resMessage =
@@ -52,7 +50,6 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
         setMessage(resMessage)
       }
     )
-    
   };
 
   return (

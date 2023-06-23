@@ -7,6 +7,7 @@ import LoginForm from './components/loginForm';
 import Home from './components/home';
 import BoardUser from './components/BoardUser';
 import BoardAdmin from "./components/BoardAdmin";
+import SignupStudent from "./components/SignupStudent";
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            bezKoder
+            Library
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -71,6 +72,15 @@ function App() {
                   Log out
                 </a>
               </li>
+
+              {isAdmin && (
+                <li>
+                  <a href = "/registerAdmin" className="nav-link">
+                    Register New Admin
+                  </a>
+                </li>
+              )}
+
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
@@ -80,11 +90,11 @@ function App() {
                 </Link>
               </li>
 
-              {/* <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
+              <li className="nav-item">
+                <Link to={"/registerStudent"} className="nav-link">
                   Sign Up
                 </Link>
-              </li> */}
+              </li>
             </div>
           )}
         </nav>
@@ -94,7 +104,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent}/>} />
-            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/registerStudent" element={<SignupStudent />} />
+            <Route path="/registerAdmin" element={<SignupAdmin />} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>

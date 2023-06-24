@@ -11,6 +11,8 @@ import SignupStudent from "./components/SignupStudent";
 import SignupAdmin from "./components/SignupAdmin";
 import BooksList from "./components/BookList";
 import BookDetails from "./components/BookDetails";
+import BookListItem from "./common/bookListItem";
+import BookSaveForm from "./components/BookSaveForm";
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
   const [isStudent, setIsStudent] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [book, setBook] = useState(null);
+
 
   const resolveLogin = () => {
     const user = getCurrentUser();
@@ -53,11 +56,18 @@ function App() {
             </li>
 
             {isAdmin && (
+              <>
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
                   Admin Board
                 </Link>
               </li>
+              <li className="nav-item">
+              <Link to={"/booksSave"} className="nav-link">
+                Save a Book
+              </Link>
+            </li>
+            </>
             )}
 
             {isStudent && (
@@ -123,6 +133,7 @@ function App() {
             <Route path="/registerAdmin" element={<SignupAdmin />} />
             <Route path="/books" element={<BooksList setBook={setBook}/>}/>
             <Route path="/moreInfo" element={<BookDetails book={book}/>} />
+            <Route path="/booksSave" element={<BookSaveForm/>}/>
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>

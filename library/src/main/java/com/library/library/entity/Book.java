@@ -9,58 +9,43 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "book_code")
-    private int bookCode;
+    @Column(name = "")
+    private String reg_no;
 
-    @Column(name = "book_title")
-    private String bookTitle;
+    @Column(name = "")
+    private String model;
 
-    @Column(name = "book_author")
-    private String author;
+    @Column(name = "")
+    private String colour;
 
-    @Column(name = "book_desc")
-    private String bookDesc;
+    @Column(name = "")
+    private double fair;
 
-    public Book() {}
 
-    public Book(int book_code,String book_title,String author,String book_desc)
+    public Book()
     {
-        this.bookCode = book_code;
-        this.bookTitle = book_title;
-        this.author = author;
-        this.bookDesc = book_desc;
-    }
 
-    public int getBookCode()
+    }
+    public Book(String reg_no,String model,String colour,double fair)
     {
-        return this.bookCode;
+        this.reg_no = reg_no;
+        this.fair = fair;
+        this.model = model;
+        this.colour = colour;
     }
-
-    public void setBookCode(int bookCode) {
-        this.bookCode = bookCode;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setBookDesc(String bookDesc) {
-        this.bookDesc = bookDesc;
-    }
-
-    public String getBookTitle()
+    public void setReg_no(String reg_no)
     {
-        return this.bookTitle;
+        this.reg_no = reg_no;
     }
-    public String getAuthor()
+
+    public void setModel(String model)
     {
-        return this.author;
+        this.model = model;
     }
-    public String getBookDesc() {
-        return this.bookDesc;
+
+    public void setColour(String colour)
+    {
+        this.
     }
+
 }

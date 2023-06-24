@@ -8,12 +8,16 @@ import Home from './components/home';
 import BoardUser from './components/BoardUser';
 import BoardAdmin from "./components/BoardAdmin";
 import SignupStudent from "./components/SignupStudent";
+import SignupAdmin from "./components/SignupAdmin";
+import BooksList from "./components/BookList";
+import BookDetails from "./components/BookDetails";
 
 function App() {
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [isStudent, setIsStudent] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [book, setBook] = useState(null);
 
   const resolveLogin = () => {
     const user = getCurrentUser();
@@ -66,6 +70,17 @@ function App() {
           </div>
 
           {currentUser ? (
+            <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/books"} className="nav-link">
+                Books
+              </Link>
+            </li>
+            </div>
+            
+          ): null}
+
+          {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={Applogout}>
@@ -106,6 +121,8 @@ function App() {
             <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent}/>} />
             <Route path="/registerStudent" element={<SignupStudent />} />
             <Route path="/registerAdmin" element={<SignupAdmin />} />
+            <Route path="/books" element={<BooksList setBook={setBook}/>}/>
+            <Route path="/moreInfo" element={<BookDetails book={book}/>} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>

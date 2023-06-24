@@ -1,12 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { registerStudent } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
+import Dialog from "@mui/material/Dialog";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 import { useStudentSignupFormValidator } from "./signupStudentValidator";
 
 const SignupStudent = () => {
@@ -105,7 +105,7 @@ const SignupStudent = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Confirm Password</label>
                         <input
                             type="password"
                             className="form-control"
@@ -186,10 +186,10 @@ const SignupStudent = () => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleToClose}
+                    <button onClick={handleToClose}
                         color="primary" autoFocus>
                         Go to Login Page
-                    </Button>
+                    </button>
                 </DialogActions>
             </Dialog>
         </div>

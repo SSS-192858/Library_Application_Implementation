@@ -1,13 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { registerAdmin } from "../services/auth_services";
 import { useAdminSignupFormValidator } from "./signupAdminValidator";
 import { useNavigate } from "react-router-dom";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
+import Dialog from "@mui/material/Dialog";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
 const SignupAdmin = () => {
 
@@ -102,7 +102,7 @@ const SignupAdmin = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Confirm Password</label>
                         <input
                             type="password"
                             className="form-control"
@@ -115,6 +115,12 @@ const SignupAdmin = () => {
                         {errors.confirmPassword.dirty && errors.confirmPassword.error ? (
                             <div className="alert alert-danger" role="alert">{errors.confirmPassword.message}</div>
                             ) : null}
+                    </div>
+
+                    <div className="form-group">
+                        <button className="btn btn-primary btn-block" type="submit">
+                            Register Admin
+                        </button>
                     </div>
 
                     {message ? 
@@ -131,10 +137,10 @@ const SignupAdmin = () => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleToClose}
+                    <button onClick={handleToClose}
                         color="primary" autoFocus>
                         Close
-                    </Button>
+                    </button>
                 </DialogActions>
             </Dialog>
         </div>

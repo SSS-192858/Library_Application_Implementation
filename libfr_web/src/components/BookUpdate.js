@@ -6,23 +6,25 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { useNavigate } from "react-router-dom";
 import {useBookSaveValidator} from "../validators/BookSaveValidator";
-import {saveBook} from '../services/auth_services';
+import {updateBook} from '../services/auth_services';
 
-const BookSaveForm = ({setBook}) => {
+const BookUpdateForm = ({book, setBook}) => {
   
     const [open,setOpen] = React.useState(false);
 
+    const bookCode = book.bookCode;
+
     const [form, setForm] = useState({
-        bookTitle: "",
-        author: "",
-        bookDesc:""
+        bookTitle: book.bookTitle,
+        author: book.author,
+        bookDesc: book.bookDesc
   });
 
   const navigate = useNavigate();
 
   const handleClickToOpen = () => {
     setOpen(true);
-};
+    };
   const [message, setMessage] = useState("");
 
   const {errors, validateForm} = useBookSaveValidator(form)
@@ -39,23 +41,23 @@ const BookSaveForm = ({setBook}) => {
     setOpen(false);
     navigate("/books")
     setBook(null);
-    };
+};
 
   const onSubmitForm = e => {
     setMessage("")
     e.preventDefault();    
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
     if (!isValid) return;
-    saveBook(form.bookTitle, form.bookDesc, form.author).then(
+    updateBook(bookCode, form.bookTitle, form.bookDesc, form.author).then(
         response => {
             handleClickToOpen()
         },
         error => {
             const resMessage = (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
             setMessage(resMessage)
         }
     )
@@ -72,6 +74,11 @@ const BookSaveForm = ({setBook}) => {
               />
 
             <form onSubmit={onSubmitForm}>
+                <div className="form-group">
+                    <p>
+                        Book Code : {bookCode}
+                    </p>
+               </div>
                 <div className="form-group">
                     <label htmlFor="bookTitle">Book Title</label>
                     <input
@@ -124,7 +131,7 @@ const BookSaveForm = ({setBook}) => {
                 </div>
                 <div className="form-group">
                     <button className="btn btn-primary btn-block" type="submit">
-                    Save Book
+                    Update Book
                     </button>
                 </div>
 
@@ -137,7 +144,7 @@ const BookSaveForm = ({setBook}) => {
                 <DialogTitle>{"Book Saved successfully"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Book was saved successfully
+                        Book has been updated successfully
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -151,4 +158,4 @@ const BookSaveForm = ({setBook}) => {
   );
 };
 
-export default BookSaveForm;
+export default BookUpdateForm;

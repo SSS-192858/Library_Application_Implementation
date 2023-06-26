@@ -4,18 +4,18 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { deleteBook } from "../services/auth_services";
+import {deleteStudent} from "../services/auth_services"
 import { useNavigate } from "react-router-dom";
 
-const BookDetails = ({book}) => {
-
+const StudentDetails = ({student, isStudent, isAdmin, setStudent}) => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleToClose = () => {
-        deleteBook(book.bookCode);
+        deleteStudent(student.id);
         setOpen(false);
-        navigate("/books");
+        setStudent(null)
+        navigate("/students")
     };
 
     const handleCancel = ()=>{
@@ -23,29 +23,33 @@ const BookDetails = ({book}) => {
     }
 
     const navFunc = () => {
-        navigate("/booksUpdate")
+        navigate("/updateStudent")
     }
 
     return (
         <div>
-            <p>{book.bookCode}</p>
-            <p>{book.bookTitle}</p>
-            <p>{book.author}</p>
-            <p>{book.bookDesc}</p>
+            <p>{student.id}</p>
+            <p>{student.studentName}</p>
+            <p>{student.email}</p>
+            <p>{student.phone}</p>
 
-            <button onClick={navFunc} className="btn btn-primary btn-block" type="submit">
-                Update Book
-            </button>
+            {isStudent && (
+                <button onClick={navFunc} className="btn btn-primary btn-block" type="submit">
+                Update Info
+                </button>
+            )}
 
-            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block" type="submit">
-                Delete Book
-            </button>
+            {isAdmin && (
+                <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block" type="submit">
+                    Delete Student
+                </button>
+            )}
 
             <Dialog open={open} onClose={handleToClose}>
-                <DialogTitle>{"Delete Book"}</DialogTitle>
+                <DialogTitle>{"Delete Student"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Are you sure you want to delete the book?
+                        Are you sure you want to delete {student.studentName}?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -59,10 +63,8 @@ const BookDetails = ({book}) => {
                     
                 </DialogActions>
             </Dialog>
-            
-            
         </div>
     )
 }
 
-export default BookDetails;
+export default StudentDetails;

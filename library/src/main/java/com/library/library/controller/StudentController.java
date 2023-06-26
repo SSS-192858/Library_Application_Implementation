@@ -71,4 +71,12 @@ public class StudentController {
         return student;
     }
 
+    @GetMapping("/user/getStudent")
+    public Student getByUserId(@RequestHeader String Authorization){
+        String username = jwtTokenUtil.getUsernameFromToken(Authorization.substring(7));
+        User user = jwtUserDetailsService.getUserByUsername(username);
+        Student student = studentService.getByUserId(user.getId());
+        return studentService.getByUserId(user.getId());
+    }
+
 }

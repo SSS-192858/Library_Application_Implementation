@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { stringValidator} from "./validators";
+import { stringValidator } from "./validators";
 
 const touchErrors = errors => {
     return Object.entries(errors).reduce((acc, [field, fieldError]) => {
@@ -25,7 +25,7 @@ export const useLoginFormValidator = form => {
     }
   });
 
-  const validateForm = ({ form, field, errors, forceTouchErrors = false }) => {
+  const validateForm = ({ form, field, errors, forceTouchErrors}) => {
     let isValid = true;
 
     // Create a deep copy of the errors

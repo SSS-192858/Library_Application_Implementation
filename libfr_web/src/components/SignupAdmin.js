@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { registerAdmin } from "../services/auth_services";
-import { useAdminSignupFormValidator } from "./signupAdminValidator";
+import { useAdminSignupFormValidator } from "../validators/signupAdminValidator";
 import { useNavigate } from "react-router-dom";
 
 import Dialog from "@mui/material/Dialog";
@@ -51,7 +51,12 @@ const SignupAdmin = () => {
                 handleClickToOpen()
             },
             error => {
-                const resMessage = "Something went wrong, please try again later"
+                const resMessage = 
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                  error.message ||
+                  error.toString();
                 setMessage(resMessage)
             }
         )

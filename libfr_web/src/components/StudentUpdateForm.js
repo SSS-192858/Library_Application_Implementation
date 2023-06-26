@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerStudent } from "../services/auth_services";
+import { updateStudent } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
 
 import Dialog from "@mui/material/Dialog";
@@ -7,27 +7,27 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { useStudentSignupFormValidator } from "../validators/signupStudentValidator";
+import { useStudentUpdateFormValidator } from "../validators/StudentUpdateValidator";
 
-const SignupStudent = () => {
+const UpdateStudent = ({student, setStudent}) => {
 
     const [open, setOpen] = React.useState(false);
 
     const [form, setForm] = useState({
-        username: "",
-        password: "",
-        confirmPassword: "",
-        studentName: "",
-        email: "",
-        phone: ""
+        studentName: student.studentName,
+        email: student.email,
+        phone: student.phone
     });
+
+    const id = student.id;
 
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
 
-    const {errors, validateForm} = useStudentSignupFormValidator(form)
+    const {errors, validateForm} = useStudentUpdateFormValidator(form)
 
     const handleClickToOpen = () => {
+        setStudent({id: id, studentName: form.studentName, email: form.email, phone: form.phone})
         setOpen(true);
     };
  
@@ -49,7 +49,7 @@ const SignupStudent = () => {
         e.preventDefault();    
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
-        registerStudent(form.username, form.password, form.studentName, form.email, form.phone).then(
+        updateStudent(id, form.studentName, form.email, form.phone).then(
             response => {
                 handleClickToOpen()
             },
@@ -75,54 +75,6 @@ const SignupStudent = () => {
             />
 
             <form onSubmit={onSubmitForm}>
-                
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="username"
-                        aria-label="Username"
-                        value={form.username}
-                        onChange={onUpdateField}
-                    />
-
-                    {errors.username.dirty && errors.username.error ? (
-                            <div className="alert alert-danger" role="alert">{errors.username.message}</div>
-                            ) : null}
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            aria-label="Password field"
-                            value={form.password}
-                            onChange={onUpdateField}
-                        />
-
-                        {errors.password.dirty && errors.password.error ? (
-                            <div className="alert alert-danger" role="alert">{errors.password.message}</div>
-                            ) : null}
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password">Confirm Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="confirmPassword"
-                            aria-label="Confirm Password field"
-                            value={form.confirmPassword}
-                            onChange={onUpdateField}
-                        />
-
-                        {errors.confirmPassword.dirty && errors.confirmPassword.error ? (
-                            <div className="alert alert-danger" role="alert">{errors.confirmPassword.message}</div>
-                            ) : null}
-                    </div>
 
                     <div className="form-group">
                     <label htmlFor="studentName">Name</label>
@@ -186,13 +138,13 @@ const SignupStudent = () => {
                 <DialogTitle>{"Signup successful"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Student was registered successfully, kindly click on the button to login again.
+                        Student details have been updated successfully!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <button onClick={handleToClose}
                         color="primary" autoFocus>
-                        Go to Login Page
+                        Close
                     </button>
                 </DialogActions>
             </Dialog>
@@ -200,4 +152,4 @@ const SignupStudent = () => {
     )
 }
 
-export default SignupStudent;
+export default UpdateStudent;

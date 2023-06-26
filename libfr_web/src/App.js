@@ -11,8 +11,11 @@ import SignupStudent from "./components/SignupStudent";
 import SignupAdmin from "./components/SignupAdmin";
 import BooksList from "./components/BookList";
 import BookDetails from "./components/BookDetails";
-import BookListItem from "./common/bookListItem";
 import BookSaveForm from "./components/BookSaveForm";
+import BookUpdateForm from "./components/BookUpdate";
+import UpdateStudent from "./components/StudentUpdateForm";
+import StudentList from "./components/StudentList";
+import StudentDetails from "./components/StudentDetails";
 
 function App() {
 
@@ -20,7 +23,7 @@ function App() {
   const [isStudent, setIsStudent] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [book, setBook] = useState(null);
-
+  const [student, setStudent] = useState(null);
 
   const resolveLogin = () => {
     const user = getCurrentUser();
@@ -71,33 +74,37 @@ function App() {
             )}
 
             {isStudent && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link to={"/user"} className="nav-link">
+                    User Board
+                  </Link>
+                </li>
+              </>
             )}
-          </div>
 
-          {currentUser ? (
-            <div className="navbar-nav mr-auto">
+            {currentUser ? (
             <li className="nav-item">
               <Link to={"/books"} className="nav-link">
                 Books
               </Link>
             </li>
-            </div>
             
-          ): null}
+            ): null}
+
+            {isAdmin && (
+              <li className="nav-item">
+                <Link to={"/students"} className="nav-link">
+                  Students
+                </Link>
+              </li>
+            )}
+
+          </div>
 
           {currentUser ? (
             <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={Applogout}>
-                  Log out
-                </a>
-              </li>
-
+              
               {isAdmin && (
                 <li>
                   <a href = "/registerAdmin" className="nav-link">
@@ -105,6 +112,21 @@ function App() {
                   </a>
                 </li>
               )}
+
+              {isStudent && (     
+                <li className="nav-item">
+                  <Link to={"/studentDetail"} className="nav-link">
+                    Profile
+                  </Link>
+                </li>
+                
+              )}
+
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={Applogout}>
+                  Log out
+                </a>
+              </li>
 
             </div>
           ) : (
@@ -128,12 +150,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent}/>} />
+            <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent} setStudent={setStudent}/>} />
             <Route path="/registerStudent" element={<SignupStudent />} />
             <Route path="/registerAdmin" element={<SignupAdmin />} />
             <Route path="/books" element={<BooksList setBook={setBook}/>}/>
             <Route path="/moreInfo" element={<BookDetails book={book}/>} />
-            <Route path="/booksSave" element={<BookSaveForm/>}/>
+            <Route path="/booksSave" element={<BookSaveForm setBook={setBook}/>}/>
+            <Route path="/booksUpdate" element={<BookUpdateForm book={book} setBook={setBook}/>}/>
+            <Route path="/students" element={<StudentList setStudent={setStudent}/>}/>
+            <Route path="/updateStudent" element={<UpdateStudent student={student} setStudent={setStudent}/>} />
+            <Route path="/studentDetail" element={<StudentDetails student={student} isStudent={isStudent} isAdmin={isAdmin} setStudent={setStudent}/>}/>
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>

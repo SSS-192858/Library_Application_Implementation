@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { stringValidator} from "./validators";
+import { stringValidator } from "./validators";
 
 const touchErrors = errors => {
     return Object.entries(errors).reduce((acc, [field, fieldError]) => {

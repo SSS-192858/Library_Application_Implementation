@@ -47,4 +47,8 @@ public class StudentService {
         }
         return studentDAO.updateStudent(student);
     }
+
+    public Student getByUserId(Integer id) {
+        return studentDAO.getStudentByUserId(id);
+    }
 }

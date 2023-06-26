@@ -17,5 +17,5 @@ public interface StudentDAO {
 
     public Student getStudentById(Integer id);
 
-
+    public Student getStudentByUserId(Integer id);
 }

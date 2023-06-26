@@ -11,7 +11,7 @@ const touchErrors = errors => {
     }, {});
 };
 
-export const BookSaveValidator = form => {
+export const useBookSaveValidator = form => {
     const [errors, setErrors] = useState({
         bookTitle: {
             dirty: false,
@@ -41,7 +41,7 @@ export const BookSaveValidator = form => {
             nextErrors = touchErrors(errors);
         }
 
-        const { bookTitle,author,bookDesc} = form;
+        const {bookTitle,author,bookDesc} = form;
 
         if (nextErrors.bookTitle.dirty && (field ? field === "bookTitle" : true)) {
             const message = stringValidator(bookTitle, form);

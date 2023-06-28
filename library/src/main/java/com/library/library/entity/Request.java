@@ -64,6 +64,17 @@ public class Request {
         return endDate;
     }
 
+    @Override
+    public String toString() {
+        return "Request{" +
+                "slno=" + slno +
+                ", student=" + student +
+                ", book=" + book +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
+
     public void setEndDate(Date end_date) {
         this.endDate = end_date;
     }

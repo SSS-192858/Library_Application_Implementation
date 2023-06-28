@@ -7,6 +7,16 @@ import org.hibernate.annotations.JoinColumnOrFormula;
 @Table(name = "book")
 public class Book {
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookCode=" + bookCode +
+                ", bookTitle='" + bookTitle + '\'' +
+                ", author='" + author + '\'' +
+                ", bookDesc='" + bookDesc + '\'' +
+                '}';
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_code")

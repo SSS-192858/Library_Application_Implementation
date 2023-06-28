@@ -108,5 +108,14 @@ public class Student {
         request.setStudent(this);
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", studentName='" + studentName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }
 

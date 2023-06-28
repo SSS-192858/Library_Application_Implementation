@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { deleteBook } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
 
-const BookDetails = ({book}) => {
+const BookDetails = ({book,isStudent,isAdmin,setBook}) => {
 
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
@@ -26,6 +26,20 @@ const BookDetails = ({book}) => {
         navigate("/booksUpdate")
     }
 
+    const handleRequest = ()=>{
+        setBook(book);
+        console.log(book);
+        navigate("/bookRequest")
+    }
+
+    const seeRequestsForBook = () => {
+        navigate("/requestsForBook");
+    }
+
+    const seeBookStudentsForBook = () => {
+        navigate("/bookStudentByBook");
+    }
+
     return (
         <div>
             <p>{book.bookCode}</p>
@@ -33,14 +47,33 @@ const BookDetails = ({book}) => {
             <p>{book.author}</p>
             <p>{book.bookDesc}</p>
 
-            <button onClick={navFunc} className="btn btn-primary btn-block" type="submit">
+            <button onClick={navFunc} className="btn btn-primary btn-block">
                 Update Book
             </button>
 
-            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block" type="submit">
+            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block">
                 Delete Book
             </button>
 
+            {isStudent &&
+            <button onClick={handleRequest} className="btn btn-primary btn-block">
+                Request Book
+            </button>    
+            }  
+
+            {isAdmin && 
+            <button onClick={seeRequestsForBook} className="btn btn-primary btn-block">
+                See all requests for this book
+            </button>
+            } 
+
+            {isAdmin && 
+                <button onClick={seeBookStudentsForBook} className="btn btn-primary btn-block">
+                    See all records for issue of this book
+                </button>
+            } 
+            
+             
             <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Delete Book"}</DialogTitle>
                 <DialogContent>

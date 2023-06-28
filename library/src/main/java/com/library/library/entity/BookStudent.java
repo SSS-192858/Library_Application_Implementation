@@ -27,11 +27,11 @@ public class BookStudent {
     private Date endDate;
 
 
-    public Date getEnd_date() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public Date getStart_date() {
+    public Date getStartDate() {
         return startDate;
     }
 
@@ -55,7 +55,7 @@ public class BookStudent {
         return slno;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEndDate(Date end_date) {
         this.endDate = end_date;
     }
 
@@ -63,7 +63,18 @@ public class BookStudent {
         this.slno = slno;
     }
 
-    public void setStart_date(Date start_date) {
+    @Override
+    public String toString() {
+        return "BookStudent{" +
+                "slno=" + slno +
+                ", student=" + student +
+                ", book=" + book +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
+
+    public void setStartDate(Date start_date) {
         this.startDate = start_date;
     }
 }

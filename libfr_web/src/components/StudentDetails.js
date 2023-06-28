@@ -7,6 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import {deleteStudent} from "../services/auth_services"
 import { useNavigate } from "react-router-dom";
 
+
+
 const StudentDetails = ({student, isStudent, isAdmin, setStudent}) => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
@@ -22,8 +24,16 @@ const StudentDetails = ({student, isStudent, isAdmin, setStudent}) => {
         setOpen(false);
     }
 
-    const navFunc = () => {
-        navigate("/updateStudent")
+    const navFunc1 = () => {
+        navigate("/updateStudent");
+    } 
+
+    const navFunc2 = () => {
+        navigate("/requestsForStudent");
+    }
+
+    const navFunc3 = () => {
+        navigate("/bookStudentByStudent")
     }
 
     return (
@@ -34,10 +44,18 @@ const StudentDetails = ({student, isStudent, isAdmin, setStudent}) => {
             <p>{student.phone}</p>
 
             {isStudent && (
-                <button onClick={navFunc} className="btn btn-primary btn-block" type="submit">
+                <button onClick={navFunc1} className="btn btn-primary btn-block" type="submit">
                 Update Info
                 </button>
             )}
+
+            <button onClick={navFunc2} className="btn btn-primary btn-block" type="submit">
+                See all Book Requests
+            </button>
+
+            <button onClick={navFunc3} className="btn btn-primary btn-block" type="submit">
+                See all issued books
+            </button>
 
             {isAdmin && (
                 <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block" type="submit">

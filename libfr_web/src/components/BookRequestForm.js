@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { updateStudent } from "../services/auth_services";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Dialog from "@mui/material/Dialog";
@@ -7,33 +6,30 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { useStudentUpdateFormValidator } from "../validators/StudentUpdateValidator";
+import {registerRequest} from "../services/request_services";
+import { RequestBookValidator } from "../validators/RequestBookValidator";
 
-const UpdateStudent = ({student, setStudent}) => {
+const BookRequestForm = ({student,book}) => {
 
     const [open, setOpen] = React.useState(false);
 
     const [form, setForm] = useState({
-        studentName: student.studentName,
-        email: student.email,
-        phone: student.phone
+        startDate:"",
+        endDate:""
     });
-
-    const id = student.id;
 
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
 
-    const {errors, validateForm} = useStudentUpdateFormValidator(form)
+    const {errors, validateForm} = RequestBookValidator(form);
 
     const handleClickToOpen = () => {
-        setStudent({id: id, studentName: form.studentName, email: form.email, phone: form.phone})
         setOpen(true);
     };
  
     const handleToClose = () => {
         setOpen(false);
-        navigate("/studentDetail")
+        navigate("/books")
     };
 
     const onUpdateField = e => {
@@ -49,7 +45,7 @@ const UpdateStudent = ({student, setStudent}) => {
         e.preventDefault();    
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
-        updateStudent(id, form.studentName, form.email, form.phone).then(
+        registerRequest(student,book,form.startDate,form.endDate).then(
             response => {
                 handleClickToOpen()
             },
@@ -64,6 +60,11 @@ const UpdateStudent = ({student, setStudent}) => {
         )
     };
 
+    useEffect(() => {
+        console.log(student);
+        console.log(book);
+    })
+
     return (
 
         <div className="col-md-12">
@@ -75,57 +76,41 @@ const UpdateStudent = ({student, setStudent}) => {
             />
 
             <form onSubmit={onSubmitForm}>
-
-                    <div className="form-group">
-                    <label htmlFor="studentName">Name</label>
+                
+                <div className="form-group">
+                    <label htmlFor="startDate">startDate</label>
                     <input
-                        type="text"
+                        type="date"
                         className="form-control"
-                        name="studentName"
-                        aria-label="Student Name"
-                        value={form.studentName}
+                        name="startDate"
+                        aria-label="startDate"
+                        value={form.startDate}
                         onChange={onUpdateField}
                     />
 
-                    {errors.studentName.dirty && errors.studentName.error ? (
-                            <div className="alert alert-danger" role="alert">{errors.studentName.message}</div>
+                    {errors.startDate.dirty && errors.startDate.error ? (
+                            <div className="alert alert-danger" role="alert">{errors.username.message}</div>
                             ) : null}
                     </div>
 
                     <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="email"
-                        aria-label="Email"
-                        value={form.email}
-                        onChange={onUpdateField}
-                    />
+                        <label htmlFor="endDate">End Date</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            name="endDate"
+                            aria-label="endDate"
+                            value={form.endDate}
+                            onChange={onUpdateField}
+                        />
 
-                    {errors.email.dirty && errors.email.error ? (
-                            <div className="alert alert-danger" role="alert">{errors.email.message}</div>
+                        {errors.endDate.dirty && errors.endDate.error ? (
+                            <div className="alert alert-danger" role="alert">{errors.password.message}</div>
                             ) : null}
                     </div>
 
                     <div className="form-group">
-                    <label htmlFor="phone">Phone</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="phone"
-                        aria-label="Phone"
-                        value={form.phone}
-                        onChange={onUpdateField}
-                    />
-
-                    {errors.phone.dirty && errors.phone.error ? (
-                            <div className="alert alert-danger" role="alert">{errors.phone.message}</div>
-                            ) : null}
-                    </div>
-
-                    <div className="form-group">
-                        <button className="btn btn-primary btn-block">Update details</button>
+                        <button className="btn btn-primary btn-block">Request Book</button>
                     </div>
 
                     {message ? 
@@ -135,16 +120,16 @@ const UpdateStudent = ({student, setStudent}) => {
             </div>
 
             <Dialog open={open} onClose={handleToClose}>
-                <DialogTitle>{"Signup successful"}</DialogTitle>
+                <DialogTitle>{"Request Book"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Student details have been updated successfully!
+                        We have received your request kindly wait till the Admin Approves it. Bye Bye !
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <button onClick={handleToClose}
                         color="primary" autoFocus>
-                        Close
+                        Go to Books list
                     </button>
                 </DialogActions>
             </Dialog>
@@ -152,4 +137,4 @@ const UpdateStudent = ({student, setStudent}) => {
     )
 }
 
-export default UpdateStudent;
+export default BookRequestForm;

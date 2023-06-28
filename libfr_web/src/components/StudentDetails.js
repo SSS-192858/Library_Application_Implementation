@@ -6,17 +6,21 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import {deleteStudent} from "../services/auth_services"
 import { useNavigate } from "react-router-dom";
+import { getStudentFromStorage, removeStudentFromStorage } from "../services/localStorageHandler";
 
-
-
-const StudentDetails = ({student, isStudent, isAdmin, setStudent}) => {
+const StudentDetails = ({isStudent, isAdmin}) => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
+
+    const [student, setStudent] = useState(() => {
+        const temp = getStudentFromStorage();
+        return temp;
+    })
 
     const handleToClose = () => {
         deleteStudent(student.id);
         setOpen(false);
-        setStudent(null)
+        removeStudentFromStorage();
         navigate("/students")
     };
 

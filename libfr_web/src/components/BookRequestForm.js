@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 import Dialog from "@mui/material/Dialog";
@@ -8,8 +8,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import {registerRequest} from "../services/request_services";
 import { RequestBookValidator } from "../validators/RequestBookValidator";
+import { getBookFromStorage, getStudentFromStorage } from "../services/localStorageHandler";
 
-const BookRequestForm = ({student,book}) => {
+const BookRequestForm = () => {
 
     const [open, setOpen] = React.useState(false);
 
@@ -17,6 +18,16 @@ const BookRequestForm = ({student,book}) => {
         startDate:"",
         endDate:""
     });
+
+    const [book, setBook] = useState(() => {
+        const temp = getBookFromStorage();
+        return temp;
+    })
+
+    const [student, setStudent] = useState(() => {
+        const temp = getStudentFromStorage();
+        return temp;
+    })
 
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
@@ -59,11 +70,6 @@ const BookRequestForm = ({student,book}) => {
             }
         )
     };
-
-    useEffect(() => {
-        console.log(student);
-        console.log(book);
-    })
 
     return (
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { setBookStudentInStorage } from '../services/localStorageHandler';
 
-export const BookStudentListItem = ({bookStudent,setBookStudent}) => {
+export const BookStudentListItem = ({bookStudent}) => {
   
-
     const handleClick=()=>{
-        setBookStudent(bookStudent);
+        setBookStudentInStorage(bookStudent);
     }
 
     return (

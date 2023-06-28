@@ -79,7 +79,7 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.DELETE,"/requests/delete/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/bookStudent/getAll").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/bookStudent/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET,"/bookStudent/student/**").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/bookStudent/student/**").hasAnyRole("STUDENT", "ADMIN")
                     .requestMatchers(HttpMethod.GET,"/bookStudent/book/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST,"/bookStudent/save/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/bookStudent/delete/**").hasRole("ADMIN")

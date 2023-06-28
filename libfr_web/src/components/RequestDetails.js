@@ -6,14 +6,20 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { deleteRequest , accept } from "../services/request_services";
 import { useNavigate } from "react-router-dom";
+import { getRequestFromStorage } from "../services/localStorageHandler";
 
-const RequestDetails = ({request,isStudent,isAdmin}) => {
+const RequestDetails = ({isStudent,isAdmin}) => {
 
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
     const [acceptOpen, setAcceptOpen] = useState(false);
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+    
+    const [request, setRequest] = useState(() => {
+        const temp = getRequestFromStorage();
+        return temp;
+    })
 
     const handleToClose = () => {
         deleteRequest(request.slno);
@@ -38,7 +44,7 @@ const RequestDetails = ({request,isStudent,isAdmin}) => {
                 navigate("/allRequests")
             },
             error => {
-              const resMessage = "The book can't be assigned for the requeted dates as it has already been issued to someone else for these dates."
+              const resMessage = "The book can't be assigned for the requested dates as it has already been issued to someone else for these dates."
               setMessage(resMessage);
               setAcceptOpen(false);
               setOpen1(true);

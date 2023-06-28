@@ -16,6 +16,12 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent, setStudent}) => {
 
   const {errors, validateForm} = useLoginFormValidator(form);
 
+  const setCurrentStudent = async () => {
+    const temp = await getStudentById();
+    setStudent(temp);
+    return temp;
+  }
+
   const onUpdateField = e => {
     const nextFormState = {
       ...form,
@@ -44,8 +50,7 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent, setStudent}) => {
 
         if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "STUDENT"){
           setIsStudent(true)
-          const temp = getStudentById();
-          setStudent(temp);
+          setCurrentStudent();
           navigate("/user")
         }
       },

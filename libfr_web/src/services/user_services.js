@@ -36,3 +36,30 @@ export const getStudents = async() => {
     console.log(response.data)
     return response.data;
 }
+
+export const getBooksStudents = async() => {
+    const response = await axios.get(API_URL + `bookStudent/getAll`, { headers: { Authorization: "Bearer " + authHeader() } });
+    console.log(response.data)
+    return response.data;
+}
+
+export const getBooksStudentsByBookCode = async (id) => {
+    const response = await axios.get(API_URL + `bookStudent/book/${id}`, {headers: {Authorization: "Bearer "+authHeader()}});
+    return response.data;
+}
+
+export const getBooksStudentsByStudentId = async (id) => {
+    console.log(id);
+    const response = await axios.get(API_URL + `bookStudent/student/${id}`, {headers: {Authorization: "Bearer "+authHeader()}});
+    console.log(response.data)
+    return response.data;
+}
+
+export const getBooksStudentsById = async (id) => {
+    const response = await axios.get(API_URL + `bookStudent/${id}`, {headers: {Authorization: "Bearer "+authHeader()}});
+    return response.data;
+}
+
+export const deleteBookStudent = async (id) => {
+    await axios.delete(API_URL + `bookStudent/delete/${id}`, {headers: {Authorization: "Bearer "+authHeader()}});
+}

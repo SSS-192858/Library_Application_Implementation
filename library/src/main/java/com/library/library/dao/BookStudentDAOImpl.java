@@ -37,11 +37,12 @@ public class BookStudentDAOImpl implements BookStudentDAO{
         Date endDate = request.getEndDate();
         Integer book = request.getBook().getBookCode();
 
-        TypedQuery<BookStudent> typedQuery = this.entityManager.createQuery("FROM BookStudent where book.bookCode = :bookId and startDate not between :startDate and :endDate and endDate not between :startDate and :endDate", BookStudent.class);
+        TypedQuery<BookStudent> typedQuery = this.entityManager.createQuery("FROM BookStudent where book.bookCode = :bookId and ((startDate between :startDate and :endDate) or (endDate between :startDate and :endDate) or (startDate < :startDate and endDate > :endDate))", BookStudent.class);
         typedQuery.setParameter("bookId",book);
         typedQuery.setParameter("startDate",startDate);
         typedQuery.setParameter("endDate",endDate);
-        return !typedQuery.getResultList().isEmpty();
+        System.out.println(typedQuery.getResultList());
+        return !(typedQuery.getResultList().isEmpty());
     }
 
     @Override

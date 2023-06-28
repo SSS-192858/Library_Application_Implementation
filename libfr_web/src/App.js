@@ -16,6 +16,11 @@ import BookUpdateForm from "./components/BookUpdate";
 import UpdateStudent from "./components/StudentUpdateForm";
 import StudentList from "./components/StudentList";
 import StudentDetails from "./components/StudentDetails";
+import RequestList from "./components/RequestList";
+import BookStudentList from "./components/BookStudentList";
+import BookRequestForm from "./components/BookRequestForm";
+import RequestDetails from "./components/RequestDetails";
+import BookStudentDetails from "./components/BookStudentDetails"
 
 function App() {
 
@@ -24,7 +29,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [book, setBook] = useState(null);
   const [student, setStudent] = useState(null);
-
+  const [request, setRequest] = useState(null);
+  const [bookStudent,setBookStudent] = useState(null);
   const resolveLogin = () => {
     const user = getCurrentUser();
     if (user) {
@@ -93,11 +99,22 @@ function App() {
             ): null}
 
             {isAdmin && (
-              <li className="nav-item">
-                <Link to={"/students"} className="nav-link">
-                  Students
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link to={"/allRequests"} className="nav-link">
+                    Requests
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/students"} className="nav-link">
+                    Students
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/bookStudentList"} className="nav-link">BookStudents</Link>
+                </li>
+              </>
+
             )}
 
           </div>
@@ -113,13 +130,27 @@ function App() {
                 </li>
               )}
 
-              {isStudent && (     
+              {isStudent &&(
+                <>
+                <li className="nav-item">
+                  <Link to={"/requestsForStudent"} className="nav-link">
+                    Pending Requests
+                  </Link>
+                </li>
+
+
+                <li className="nav-item">
+                  <Link to={"/bookStudentByStudent"} className="nav-link">
+                    Issued Books
+                  </Link>
+                </li>
+
                 <li className="nav-item">
                   <Link to={"/studentDetail"} className="nav-link">
                     Profile
                   </Link>
                 </li>
-                
+                </>   
               )}
 
               <li className="nav-item">
@@ -154,12 +185,21 @@ function App() {
             <Route path="/registerStudent" element={<SignupStudent />} />
             <Route path="/registerAdmin" element={<SignupAdmin />} />
             <Route path="/books" element={<BooksList setBook={setBook}/>}/>
-            <Route path="/moreInfo" element={<BookDetails book={book}/>} />
+            <Route path="/moreInfo" element={<BookDetails book={book} isStudent={isStudent} isAdmin={isAdmin} setBook={setBook}/>} />
             <Route path="/booksSave" element={<BookSaveForm setBook={setBook}/>}/>
             <Route path="/booksUpdate" element={<BookUpdateForm book={book} setBook={setBook}/>}/>
             <Route path="/students" element={<StudentList setStudent={setStudent}/>}/>
             <Route path="/updateStudent" element={<UpdateStudent student={student} setStudent={setStudent}/>} />
             <Route path="/studentDetail" element={<StudentDetails student={student} isStudent={isStudent} isAdmin={isAdmin} setStudent={setStudent}/>}/>
+            <Route path="/bookRequest" element={<BookRequestForm student={student} book={book}/>}/>
+            <Route path="/allRequests" element={<RequestList choice={1} request={request} setRequest={setRequest}/>} />
+            <Route path="/requestDetails" element={<RequestDetails request={request} isStudent={isStudent} isAdmin={isAdmin} />} />
+            <Route path="/requestsForBook" element={<RequestList choice={2} id={book} setRequest={setRequest}/>}/>
+            <Route path="/bookStudentDetail" element={<BookStudentDetails bookStudent={bookStudent} isAdmin={isAdmin}/>}/>
+            <Route path="/bookStudentList" element={<BookStudentList setBookStudent={setBookStudent} choice={1}/>}/>
+            <Route path="/bookStudentByStudent" element={<BookStudentList setBookStudent={setBookStudent} choice={2} id={student}/>}/>
+            <Route path="/bookStudentByBook" element={<BookStudentList setBookStudent={setBookStudent} choice={3} id={book}/>}/>
+            <Route path="/requestsForStudent" element={<RequestList choice={3} id={student} request={request} setRequest={setRequest}/>}/>
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>

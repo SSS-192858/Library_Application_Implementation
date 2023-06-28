@@ -54,7 +54,7 @@ public class RequestDAOImpl implements RequestDAO {
 
     @Override
     public List<Request> getRequestByBookId(Integer id) {
-        TypedQuery<Request> tpq = this.entityManager.createQuery("FROM Request where book.book_code = :code", Request.class);
+        TypedQuery<Request> tpq = this.entityManager.createQuery("FROM Request where book.bookCode = :code", Request.class);
         tpq.setParameter("code", id);
         return tpq.getResultList();
     }

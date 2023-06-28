@@ -78,7 +78,10 @@ public class RequestController {
 
     @GetMapping("/bookStudent/student/{id}")
     public List<BookStudent> getBookStudentByStudentId(@PathVariable Integer id){
-        return bookStudentService.getBookStudentByStudentId(id);
+        System.out.println("HEREEEE");
+        List<BookStudent> list = bookStudentService.getBookStudentByStudentId(id);
+        System.out.println(list);
+        return list;
     }
 
     @GetMapping("/bookStudent/book/{id}")
@@ -101,11 +104,12 @@ public class RequestController {
     @Transactional
     public BookStudent accept(@RequestBody Request request){
         if(bookStudentService.doesRequestOverlap(request)){
+
             throw new UnavailableForGivenDatesException();
         }else{
             BookStudent bs = new BookStudent();
-            bs.setEnd_date(request.getEndDate());
-            bs.setStart_date(request.getStartDate());
+            bs.setEndDate(request.getEndDate());
+            bs.setStartDate(request.getStartDate());
             bs.setBook(request.getBook());
             bs.setStudent(request.getStudent());
 

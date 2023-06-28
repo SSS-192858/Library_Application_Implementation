@@ -7,12 +7,16 @@ import DialogContent from "@mui/material/DialogContent";
 import { useNavigate } from "react-router-dom";
 import {useBookSaveValidator} from "../validators/BookSaveValidator";
 import {updateBook} from '../services/auth_services';
+import { getBookFromStorage, removeBookFromStorage } from "../services/localStorageHandler";
 
-const BookUpdateForm = ({book, setBook}) => {
+const BookUpdateForm = () => {
   
     const [open,setOpen] = React.useState(false);
 
-    const bookCode = book.bookCode;
+    const [book, setBook] = useState(() => {
+      const temp = getBookFromStorage();
+      return temp;
+    })
 
     const [form, setForm] = useState({
         bookTitle: book.bookTitle,
@@ -24,7 +28,8 @@ const BookUpdateForm = ({book, setBook}) => {
 
   const handleClickToOpen = () => {
     setOpen(true);
-    };
+  };
+
   const [message, setMessage] = useState("");
 
   const {errors, validateForm} = useBookSaveValidator(form)
@@ -40,15 +45,15 @@ const BookUpdateForm = ({book, setBook}) => {
   const handleToClose = () => {
     setOpen(false);
     navigate("/books")
-    setBook(null);
-};
+    removeBookFromStorage();
+  };
 
   const onSubmitForm = e => {
     setMessage("")
     e.preventDefault();    
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
     if (!isValid) return;
-    updateBook(bookCode, form.bookTitle, form.bookDesc, form.author).then(
+    updateBook(book.bookCode, form.bookTitle, form.bookDesc, form.author).then(
         response => {
             handleClickToOpen()
         },
@@ -61,7 +66,7 @@ const BookUpdateForm = ({book, setBook}) => {
             setMessage(resMessage)
         }
     )
-};
+  };
 
   return (
 
@@ -76,7 +81,7 @@ const BookUpdateForm = ({book, setBook}) => {
             <form onSubmit={onSubmitForm}>
                 <div className="form-group">
                     <p>
-                        Book Code : {bookCode}
+                        Book Code : {book.bookCode}
                     </p>
                </div>
                 <div className="form-group">

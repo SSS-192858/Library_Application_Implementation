@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { updateStudent } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +8,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { useStudentUpdateFormValidator } from "../validators/StudentUpdateValidator";
+import { getStudentFromStorage, setStudentInStorage } from "../services/localStorageHandler";
 
-const UpdateStudent = ({student, setStudent}) => {
+const UpdateStudent = () => {
 
     const [open, setOpen] = React.useState(false);
+    const [student, setStudent] = useState(() => {
+        const temp = getStudentFromStorage();
+        return temp;
+    })
 
     const [form, setForm] = useState({
         studentName: student.studentName,
@@ -19,15 +24,14 @@ const UpdateStudent = ({student, setStudent}) => {
         phone: student.phone
     });
 
-    const id = student.id;
-
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
 
     const {errors, validateForm} = useStudentUpdateFormValidator(form)
 
     const handleClickToOpen = () => {
-        setStudent({id: id, studentName: form.studentName, email: form.email, phone: form.phone})
+        const temp = {id: student.id, studentName: form.studentName, email: form.email, phone: form.phone}
+        setStudentInStorage(temp);
         setOpen(true);
     };
  
@@ -49,7 +53,7 @@ const UpdateStudent = ({student, setStudent}) => {
         e.preventDefault();    
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
-        updateStudent(id, form.studentName, form.email, form.phone).then(
+        updateStudent(student.id, form.studentName, form.email, form.phone).then(
             response => {
                 handleClickToOpen()
             },

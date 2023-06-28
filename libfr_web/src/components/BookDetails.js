@@ -6,14 +6,21 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { deleteBook } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
+import { getBookFromStorage, removeBookFromStorage, setBookInStorage } from "../services/localStorageHandler";
 
-const BookDetails = ({book,isStudent,isAdmin,setBook}) => {
+const BookDetails = ({isStudent,isAdmin}) => {
 
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
+    const [book, setBook] = useState(() => {
+        const temp = getBookFromStorage();
+        return temp;
+    })
+
     const handleToClose = () => {
         deleteBook(book.bookCode);
+        removeBookFromStorage();
         setOpen(false);
         navigate("/books");
     };
@@ -27,7 +34,7 @@ const BookDetails = ({book,isStudent,isAdmin,setBook}) => {
     }
 
     const handleRequest = ()=>{
-        setBook(book);
+        setBookInStorage(book);
         console.log(book);
         navigate("/bookRequest")
     }
@@ -47,13 +54,7 @@ const BookDetails = ({book,isStudent,isAdmin,setBook}) => {
             <p>{book.author}</p>
             <p>{book.bookDesc}</p>
 
-            <button onClick={navFunc} className="btn btn-primary btn-block">
-                Update Book
-            </button>
-
-            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block">
-                Delete Book
-            </button>
+            
 
             {isStudent &&
             <button onClick={handleRequest} className="btn btn-primary btn-block">
@@ -62,9 +63,21 @@ const BookDetails = ({book,isStudent,isAdmin,setBook}) => {
             }  
 
             {isAdmin && 
+
+            <>
             <button onClick={seeRequestsForBook} className="btn btn-primary btn-block">
                 See all requests for this book
             </button>
+
+            <button onClick={navFunc} className="btn btn-primary btn-block">
+                Update Book
+            </button>
+
+            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block">
+                Delete Book
+            </button>
+
+            </>
             } 
 
             {isAdmin && 

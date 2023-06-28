@@ -3,8 +3,9 @@ import { useLoginFormValidator } from "../validators/loginFormValidator";
 import { getCurrentUser, login } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
 import { getStudentById } from "../services/user_services";
+import { setStudentInStorage } from "../services/localStorageHandler";
 
-const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent, setStudent}) => {
+const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
   const [form, setForm] = useState({
     username: "",
     password: ""
@@ -18,7 +19,8 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent, setStudent}) => {
 
   const setCurrentStudent = async () => {
     const temp = await getStudentById();
-    setStudent(temp);
+    console.log(temp)
+    setStudentInStorage(temp);
     return temp;
   }
 
@@ -43,9 +45,7 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent, setStudent}) => {
 
         if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "ADMIN"){
           setIsAdmin(true)
-          setStudent(null)
           navigate("/admin")
-          
         }
 
         if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "STUDENT"){

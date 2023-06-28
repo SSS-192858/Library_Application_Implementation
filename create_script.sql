@@ -57,36 +57,37 @@ create table student_book(
 
 ALTER TABLE user_roles
 ADD CONSTRAINT fk_user_userRoles
-FOREIGN KEY (user_id) REFERENCES user(user_id);
+FOREIGN KEY (user_id) REFERENCES user(user_id) on delete cascade;
 
 ALTER TABLE user_roles
 ADD CONSTRAINT fk_role_userRoles
-FOREIGN KEY (role_id) REFERENCES role(role_id);
+FOREIGN KEY (role_id) REFERENCES role(role_id) on delete cascade;
 
 ALTER TABLE student
 ADD CONSTRAINT fk_student_user
-FOREIGN KEY (user_id) REFERENCES user(user_id);
+FOREIGN KEY (user_id) REFERENCES user(user_id) on delete cascade;
 
 ALTER TABLE request
 ADD CONSTRAINT fk_book_request
-FOREIGN KEY (book_code) REFERENCES book(book_code);
+FOREIGN KEY (book_code) REFERENCES book(book_code) on delete cascade;
 
 ALTER TABLE request
 ADD CONSTRAINT fk_student_request
-FOREIGN KEY (student_id) REFERENCES student(student_id);
+FOREIGN KEY (student_id) REFERENCES student(student_id) on delete cascade;
 
 ALTER TABLE student_book
 ADD CONSTRAINT fk_sb_stud
-FOREIGN KEY (student_id) REFERENCES student(student_id);
+FOREIGN KEY (student_id) REFERENCES student(student_id) on delete cascade;
 
 ALTER TABLE student_book
 ADD CONSTRAINT fk_sb_book
-FOREIGN KEY (book_code) REFERENCES book(book_code);
+FOREIGN KEY (book_code) REFERENCES book(book_code) on delete cascade;
 
 INSERT INTO role values (1,'ADMIN'),(2,'STUDENT');
 INSERT INTO user values (1,"admin","$2a$12$5Y0GaYPjhBTO7ueSN3OFc.Xhi72L6Uk3ebhTp7YXVf2ldCiHsoThS");
 -- test123
 INSERT INTO user values (2,"student","$2a$10$GCdiAz.35tPgpxlD.iRsSOkxDNGkBVJLvdDvSorbc/CSnXJoQkDAa");
+INSERT INTO student values (1, 2, "student", "student@gmail.com", "1234567890");
 INSERT INTO book values (1,"jiufhfwh", "qjuywgeu", "qqhfiu gqgfqe bqigqegi");
 
 INSERT INTO user_roles (user_id, role_id) SELECT user.user_id, 1 FROM user WHERE user.username = "admin";

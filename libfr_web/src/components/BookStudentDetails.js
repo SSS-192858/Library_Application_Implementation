@@ -6,8 +6,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { deleteBookStudent } from "../services/user_services";
 import { useNavigate } from "react-router-dom";
+import { getBookStudentFromStorage } from "../services/localStorageHandler";
 
-const BookStudentDetails = ({bookStudent,isAdmin}) => {
+const BookStudentDetails = ({isAdmin}) => {
+
+    const [bookStudent, setBookStudent] = useState(() => {
+        const temp = getBookStudentFromStorage();
+        return temp;
+    })
 
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();

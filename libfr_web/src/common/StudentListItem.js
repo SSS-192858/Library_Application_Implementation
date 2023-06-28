@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { setStudentInStorage } from "../services/localStorageHandler";
 
-const StudentListItem = ({student, setStudent}) => {
+const StudentListItem = ({student}) => {
 
     const handleClick = () => {
-        setStudent(student);
+        setStudentInStorage(student);
     }
-
-    useEffect(() => {
-        console.log(student)
-    })
 
     return (
         <div className="book" onClick={handleClick}>

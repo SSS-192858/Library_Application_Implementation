@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { setBookInStorage, setRequestInStorage, setStudentInStorage } from "../services/localStorageHandler";
 
-const RequestListItem = ({request, setRequest}) => {
+const RequestListItem = ({request}) => {
 
     const handleClick = () => {
-        setRequest(request);
+        setBookInStorage(request.book)
+        setStudentInStorage(request.student)
+        setRequestInStorage(request);
     }
 
     return (

@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { setBookInStorage } from "../services/localStorageHandler";
 
-const BookListItem = ({book, setBook}) => {
+const BookListItem = ({book}) => {
 
     const handleClick = () => {
-        setBook(book)
+        setBookInStorage(book);
     }
-
-    useEffect(() => {
-        console.log(book)
-    })
 
     return (
         <div className="book" onClick={handleClick}>

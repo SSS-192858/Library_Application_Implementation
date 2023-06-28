@@ -27,10 +27,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isStudent, setIsStudent] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [book, setBook] = useState(null);
-  const [student, setStudent] = useState(null);
-  const [request, setRequest] = useState(null);
-  const [bookStudent,setBookStudent] = useState(null);
+
   const resolveLogin = () => {
     const user = getCurrentUser();
     if (user) {
@@ -111,7 +108,7 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/bookStudentList"} className="nav-link">BookStudents</Link>
+                  <Link to={"/bookStudentList"} className="nav-link">Book Issue info</Link>
                 </li>
               </>
 
@@ -181,25 +178,25 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent} setStudent={setStudent}/>} />
+            <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent}/>} />
             <Route path="/registerStudent" element={<SignupStudent />} />
             <Route path="/registerAdmin" element={<SignupAdmin />} />
-            <Route path="/books" element={<BooksList setBook={setBook}/>}/>
-            <Route path="/moreInfo" element={<BookDetails book={book} isStudent={isStudent} isAdmin={isAdmin} setBook={setBook}/>} />
-            <Route path="/booksSave" element={<BookSaveForm setBook={setBook}/>}/>
-            <Route path="/booksUpdate" element={<BookUpdateForm book={book} setBook={setBook}/>}/>
-            <Route path="/students" element={<StudentList setStudent={setStudent}/>}/>
-            <Route path="/updateStudent" element={<UpdateStudent student={student} setStudent={setStudent}/>} />
-            <Route path="/studentDetail" element={<StudentDetails student={student} isStudent={isStudent} isAdmin={isAdmin} setStudent={setStudent}/>}/>
-            <Route path="/bookRequest" element={<BookRequestForm student={student} book={book}/>}/>
-            <Route path="/allRequests" element={<RequestList choice={1} request={request} setRequest={setRequest}/>} />
-            <Route path="/requestDetails" element={<RequestDetails request={request} isStudent={isStudent} isAdmin={isAdmin} />} />
-            <Route path="/requestsForBook" element={<RequestList choice={2} id={book} setRequest={setRequest}/>}/>
-            <Route path="/bookStudentDetail" element={<BookStudentDetails bookStudent={bookStudent} isAdmin={isAdmin}/>}/>
-            <Route path="/bookStudentList" element={<BookStudentList setBookStudent={setBookStudent} choice={1}/>}/>
-            <Route path="/bookStudentByStudent" element={<BookStudentList setBookStudent={setBookStudent} choice={2} id={student}/>}/>
-            <Route path="/bookStudentByBook" element={<BookStudentList setBookStudent={setBookStudent} choice={3} id={book}/>}/>
-            <Route path="/requestsForStudent" element={<RequestList choice={3} id={student} request={request} setRequest={setRequest}/>}/>
+            <Route path="/books" element={<BooksList/>}/>
+            <Route path="/moreInfo" element={<BookDetails isStudent={isStudent} isAdmin={isAdmin}/>} />
+            <Route path="/booksSave" element={<BookSaveForm/>}/>
+            <Route path="/booksUpdate" element={<BookUpdateForm/>}/>
+            <Route path="/students" element={<StudentList/>}/>
+            <Route path="/updateStudent" element={<UpdateStudent/>} />
+            <Route path="/studentDetail" element={<StudentDetails isStudent={isStudent} isAdmin={isAdmin}/>}/>
+            <Route path="/bookRequest" element={<BookRequestForm/>}/>
+            <Route path="/allRequests" element={<RequestList choice={1}/>} />
+            <Route path="/requestDetails" element={<RequestDetails isStudent={isStudent} isAdmin={isAdmin} />} />
+            <Route path="/requestsForBook" element={<RequestList choice={2}/>}/>
+            <Route path="/bookStudentDetail" element={<BookStudentDetails isAdmin={isAdmin}/>}/>
+            <Route path="/bookStudentList" element={<BookStudentList choice={1}/>}/>
+            <Route path="/bookStudentByStudent" element={<BookStudentList choice={2} />}/>
+            <Route path="/bookStudentByBook" element={<BookStudentList choice={3} />}/>
+            <Route path="/requestsForStudent" element={<RequestList choice={3}/>}/>
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>

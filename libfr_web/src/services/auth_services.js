@@ -51,23 +51,6 @@ export const registerStudent = async(username, password, studentName, email, pho
     return "Signup successful";
 }
 
-export const saveBook = async(bookTitle, bookDesc, author) => {
-    var token = authHeader();
-    await axios.post(API_URL + "books/save", {
-        bookTitle,
-        bookDesc,
-        author
-    }, { headers: { Authorization: "Bearer " + token } });
-
-    return "Book Successfully Saved";
-}
-
-export const deleteBook = async(bookCode) => {
-    var token = authHeader();
-    await axios.delete(API_URL + `books/deleteBook/${bookCode}`, { headers: { Authorization: "Bearer " + token } })
-    return "Book Successfully Deleted!";
-}
-
 export const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem('user'));
 }

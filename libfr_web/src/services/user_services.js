@@ -62,3 +62,53 @@ export const getBooksStudentsById = async (id) => {
 export const deleteBookStudent = async (id) => {
     await axios.delete(API_URL + `bookStudent/delete/${id}`, {headers: {Authorization: "Bearer "+authHeader()}});
 }
+
+export const saveBook = async(bookTitle, bookDesc, author) => {
+    var token = authHeader();
+    await axios.post(API_URL + "books/save", {
+        bookTitle,
+        bookDesc,
+        author
+    }, { headers: { Authorization: "Bearer " + token } });
+
+    return "Book Successfully Saved";
+}
+
+export const deleteBook = async(bookCode) => {
+    var token = authHeader();
+    await axios.delete(API_URL + `books/deleteBook/${bookCode}`, { headers: { Authorization: "Bearer " + token } })
+    return "Book Successfully Deleted!";
+}
+
+export const updateBook = async(bookCode, bookTitle, bookDesc, author) => {
+    var token = authHeader();
+
+    await axios.put(API_URL + "books/updateBook", {
+        bookCode,
+        bookTitle,
+        author,
+        bookDesc
+    }, { headers: { Authorization: "Bearer " + token } });
+
+    return "Book Data updated successfully";
+}
+
+export const deleteStudent = async(studentId) => {
+
+    await axios.delete(API_URL + `student/deleteStudent/${studentId}`, { headers: { Authorization: "Bearer " + authHeader() } });
+    return "Student Deleted Successfully";
+}
+
+export const updateStudent = async(id, studentName, email, phone) => {
+    var token = authHeader();
+
+    await axios.put(API_URL + "student/updateStudent", {
+        id,
+        studentName,
+        email,
+        phone
+    }, { headers: { Authorization: "Bearer " + token } });
+
+    return "Data saved successfully";
+}
+

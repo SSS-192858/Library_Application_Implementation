@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLoginFormValidator } from "../validators/loginFormValidator";
-import { getCurrentUser, login } from "../services/auth_services";
+import { getCurrentUser, login } from "../services/user_services";
 import { useNavigate } from "react-router-dom";
 import { getStudentById } from "../services/user_services";
 import { setStudentInStorage } from "../services/localStorageHandler";

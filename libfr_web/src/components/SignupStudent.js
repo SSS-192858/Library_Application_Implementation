@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerStudent } from "../services/auth_services";
+import { registerStudent } from "../services/user_services";
 import { useNavigate } from "react-router-dom";
 
 import Dialog from "@mui/material/Dialog";

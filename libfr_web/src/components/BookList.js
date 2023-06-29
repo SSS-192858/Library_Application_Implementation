@@ -16,11 +16,21 @@ function BooksList() {
   },[])
     
   return (
+    <>
+      { (books.length === 0) ? <div className='container'>
+        <header className='jumbotron'> 
+          Nothing to show
+        </header>
+        
+      </div>
+        : null
+      } 
     <ul id="remove">
       {books.map((data) => (
         <li id="space" key= {data.bookCode}><BookListItem book={data}/></li>
       ))}
     </ul>
+    </>
   );
 }
 

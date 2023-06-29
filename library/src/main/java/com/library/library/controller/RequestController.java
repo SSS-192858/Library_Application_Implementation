@@ -76,10 +76,9 @@ public class RequestController {
         return bookStudentService.getBookStudentById(id);
     }
 
-    @GetMapping("/bookStudent/student/{id}")
-    public List<BookStudent> getBookStudentByStudentId(@PathVariable Integer id){
-        System.out.println("HEREEEE");
-        List<BookStudent> list = bookStudentService.getBookStudentByStudentId(id);
+    @GetMapping("/bookStudent/students/{student_id}")
+    public List<BookStudent> getByStudentId(@PathVariable Integer student_id){
+        List<BookStudent> list = bookStudentService.getBookStudentByStudentId(student_id);
         System.out.println(list);
         return list;
     }

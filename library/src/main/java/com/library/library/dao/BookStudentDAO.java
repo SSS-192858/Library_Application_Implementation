@@ -14,7 +14,7 @@ public interface BookStudentDAO {
 
     public List<BookStudent> findAllBookStudent();
 
-    public List<BookStudent> findBookStudentByStudent(int student_id);
+    public List<BookStudent> findBookStudentByStudent(Integer student_id);
 
     public List<BookStudent> findBookStudentByBook(int book_code);
 

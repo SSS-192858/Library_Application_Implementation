@@ -28,11 +28,21 @@ const RequestList = ({choice}) => {
         getRequests();
     }, [])
 
-    return (<ul id="remove">
-        {requests.map((data) => (
-            <li id="space" key= {data.slno}><RequestListItem request={data}/></li>
-        ))}
+    return (
+    <>
+        { (requests.length === 0) ? <div className='container'>
+            <header className='jumbotron'> 
+                Nothing to show
+            </header>
+        </div>
+            : null
+        }
+        <ul id="remove">
+            {requests.map((data) => (
+                <li id="space" key= {data.slno}><RequestListItem request={data}/></li>
+            ))}
         </ul>
+    </>
     )
 }
 

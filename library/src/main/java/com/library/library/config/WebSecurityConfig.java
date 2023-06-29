@@ -56,7 +56,7 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((configurer)->{
-            configurer.requestMatchers("/authenticate","/register_student").permitAll()
+            configurer.requestMatchers("/authenticate","/register_student", "/bookStudent/students/**").permitAll()
                     .requestMatchers(HttpMethod.POST,"/register_admin").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/dummy_students").hasRole("STUDENT")
                     .requestMatchers(HttpMethod.GET,"/dummy_admin").hasRole("ADMIN")
@@ -79,7 +79,6 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.DELETE,"/requests/delete/**").permitAll()
                     .requestMatchers(HttpMethod.GET,"/bookStudent/getAll").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/bookStudent/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET,"/bookStudent/student/**").hasAnyRole("STUDENT", "ADMIN")
                     .requestMatchers(HttpMethod.GET,"/bookStudent/book/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST,"/bookStudent/save/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/bookStudent/delete/**").hasRole("ADMIN")

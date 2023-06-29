@@ -50,7 +50,7 @@ export const getBooksStudentsByBookCode = async (id) => {
 
 export const getBooksStudentsByStudentId = async (id) => {
     var token = authHeader();
-    const response = await axios.get(API_URL + `bookStudent/student/${id}`, {headers: {Authorization: "Bearer "+token}});
+    const response = await axios.get(API_URL + `bookStudent/students/${id}`, {headers: {Authorization: "Bearer "+token}});
     return response.data;
 }
 

@@ -29,11 +29,21 @@ const BookStudentList = ({choice}) => {
   },[])
     
   return (
-    <ul id="remove">
-      {bookStudents.map((data) => (
-        <li id="space" key= {data.slno}><BookStudentListItem bookStudent={data}/></li>
-      ))}
-    </ul>
+    <>
+      { (bookStudents.length === 0) ? <div className='container'>
+            <header className='jumbotron'> 
+                Nothing to show
+            </header>
+        </div>
+            : null
+      }
+      
+      <ul id="remove">
+        {bookStudents.map((data) => (
+          <li id="space" key= {data.slno}><BookStudentListItem bookStudent={data}/></li>
+        ))}
+      </ul>
+    </>
   );
 }
 

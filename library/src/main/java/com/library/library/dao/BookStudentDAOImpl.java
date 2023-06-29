@@ -59,7 +59,7 @@ public class BookStudentDAOImpl implements BookStudentDAO{
     }
 
     @Override
-    public List<BookStudent> findBookStudentByStudent(int student_id) {
+    public List<BookStudent> findBookStudentByStudent(Integer student_id) {
         TypedQuery<BookStudent> tpq = this.entityManager.createQuery("FROM BookStudent where student.id = :id", BookStudent.class);
         tpq.setParameter("id", student_id);
         return tpq.getResultList();

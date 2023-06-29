@@ -4,7 +4,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import {deleteStudent} from "../services/auth_services"
+import {deleteStudent} from "../services/user_services"
 import { useNavigate } from "react-router-dom";
 import { getStudentFromStorage, removeStudentFromStorage } from "../services/localStorageHandler";
 

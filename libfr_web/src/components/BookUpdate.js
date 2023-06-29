@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { useNavigate } from "react-router-dom";
 import {useBookSaveValidator} from "../validators/BookSaveValidator";
-import {updateBook} from '../services/auth_services';
+import {updateBook} from '../services/user_services';
 import { getBookFromStorage, removeBookFromStorage } from "../services/localStorageHandler";
 
 const BookUpdateForm = () => {

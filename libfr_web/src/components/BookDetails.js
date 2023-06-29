@@ -4,7 +4,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { deleteBook } from "../services/auth_services";
+import { deleteBook } from "../services/user_services";
 import { useNavigate } from "react-router-dom";
 import { getBookFromStorage, removeBookFromStorage, setBookInStorage } from "../services/localStorageHandler";
 

@@ -62,3 +62,20 @@ export const getBooksStudentsById = async (id) => {
 export const deleteBookStudent = async (id) => {
     await axios.delete(API_URL + `bookStudent/delete/${id}`, {headers: {Authorization: "Bearer "+authHeader()}});
 }
+
+export const saveBook = async(bookTitle, bookDesc, author) => {
+    var token = authHeader();
+    await axios.post(API_URL + "books/save", {
+        bookTitle,
+        bookDesc,
+        author
+    }, { headers: { Authorization: "Bearer " + token } });
+
+    return "Book Successfully Saved";
+}
+
+export const deleteBook = async(bookCode) => {
+    var token = authHeader();
+    await axios.delete(API_URL + `books/deleteBook/${bookCode}`, { headers: { Authorization: "Bearer " + token } })
+    return "Book Successfully Deleted!";
+}

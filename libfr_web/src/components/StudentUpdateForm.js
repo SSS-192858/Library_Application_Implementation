@@ -139,7 +139,7 @@ const UpdateStudent = () => {
             </div>
 
             <Dialog open={open} onClose={handleToClose}>
-                <DialogTitle>{"Signup successful"}</DialogTitle>
+                <DialogTitle>{"Update successful"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Student details have been updated successfully!

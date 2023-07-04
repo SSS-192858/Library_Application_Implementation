@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {useBookSaveValidator} from "../validators/BookSaveValidator";
 import {saveBook} from '../services/user_services';
 import { removeBookFromStorage } from "../services/localStorageHandler";
+import image from "../assets/image.png";
 
 const BookSaveForm = () => {
   
@@ -67,7 +68,7 @@ const BookSaveForm = () => {
     <div className="col-md-12">
         <div className="card card-container">
               <img
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                src={image}
                 alt="profile-img"
                 className="profile-img-card"
               />
@@ -80,7 +81,7 @@ const BookSaveForm = () => {
                     type="text"
                     aria-label="bookTitle"
                     name="bookTitle"
-                    placeholder="book name"
+                    placeholder="Book Name"
                     value={form.bookTitle}
                     onChange={onUpdateField}
                     />
@@ -97,7 +98,7 @@ const BookSaveForm = () => {
                     type="bookDesc"
                     aria-label="bookDesc"
                     name="bookDesc"
-                    placeholder="book description"
+                    placeholder="Book Description"
                     value={form.bookDesc}
                     onChange={onUpdateField}
                     />
@@ -114,7 +115,7 @@ const BookSaveForm = () => {
                     type="author"
                     aria-label="author"
                     name="author"
-                    placeholder="book author"
+                    placeholder="Author"
                     value={form.author}
                     onChange={onUpdateField}
                     />
@@ -124,7 +125,7 @@ const BookSaveForm = () => {
                             ) : null}
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary btn-block" type="submit">
+                    <button className="btn btn-success btn-block form-button" type="submit">
                     Save Book
                     </button>
                 </div>

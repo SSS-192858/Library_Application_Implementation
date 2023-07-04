@@ -53,26 +53,46 @@ const RequestDetails = ({isStudent,isAdmin}) => {
     }
 
     return (
-        <div>
-            <p>{request.slno}</p>
-            <p>{request.student.id}</p>
-            <p>{request.student.studentName}</p>
-            <p>{request.student.email}</p>
-            <p>{request.student.phone}</p>
-            <p>{request.book.bookCode}</p>
-            <p>{request.book.bookTitle}</p>
-            <p>{request.book.author}</p>
-            <p>{request.startDate}</p>
-            <p>{request.endDate}</p>
+        <div className="container">
+            <div className="card">
+                <div className="card-body">
+                    <h1 className="card-title">
+                    {request.slno}. {request.book.bookTitle} - {request.student.studentName}
+                    </h1>
+                    <div className="card-text">
+                        
+                        <h4>
+                            Book Details :
+                        </h4>
+                        <p></p>
+                        <p>Author : {request.book.author}</p>
+                        <p>Description : {request.book.bookDesc}</p>
+
+                        <h4>
+                            Student Details :
+                        </h4>
+                        <p></p>
+                        <p>Email : {request.student.email}</p>
+                        <p>Phone : {request.student.phone}</p>
+
+                        <p>
+                            Start Date : {request.startDate}
+                        </p>
+                        
+                        <p>
+                            End Date : {request.endDate}
+                        </p>
+                </div>
 
             {isAdmin &&
-            <button onClick={()=>{setAcceptOpen(true)}} className="btn btn-primary btn-block" type="submit">
+            <button onClick={()=>{setAcceptOpen(true)}} className="btn btn-success" type="submit">
                 Accept
             </button>
             }
-            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block" type="submit" >
+            <button onClick={()=>{setOpen(true)}} className="btn btn-danger" type="submit" >
                 Delete
             </button>
+        </div></div>
             {message==="" ? (
                 <Dialog open={acceptOpen} onClose={handleAccept}>
                     <DialogTitle>{"Accept Request"}</DialogTitle>
@@ -82,11 +102,11 @@ const RequestDetails = ({isStudent,isAdmin}) => {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <button onClick={handleCancelAccept} color="primary" autoFocus>
+                        <button onClick={handleCancelAccept} color="light" autoFocus>
                             Cancel
                         </button>
                         <button onClick={handleAccept}
-                            color="primary" autoFocus>
+                            color="success" autoFocus>
                             Accept
                         </button>
                         
@@ -101,7 +121,7 @@ const RequestDetails = ({isStudent,isAdmin}) => {
                     </DialogContent>
                     <DialogActions>
                         <button onClick={handleToClose}
-                            color="primary" autoFocus>
+                            color="warning" autoFocus>
                             Delete Request
                         </button>
                         

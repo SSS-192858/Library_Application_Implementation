@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerAdmin } from "../services/user_services";
+import { registerAdmin } from "../services/auth_services";
 import { useAdminSignupFormValidator } from "../validators/signupAdminValidator";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import image1 from "../assets/image1.png";
 
 const SignupAdmin = () => {
 
@@ -67,7 +68,7 @@ const SignupAdmin = () => {
         <div className="col-md-12">
             <div className="card card-container">
             <img
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                src={image1}
                 alt="profile-img"
                 className="profile-img-card"
             />
@@ -123,7 +124,7 @@ const SignupAdmin = () => {
                     </div>
 
                     <div className="form-group">
-                        <button className="btn btn-primary btn-block" type="submit">
+                        <button className="btn-block form-button1" type="submit">
                             Register Admin
                         </button>
                     </div>

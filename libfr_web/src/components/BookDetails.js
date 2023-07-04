@@ -48,44 +48,50 @@ const BookDetails = ({isStudent,isAdmin}) => {
     }
 
     return (
-        <div>
-            <p>{book.bookCode}</p>
-            <p>{book.bookTitle}</p>
-            <p>{book.author}</p>
-            <p>{book.bookDesc}</p>
+        <div className="container">
+            <div className="card">
+                <div className="card-body">
+                    <h1 className="card-title">
+                        {book.bookTitle}
+                    </h1>
+                    <div className="card-text">
+                        <p>Book Code - {book.bookCode}</p>
+                        <p>Book Author - {book.author}</p>
+                        <p>{book.bookDesc}</p>
+                        <br />
+                    </div>
 
-            
+                    {isStudent &&
+                    <button onClick={handleRequest} className="btn btn-info">
+                        Request Book
+                    </button>    
+                    }  
 
-            {isStudent &&
-            <button onClick={handleRequest} className="btn btn-primary btn-block">
-                Request Book
-            </button>    
-            }  
+                    {isAdmin && 
 
-            {isAdmin && 
+                    <>
+                    <button onClick={seeRequestsForBook} className="btn btn-success">
+                        See all requests for this book
+                    </button>
 
-            <>
-            <button onClick={seeRequestsForBook} className="btn btn-primary btn-block">
-                See all requests for this book
-            </button>
+                    <button onClick={navFunc} className="btn btn-warning">
+                        Update Book
+                    </button>
 
-            <button onClick={navFunc} className="btn btn-primary btn-block">
-                Update Book
-            </button>
+                    <button onClick={()=>{setOpen(true)}} className="btn btn-danger">
+                        Delete Book
+                    </button>
 
-            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block">
-                Delete Book
-            </button>
+                    </>
+                    } 
 
-            </>
-            } 
-
-            {isAdmin && 
-                <button onClick={seeBookStudentsForBook} className="btn btn-primary btn-block">
-                    See all records for issue of this book
-                </button>
-            } 
-            
+                    {isAdmin && 
+                        <button onClick={seeBookStudentsForBook} className="btn btn-info">
+                            See all records for issue of this book
+                        </button>
+                    }
+                </div>
+            </div>
              
             <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Delete Book"}</DialogTitle>
@@ -102,7 +108,6 @@ const BookDetails = ({isStudent,isAdmin}) => {
                         color="primary" autoFocus>
                         Delete
                     </button>
-                    
                 </DialogActions>
             </Dialog>
             

@@ -49,8 +49,8 @@ function App() {
   }, []);
   
   return (
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <div className="back">
+        <nav className="navbar navbar-expand navbar-dark nav">
           <Link to={"/"} className="navbar-brand">
             Library
           </Link>
@@ -64,26 +64,11 @@ function App() {
             {isAdmin && (
               <>
               <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-              <li className="nav-item">
               <Link to={"/booksSave"} className="nav-link">
                 Save a Book
               </Link>
             </li>
             </>
-            )}
-
-            {isStudent && (
-              <>
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User Board
-                  </Link>
-                </li>
-              </>
             )}
 
             {currentUser ? (

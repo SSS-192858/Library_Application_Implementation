@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from "react-router-dom";
 import { setBookStudentInStorage } from '../services/localStorageHandler';
 
 export const BookStudentListItem = ({bookStudent}) => {
@@ -9,30 +8,21 @@ export const BookStudentListItem = ({bookStudent}) => {
     }
 
     return (
-    <div className="book" onClick={handleClick}>
-    <Link to="/bookStudentDetail">
-        <p>
-            Book Details :
-        </p>
-        <p>{bookStudent.book.bookCode}</p>
-        <p>{bookStudent.book.bookTitle}</p>
-        <p>{bookStudent.book.author}</p>
-        <p>{bookStudent.book.bookDesc}</p>
 
-        <p>
-            Student Details :
-        </p>
-
-        <p>{bookStudent.student.id}</p>
-        <p>{bookStudent.student.studentName}</p>
-
-        <p>
-            Start Date : {bookStudent.startDate}
-        </p>
-        <p>
-            End Date : {bookStudent.endDate}
-        </p>
-    </Link>
-</div>
+    <a href="/bookStudentDetail">
+    <div className="card1" onClick={handleClick}>
+        <div className="card-body">
+            <h3>{bookStudent.book.bookTitle}</h3>
+            <h3>{bookStudent.student.studentName}</h3>
+            <br/>
+            <p>
+                From - {bookStudent.startDate}
+            </p>
+            <p>
+                To - {bookStudent.endDate}
+            </p>
+        </div>
+    </div>
+    </a>
   )
 }

@@ -29,56 +29,62 @@ const BookStudentDetails = ({isAdmin}) => {
     }
 
     return (
-        <div>
-            <div className="book">
-                <p>{bookStudent.slno}</p>
-                <p>
-                    Book Details :
-                </p>
-                <p>{bookStudent.book.bookCode}</p>
-                <p>{bookStudent.book.bookTitle}</p>
-                <p>{bookStudent.book.author}</p>
-                <p>{bookStudent.book.bookDesc}</p>
+        <div className="container">
+            <div className="card">
+                <div className="card-body">
+                    <h1 className="card-title">
+                    {bookStudent.slno}. {bookStudent.book.bookTitle} - {bookStudent.student.studentName}
+                    </h1>
+                    <div className="card-text">
+                        
+                        <h4>
+                            Book Details :
+                        </h4>
+                        <p></p>
+                        <p>Author : {bookStudent.book.author}</p>
+                        <p>Description : {bookStudent.book.bookDesc}</p>
 
-                <p>
-                    Student Details :
-                </p>
+                        <h4>
+                            Student Details :
+                        </h4>
+                        <p></p>
+                        <p>Email : {bookStudent.student.email}</p>
+                        
+                        <p>Phone : {bookStudent.student.phone}</p>
 
-                <p>{bookStudent.student.id}</p>
-                <p>{bookStudent.student.studentName}</p>
-                <p>{bookStudent.student.email}</p>
-                <p>{bookStudent.student.phone}</p>
-
-                <p>
-                    Start Date : {bookStudent.startDate}
-                </p>
-                <p>
-                    End Date : {bookStudent.endDate}
-                </p>
-            {isAdmin && 
-            <button onClick={()=>{setOpen(true)}} className="btn btn-primary btn-block" type="submit">
-                Delete BookStudent
-            </button>
-            }   
-            <Dialog open={open} onClose={handleToClose}>
-                <DialogTitle>{"Delete BookStudent"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Are you sure you want to delete this record?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <button onClick={handleCancel} color="primary" autoFocus>
-                        Cancel
-                    </button>
-                    <button onClick={handleToClose}
-                        color="primary" autoFocus>
+                        <p>
+                            Start Date : {bookStudent.startDate}
+                        </p>
+                        
+                        <p>
+                            End Date : {bookStudent.endDate}
+                        </p>
+                </div>
+                    {isAdmin && 
+                    <button onClick={()=>{setOpen(true)}} className="btn btn-danger" type="submit">
                         Delete BookStudent
                     </button>
-                </DialogActions>
-            </Dialog>
-            </div>
-    </div>
+                    }
+                </div>
+        </div> 
+                <Dialog open={open} onClose={handleToClose}>
+                    <DialogTitle>{"Delete BookStudent"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Are you sure you want to delete this record?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <button onClick={handleCancel} color="light" autoFocus>
+                            Cancel
+                        </button>
+                        <button onClick={handleToClose}
+                            color="warning" autoFocus>
+                            Delete BookStudent
+                        </button>
+                    </DialogActions>
+                </Dialog>
+        </div>
     )
 }
 

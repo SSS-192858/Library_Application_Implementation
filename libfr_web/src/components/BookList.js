@@ -17,19 +17,22 @@ function BooksList() {
     
   return (
     <>
-      { (books.length === 0) ? <div className='container'>
-        <header className='jumbotron'> 
-          Nothing to show
+      { (books.length === 0) ? <div className='container banner'>
+        <header className='jumbotron banner'> 
+          <h5>Nothing to show</h5>
         </header>
         
       </div>
         : null
       } 
-    <ul id="remove">
-      {books.map((data) => (
-        <li id="space" key= {data.bookCode}><BookListItem book={data}/></li>
-      ))}
-    </ul>
+      <div className='container'>
+        <div className='row'>
+
+        {books.map((data) => (
+          <div id="space" key= {data.bookCode} className='col-md-4'><BookListItem book={data}/></div>
+        ))}
+        </div>
+      </div>
     </>
   );
 }

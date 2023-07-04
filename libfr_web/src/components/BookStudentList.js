@@ -30,19 +30,19 @@ const BookStudentList = ({choice}) => {
     
   return (
     <>
-      { (bookStudents.length === 0) ? <div className='container'>
-            <header className='jumbotron'> 
-                Nothing to show
+      { (bookStudents.length === 0) ? <div className='container banner'>
+            <header className='jumbotron banner'> 
+                <h5>Nothing to show</h5>
             </header>
         </div>
             : null
       }
-      
-      <ul id="remove">
+      <div className='container'>
+        <div className='row'>
         {bookStudents.map((data) => (
-          <li id="space" key= {data.slno}><BookStudentListItem bookStudent={data}/></li>
+          <div id="space" key= {data.slno}><BookStudentListItem bookStudent={data}/></div>
         ))}
-      </ul>
+      </div></div>
     </>
   );
 }

@@ -30,18 +30,19 @@ const RequestList = ({choice}) => {
 
     return (
     <>
-        { (requests.length === 0) ? <div className='container'>
-            <header className='jumbotron'> 
-                Nothing to show
+        { (requests.length === 0) ? <div className='container banner'>
+            <header className='jumbotron banner'> 
+            <h5>Nothing to show</h5>
             </header>
         </div>
             : null
         }
-        <ul id="remove">
+        <div className='container'>
+            <div className='row'>
             {requests.map((data) => (
-                <li id="space" key= {data.slno}><RequestListItem request={data}/></li>
+                <div id="space" key= {data.slno}><RequestListItem request={data}/></div>
             ))}
-        </ul>
+        </div></div>
     </>
     )
 }

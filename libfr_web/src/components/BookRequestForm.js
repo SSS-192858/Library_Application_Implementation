@@ -116,7 +116,7 @@ const BookRequestForm = () => {
                     </div>
 
                     <div className="form-group">
-                        <button className="btn btn-primary btn-block">Request Book</button>
+                        <button className="btn btn-success btn-block form-button">Request Book</button>
                     </div>
 
                     {message ? 
@@ -129,7 +129,7 @@ const BookRequestForm = () => {
                 <DialogTitle>{"Request Book"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        We have received your request kindly wait till the Admin Approves it. Bye Bye !
+                        We have received your request kindly wait till the Admin Approves it.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

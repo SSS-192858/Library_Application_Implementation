@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {useBookSaveValidator} from "../validators/BookSaveValidator";
 import {updateBook} from '../services/user_services';
 import { getBookFromStorage, removeBookFromStorage } from "../services/localStorageHandler";
-
+import image from "../assets/image.png";
 const BookUpdateForm = () => {
   
     const [open,setOpen] = React.useState(false);
@@ -73,7 +73,7 @@ const BookUpdateForm = () => {
     <div className="col-md-12">
         <div className="card card-container">
               <img
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                src={image}
                 alt="profile-img"
                 className="profile-img-card"
               />
@@ -135,7 +135,7 @@ const BookUpdateForm = () => {
                             ) : null}
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary btn-block" type="submit">
+                    <button className="btn btn-success btn-block" type="submit">
                     Update Book
                     </button>
                 </div>

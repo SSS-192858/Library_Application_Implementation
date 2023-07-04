@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useLoginFormValidator } from "../validators/loginFormValidator";
-import { getCurrentUser, login } from "../services/user_services";
+import { getCurrentUser, login } from "../services/auth_services";
 import { useNavigate } from "react-router-dom";
 import { getStudentById } from "../services/user_services";
 import { setStudentInStorage } from "../services/localStorageHandler";
+import image1 from "../assets/image1.png";
 
 const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
   const [form, setForm] = useState({
@@ -67,7 +68,7 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
     <div className="col-md-12">
         <div className="card card-container">
               <img
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                src={image1}
                 alt="profile-img"
                 className="profile-img-card"
               />
@@ -105,7 +106,7 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
                             ) : null}
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary btn-block" type="submit">
+                    <button className="btn-block form-button1" type="submit">
                     Login
                     </button>
                 </div>

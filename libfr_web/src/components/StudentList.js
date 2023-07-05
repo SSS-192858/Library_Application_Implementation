@@ -28,7 +28,7 @@ function StudentList(){
       <div className='container'>
         <div className='row'>
           {students.map((data) => (
-            <div id="space" key= {data.id}><StudentListItem student={data}/></div>
+            <div id="space" key= {data.id} className='col-lg-4 col-sm-12 col-md-6'><StudentListItem student={data}/></div>
           ))}
         </div>
       </div>

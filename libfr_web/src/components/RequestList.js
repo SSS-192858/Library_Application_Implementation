@@ -40,7 +40,7 @@ const RequestList = ({choice}) => {
         <div className='container'>
             <div className='row'>
             {requests.map((data) => (
-                <div id="space" key= {data.slno}><RequestListItem request={data}/></div>
+                <div id="space" key= {data.slno} className="col-lg-4 col-sm-12 col-md-6"><RequestListItem request={data}/></div>
             ))}
         </div></div>
     </>

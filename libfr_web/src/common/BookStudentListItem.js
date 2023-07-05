@@ -1,5 +1,6 @@
 import React from 'react'
 import { setBookStudentInStorage } from '../services/localStorageHandler';
+import dateFormat from 'dateformat';
 
 export const BookStudentListItem = ({bookStudent}) => {
   
@@ -12,14 +13,14 @@ export const BookStudentListItem = ({bookStudent}) => {
     <a href="/bookStudentDetail">
     <div className="card1" onClick={handleClick}>
         <div className="card-body">
-            <h3>{bookStudent.book.bookTitle}</h3>
-            <h3>{bookStudent.student.studentName}</h3>
+            <h3>Book- {bookStudent.book.bookTitle}</h3>
+            <h3>Student- {bookStudent.student.studentName}</h3>
             <br/>
             <p>
-                From - {bookStudent.startDate}
+                From - {dateFormat(bookStudent.startDate, "fullDate")}
             </p>
             <p>
-                To - {bookStudent.endDate}
+                To - {dateFormat(bookStudent.endDate, "fullDate")}
             </p>
         </div>
     </div>

@@ -40,7 +40,7 @@ const BookStudentList = ({choice}) => {
       <div className='container'>
         <div className='row'>
         {bookStudents.map((data) => (
-          <div id="space" key= {data.slno}><BookStudentListItem bookStudent={data}/></div>
+          <div id="space" key= {data.slno} className='col-lg-4 col-sm-12 col-md-6'><BookStudentListItem bookStudent={data}/></div>
         ))}
       </div></div>
     </>

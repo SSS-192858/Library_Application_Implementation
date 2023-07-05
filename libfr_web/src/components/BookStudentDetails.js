@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { deleteBookStudent } from "../services/user_services";
 import { useNavigate } from "react-router-dom";
 import { getBookStudentFromStorage } from "../services/localStorageHandler";
-
+import dateFormat from "dateformat";
 const BookStudentDetails = ({isAdmin}) => {
 
     const [bookStudent, setBookStudent] = useState(() => {
@@ -53,11 +53,11 @@ const BookStudentDetails = ({isAdmin}) => {
                         <p>Phone : {bookStudent.student.phone}</p>
 
                         <p>
-                            Start Date : {bookStudent.startDate}
+                            Start Date : {dateFormat(bookStudent.student.startDate,"fullDate")}
                         </p>
                         
                         <p>
-                            End Date : {bookStudent.endDate}
+                            End Date :{dateFormat(bookStudent.endDate,"fullDate")}
                         </p>
                 </div>
                     {isAdmin && 

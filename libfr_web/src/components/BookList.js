@@ -29,7 +29,7 @@ function BooksList() {
         <div className='row'>
 
         {books.map((data) => (
-          <div id="space" key= {data.bookCode} className='col-md-4'><BookListItem book={data}/></div>
+          <div id="space" key= {data.bookCode} className='col-lg-4 col-sm-12 col-md-6'><BookListItem book={data}/></div>
         ))}
         </div>
       </div>

@@ -24,9 +24,28 @@ import BookStudentDetails from "./components/BookStudentDetails"
 
 function App() {
 
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isStudent, setIsStudent] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(() => {
+    const user = getCurrentUser();
+    if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "ADMIN"){
+      return true;
+    }else{
+      return false;
+    }
+  });
+
+  const [isStudent, setIsStudent] = useState(() => {
+    const user = getCurrentUser();
+    if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "STUDENT"){
+      return true;
+    }else{
+      return false;
+    }
+  });
+
+  const [currentUser, setCurrentUser] = useState(() => {
+    const temp = getCurrentUser();
+    return temp;
+  });
 
   const resolveLogin = () => {
     const user = getCurrentUser();
@@ -42,6 +61,7 @@ function App() {
     setCurrentUser(null);
     setIsAdmin(false);
     setIsStudent(false);
+    
   }
 
   useEffect(() => {
@@ -49,17 +69,12 @@ function App() {
   }, []);
   
   return (
-      <div className="back">
+      <div>
         <nav className="navbar navbar-expand navbar-dark nav">
           <Link to={"/"} className="navbar-brand">
             Library
           </Link>
           <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
 
             {isAdmin && (
               <>
@@ -161,8 +176,8 @@ function App() {
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home currentUser={currentUser}/>} />
+            <Route path="/home" element={<Home currentUser={currentUser}/>} />
             <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent}/>} />
             <Route path="/registerStudent" element={<SignupStudent />} />
             <Route path="/registerAdmin" element={<SignupAdmin />} />

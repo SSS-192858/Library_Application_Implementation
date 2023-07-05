@@ -1,13 +1,25 @@
+import { useEffect } from "react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = ({currentUser}) => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const func = () => {
+            if (currentUser){
+                navigate("/books")
+            }else{
+                navigate("/login")
+            }
+        }
+        func();
+    }, [])
 
     return (
-        <div className="container banner">
-            <header className="jumbotron banner">
-                <h3>Home Page</h3>
-            </header>
-        </div> 
+        <> 
+        </>
     );
   
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { setRequestInStorage } from "../services/localStorageHandler";
+import dateFormat from "dateformat";
 
 const RequestListItem = ({request}) => {
 
@@ -15,10 +16,10 @@ const RequestListItem = ({request}) => {
                     <h3>Student- {request.student.studentName}</h3>
                     <br/>
                     <p>
-                        From - {request.startDate}
+                        From - {dateFormat(request.startDate, "fullDate")}
                     </p>
                     <p>
-                        To - {request.endDate}
+                        To - {dateFormat(request.endDate, "fullDate")}
                     </p>
                 </div>
             </div>

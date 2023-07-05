@@ -41,18 +41,18 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
     login(form.username, form.password).then(
       response => {
 
-        const user = getCurrentUser()
+        const user = getCurrentUser();
         setCurrentUser(user)
 
         if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "ADMIN"){
           setIsAdmin(true)
-          navigate("/admin")
+          navigate("/home")
         }
 
         if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "STUDENT"){
           setIsStudent(true)
           setCurrentStudent();
-          navigate("/user")
+          navigate("/home")
         }
       },
       error => {

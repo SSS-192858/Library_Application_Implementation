@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { deleteRequest , accept } from "../services/request_services";
 import { useNavigate } from "react-router-dom";
 import { getRequestFromStorage } from "../services/localStorageHandler";
+import dateFormat from "dateformat";
 
 const RequestDetails = ({isStudent,isAdmin}) => {
 
@@ -76,11 +77,11 @@ const RequestDetails = ({isStudent,isAdmin}) => {
                         <p>Phone : {request.student.phone}</p>
 
                         <p>
-                            Start Date : {request.startDate}
+                            Start Date : {dateFormat(bookStudent.student.startDate,"fullDate")}
                         </p>
                         
                         <p>
-                            End Date : {request.endDate}
+                            End Date : {dateFormat(bookStudent.endDate,"fullDate")}
                         </p>
                 </div>
 

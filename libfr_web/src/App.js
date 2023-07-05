@@ -5,8 +5,6 @@ import { getCurrentUser, logout } from './services/auth_services';
 import { useEffect, useState } from 'react';
 import LoginForm from './components/loginForm';
 import Home from './components/home';
-import BoardUser from './components/BoardUser';
-import BoardAdmin from "./components/BoardAdmin";
 import SignupStudent from "./components/SignupStudent";
 import SignupAdmin from "./components/SignupAdmin";
 import BooksList from "./components/BookList";
@@ -21,6 +19,7 @@ import BookStudentList from "./components/BookStudentList";
 import BookRequestForm from "./components/BookRequestForm";
 import RequestDetails from "./components/RequestDetails";
 import BookStudentDetails from "./components/BookStudentDetails"
+import { removeBookFromStorage, removeBookStudentFromStorage, removeRequestFromStorage, removeStudentFromStorage } from "./services/localStorageHandler";
 
 function App() {
 
@@ -53,6 +52,10 @@ function App() {
       setCurrentUser(user);
       setIsAdmin(user.user.roles[0].name === "ADMIN");
       setIsStudent(user.user.roles[0].name === "STUDENT");
+      removeBookFromStorage();
+      removeRequestFromStorage();
+      removeBookStudentFromStorage();
+      removeStudentFromStorage();
     }
   };
 
@@ -197,8 +200,6 @@ function App() {
             <Route path="/bookStudentByStudent" element={<BookStudentList choice={2} />}/>
             <Route path="/bookStudentByBook" element={<BookStudentList choice={3} />}/>
             <Route path="/requestsForStudent" element={<RequestList choice={3}/>}/>
-            <Route path="/user" element={<BoardUser />} />
-            <Route path="/admin" element={<BoardAdmin />} />
           </Routes>
         </div>
       </div>

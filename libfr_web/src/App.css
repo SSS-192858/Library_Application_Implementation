@@ -94,23 +94,6 @@ a:hover {
     color: white;
 }
 
-.book {
-    height: 200px;
-    width: 200px;
-    border-color: red;
-    border-style: solid;
-}
-
-ul#remove {
-    list-style-type: none;
-    padding: 10;
-}
-
-li#space {
-    margin: 10px;
-    padding: 10px
-}
-
 .profile-img-card {
     width: 96px;
     height: 96px;

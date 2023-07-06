@@ -273,4 +273,4 @@ INSERT INTO student_book values (8,14,12,"2023-06-02 18:00:00","2023-06-16 18:00
 INSERT INTO student_book values (9,3,1,"2023-06-02 18:00:00","2023-06-19 18:00:00");
 INSERT INTO student_book values (10,6,20,"2023-06-09 18:00:00","2023-06-25 18:00:00");
 INSERT INTO student_book values (11,2,20,"2023-06-18 18:00:00","2023-06-30 18:00:00");
-INSERT INTO student_book values (12,30,17,"2023-06-23 18:00:00","2023-07-15 18:00:00");s
+INSERT INTO student_book values (12,30,17,"2023-06-23 18:00:00","2023-07-15 18:00:00");

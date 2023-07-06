@@ -77,7 +77,7 @@ const RequestDetails = ({isStudent,isAdmin}) => {
                         <p>Phone : {request.student.phone}</p>
 
                         <p>
-                            Start Date : {dateFormat(bookStudent.student.startDate,"fullDate")}
+                            Start Date : {dateFormat(bookStudent.startDate,"fullDate")}
                         </p>
                         
                         <p>

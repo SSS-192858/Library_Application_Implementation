@@ -53,7 +53,7 @@ const BookStudentDetails = ({isAdmin}) => {
                         <p>Phone : {bookStudent.student.phone}</p>
 
                         <p>
-                            Start Date : {dateFormat(bookStudent.student.startDate,"fullDate")}
+                            Start Date : {dateFormat(bookStudent.startDate,"fullDate")}
                         </p>
                         
                         <p>

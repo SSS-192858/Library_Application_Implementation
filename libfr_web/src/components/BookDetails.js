@@ -110,8 +110,6 @@ const BookDetails = ({isStudent,isAdmin}) => {
                     </button>
                 </DialogActions>
             </Dialog>
-            
-            
         </div>
     )
 }

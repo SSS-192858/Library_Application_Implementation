@@ -1,6 +1,5 @@
 package com.library.library.dao;
 
-import com.library.library.entity.Request;
 import com.library.library.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;

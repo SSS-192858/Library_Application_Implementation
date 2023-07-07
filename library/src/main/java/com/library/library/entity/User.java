@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "user")

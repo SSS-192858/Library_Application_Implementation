@@ -1,7 +1,6 @@
 package com.library.library.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 @Entity
 @Table(name = "book")

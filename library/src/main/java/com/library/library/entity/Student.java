@@ -2,7 +2,9 @@ package com.library.library.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "student")

@@ -2,16 +2,12 @@ package com.library.library.dao;
 
 import com.library.library.entity.BookStudent;
 import com.library.library.entity.Request;
-import com.library.library.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 

@@ -5,8 +5,6 @@ import com.library.library.entity.Student;
 import com.library.library.entity.User;
 import com.library.library.service.JwtUserDetailsService;
 import com.library.library.service.StudentService;
-import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

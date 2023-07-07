@@ -77,11 +77,11 @@ const RequestDetails = ({isStudent,isAdmin}) => {
                         <p>Phone : {request.student.phone}</p>
 
                         <p>
-                            Start Date : {dateFormat(bookStudent.startDate,"fullDate")}
+                            Start Date : {dateFormat(request.startDate,"fullDate")}
                         </p>
                         
                         <p>
-                            End Date : {dateFormat(bookStudent.endDate,"fullDate")}
+                            End Date : {dateFormat(request.endDate,"fullDate")}
                         </p>
                 </div>
 

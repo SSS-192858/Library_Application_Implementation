@@ -52,10 +52,6 @@ function App() {
       setCurrentUser(user);
       setIsAdmin(user.user.roles[0].name === "ADMIN");
       setIsStudent(user.user.roles[0].name === "STUDENT");
-      removeBookFromStorage();
-      removeRequestFromStorage();
-      removeBookStudentFromStorage();
-      removeStudentFromStorage();
     }
   };
 
@@ -64,7 +60,10 @@ function App() {
     setCurrentUser(null);
     setIsAdmin(false);
     setIsStudent(false);
-    
+    removeBookFromStorage();
+    removeRequestFromStorage();
+    removeBookStudentFromStorage();
+    removeStudentFromStorage();
   }
 
   useEffect(() => {

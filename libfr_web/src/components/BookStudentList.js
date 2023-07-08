@@ -15,6 +15,7 @@ const BookStudentList = ({choice}) => {
         setBookStudents(response);
     }else if (choice === 2){
         student = getStudentFromStorage();
+        console.log(student)
         const response = await getBooksStudentsByStudentId(student.id);
         setBookStudents(response);
     }else if (choice === 3){

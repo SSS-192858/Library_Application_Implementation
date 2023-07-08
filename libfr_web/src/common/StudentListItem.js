@@ -1,10 +1,12 @@
 import React from "react";
-import { setStudentInStorage } from "../services/localStorageHandler";
+import { getStudentFromStorage, setStudentInStorage } from "../services/localStorageHandler";
 
 const StudentListItem = ({student}) => {
 
     const handleClick = () => {
         setStudentInStorage(student);
+        const stud = getStudentFromStorage();
+        console.log(stud)
     }
 
     return (

@@ -1,6 +1,6 @@
-drop database if exists Library;
-create database Library;
-use Library;
+drop database if exists library;
+create database library;
+use library;
 
 create table user(
     user_id INTEGER auto_increment PRIMARY KEY,

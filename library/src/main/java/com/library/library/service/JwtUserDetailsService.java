@@ -31,6 +31,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private UserDAO userDao;
 
+    //to load the user details object to be used for authentication
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -42,6 +43,7 @@ public class JwtUserDetailsService implements UserDetailsService {
                 getAuthority(user));
     }
 
+    //to get the user by username, to be used in the controller for authentication and passing data
     public User getUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
         if (user == null) {
@@ -51,6 +53,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return user;
     }
 
+    //to get the authorities, used by the authentication logic
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getRoles().forEach(role -> {
@@ -59,6 +62,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return authorities;
     }
 
+    //method called when we save a new user, gives the required privileges
     public User saveUser(UserDTO user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
@@ -73,7 +77,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return userDao.save(newUser);
     }
 
-
+    //method called when we save a new admin
     public User saveAdmin(UserDTO user){
         User newUser = new User();
         newUser.setUsername(user.getUsername());

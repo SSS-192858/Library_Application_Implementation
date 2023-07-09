@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import image1 from "../assets/image1.png";
 
+// Admin signup form
 const SignupAdmin = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -25,15 +26,18 @@ const SignupAdmin = () => {
 
     const {errors, validateForm} = useAdminSignupFormValidator(form);
 
+    // opens dialog box
     const handleClickToOpen = () => {
         setOpen(true);
     };
- 
+
+    // close Dialog box
     const handleToClose = () => {
         setOpen(false);
         navigate("/home")
     };
 
+    // when any form field is updated, check validity of the field
     const onUpdateField = e => {
         const nextFormState = {
           ...form,
@@ -42,12 +46,19 @@ const SignupAdmin = () => {
         setForm(nextFormState);
     };
 
+    // when Register button is clicked, perform all validation checks ( including backend checks such as unique username )
+    // and if valid, display dialog box signifying completion, else show error message 
+
     const onSubmitForm = e => {
         setMessage("")
-        e.preventDefault();    
+        e.preventDefault(); 
+        // checks validity of form fields   
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
+        // if invalid
         if (!isValid) return;
+        // if valid
         registerAdmin(form.username, form.password).then(
+            //if successful, open dialog box
             response => {
                 handleClickToOpen()
             },
@@ -66,6 +77,7 @@ const SignupAdmin = () => {
     return (
 
         <div className="col-md-12">
+            {/* image of person */}
             <div className="card card-container">
             <img
                 src={image1}
@@ -73,8 +85,9 @@ const SignupAdmin = () => {
                 className="profile-img-card"
             />
 
+            {/* actual form */}
             <form onSubmit={onSubmitForm}>
-                
+                {/* username input field */}
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input
@@ -91,6 +104,7 @@ const SignupAdmin = () => {
                             ) : null}
                     </div>
 
+                    {/* password input field */}
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
@@ -107,6 +121,7 @@ const SignupAdmin = () => {
                             ) : null}
                     </div>
 
+                    {/* confirm password field */}
                     <div className="form-group">
                         <label htmlFor="password">Confirm Password</label>
                         <input
@@ -122,19 +137,22 @@ const SignupAdmin = () => {
                             <div className="alert alert-danger" role="alert">{errors.confirmPassword.message}</div>
                             ) : null}
                     </div>
-
+                    
+                    {/* register button */}
                     <div className="form-group">
-                        <button className="btn-block form-button1" type="submit">
+                        <button className="btn btn-block form-button1" type="submit">
                             Register Admin
                         </button>
                     </div>
 
+                    {/* display error message if any */}
                     {message ? 
                         <div className="alert alert-danger" role="alert">{message}</div>
                         : null}
                 </form>
             </div>
 
+            {/* Display dialog box when admin has been successfully registered */}
             <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Signup successful"}</DialogTitle>
                 <DialogContent>

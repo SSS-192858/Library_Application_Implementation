@@ -3,6 +3,7 @@ package com.library.library.entity;
 import jakarta.persistence.*;
 
 @Entity
+// book entity that will be mapped to book table in the database.
 @Table(name = "book")
 public class Book {
 
@@ -19,14 +20,16 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_code")
+//    The book identification
     private int bookCode;
-
+//    book name
     @Column(name = "book_title")
     private String bookTitle;
-
+//  author of the book
     @Column(name = "book_author")
     private String author;
 
+//    book description
     @Column(name = "book_desc")
     private String bookDesc;
 

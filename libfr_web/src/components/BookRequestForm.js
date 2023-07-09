@@ -11,15 +11,19 @@ import { RequestBookValidator } from "../validators/RequestBookValidator";
 import { getBookFromStorage, getStudentFromStorage } from "../services/localStorageHandler";
 import image from "../assets/image.png";
 
+//component to create a new request for a book
 const BookRequestForm = () => {
 
+    //state to handle the dialog box
     const [open, setOpen] = React.useState(false);
 
+    //form variables
     const [form, setForm] = useState({
         startDate:"",
         endDate:""
     });
 
+    //we retrieve book and student from storage, to send to api when we fill the form
     const [book, setBook] = useState(() => {
         const temp = getBookFromStorage();
         return temp;
@@ -33,8 +37,10 @@ const BookRequestForm = () => {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
 
+    //validation 
     const {errors, validateForm} = RequestBookValidator(form);
 
+    //functions to handle opening and closing of dialog box
     const handleClickToOpen = () => {
         setOpen(true);
     };
@@ -44,6 +50,7 @@ const BookRequestForm = () => {
         navigate("/books")
     };
 
+    //function to manage the form state variable 
     const onUpdateField = e => {
         const nextFormState = {
           ...form,
@@ -52,16 +59,23 @@ const BookRequestForm = () => {
         setForm(nextFormState);
     };
 
+    //function called when submit button is pressed 
     const onSubmitForm = e => {
         setMessage("")
         e.preventDefault();    
+
+        //validation logic
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
+
+        //if valid, register request to backend
         registerRequest(student,book,form.startDate,form.endDate).then(
             response => {
+                //open dialog box if succeeded
                 handleClickToOpen()
             },
             error => {
+                //else set error message
                 const resMessage = (error.response &&
                     error.response.data &&
                     error.response.data.message) ||
@@ -84,6 +98,7 @@ const BookRequestForm = () => {
 
             <form onSubmit={onSubmitForm}>
                 
+                {/* start date input field */}
                 <div className="form-group">
                     <label htmlFor="startDate">startDate</label>
                     <input
@@ -100,6 +115,7 @@ const BookRequestForm = () => {
                             ) : null}
                     </div>
 
+                    {/* end date input field */}
                     <div className="form-group">
                         <label htmlFor="endDate">End Date</label>
                         <input
@@ -120,12 +136,14 @@ const BookRequestForm = () => {
                         <button className="btn btn-success btn-block form-button">Request Book</button>
                     </div>
 
+                    {/* cn=onditionally show error message */}
                     {message ? 
                         <div className="alert alert-danger" role="alert">{message}</div>
                         : null}
                 </form>
             </div>
 
+            {/* dialog box to notify about the success of the request to the api */}
             <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Request Book"}</DialogTitle>
                 <DialogContent>

@@ -25,6 +25,7 @@ public class RequestService {
         this.studentDAO = studentDAO;
     }
 
+    //method to save the request to the database, throws error if student record doesn't exist
     @Transactional
     public Request saveRequest(Request request) throws StudentNotFoundException
     {
@@ -37,6 +38,7 @@ public class RequestService {
         return this.requestDAO.saveRequest(request);
     }
 
+    //to delete a request by id, throws exception if the request is not found
     @Transactional
     public Request deleteRequestbyId(int theID) throws RequestNotFoundException{
         Request request = requestDAO.getRequestById(theID);
@@ -47,11 +49,13 @@ public class RequestService {
         }
     }
 
+    //to get all book requests
     public List<Request> findAllRequests()
     {
         return this.requestDAO.findAllRequests();
     }
 
+    //to get requests by id, throws exception if not found
     public Request getRequestbyID(int theID) throws RequestNotFoundException {
         Request request = requestDAO.getRequestById(theID);
         if (request == null){
@@ -60,10 +64,12 @@ public class RequestService {
         return this.requestDAO.getRequestById(theID);
     }
 
+    //to get requests by student id
     public List<Request> getRequestbyStudentID(int studentID) {
         return this.requestDAO.getRequestByStudentId(studentID);
     }
 
+    //to get requests by book code
     public List<Request> getRequestsByBookCode(int bookCode){
         return this.requestDAO.getRequestByBookId(bookCode);
     }

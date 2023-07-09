@@ -21,17 +21,20 @@ public class BookDAOImpl implements BookDAO {
         this.entityManager = entityManager;
     }
 
+    //find book by book code
     @Override
     public Book findBookById(int book_code) {
         return this.entityManager.find(Book.class,book_code);
     }
 
+    //get all books
     @Override
     public List<Book> findAllbooks() {
         TypedQuery<Book> tpq = this.entityManager.createQuery("FROM Book",Book.class);
         return tpq.getResultList();
     }
 
+    //delete a book by its book code
     @Override
     @Transactional
     public Book deleteById(int book_code) {
@@ -45,6 +48,7 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
+    //save a new book
     @Override
     @Transactional
     public Book saveBook(Book book) {
@@ -52,6 +56,7 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
+    //update existing book record
     @Override
     @Transactional
     public Book updateBook(Book book) {

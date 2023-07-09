@@ -4,13 +4,16 @@ import jakarta.persistence.*;
 
 
 @Entity
+// role entity
 public class Role {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "role_id")
+//    id no for that role.
     private long id;
 
     @Column(name = "role_name")
+//    name of the role.
     private String name;
 
     public long getId() {

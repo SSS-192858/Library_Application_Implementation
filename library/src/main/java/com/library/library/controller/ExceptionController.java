@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
+
+// all the handlers handle specific exceptions and return appropriate error messages
+
 @ControllerAdvice
 @CrossOrigin(origins = "*")
 public class ExceptionController {

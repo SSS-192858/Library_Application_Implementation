@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { stringValidator, emailValidator, phoneValidator } from "./validators";
 
+// checks for errors in the form fields
 const touchErrors = errors => {
     return Object.entries(errors).reduce((acc, [field, fieldError]) => {
         acc[field] = {
@@ -30,6 +31,8 @@ export const useStudentUpdateFormValidator = form => {
         }
     });
 
+    // calling the validators from validators.js
+    // and checking whether they can constitute a valid form entry
     const validateForm = ({ form, field, errors, forceTouchErrors = false }) => {
         let isValid = true;
 
@@ -42,6 +45,8 @@ export const useStudentUpdateFormValidator = form => {
         }
 
         const { studentName, email, phone } = form;
+
+        // checking the validity of data entered in various fields of the update student info form
 
         if (nextErrors.studentName.dirty && (field ? field === "studentName" : true)) {
             const studentNameMessage = stringValidator(studentName, form);
@@ -64,6 +69,7 @@ export const useStudentUpdateFormValidator = form => {
             if (!!phoneMessage) isValid = false;
         }
 
+        // in case of errors, return error messages
         setErrors(nextErrors);
 
         return {

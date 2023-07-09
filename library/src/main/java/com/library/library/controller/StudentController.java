@@ -26,17 +26,14 @@ public class StudentController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
+    //endpoint to delete the student,
     @DeleteMapping("/deleteStudent/{student_id}")
-    public Student deleteStudentByID(@PathVariable int student_id)
-    {
-        Student tempEmployee = this.studentService.findStudentById(student_id);
-        if(tempEmployee==null)
-        {
-            throw new RuntimeException("Student id not found "+student_id);
-        }
+    public Student deleteStudentByID(@PathVariable int student_id) {
+        Student tempStudent = this.studentService.findStudentById(student_id);
         return this.studentService.deleteStudent(student_id);
     }
 
+    //endpoint to update the student records, the user object is extracted from the token, and then assigned
     @PutMapping("/updateStudent")
     public Student updateStudent(@RequestBody Student student, @RequestHeader String Authorization)
     {
@@ -46,18 +43,21 @@ public class StudentController {
         return this.studentService.updateStudent(student);
     }
 
+    //endpoint to get all the student records
     @GetMapping("/getAll")
     public List<Student> findAll()
     {
         return this.studentService.findAll();
     }
 
+    //endpoint to get student record by using student id
     @GetMapping("/getStudent/{student_id}")
     public Student findStudentByID(@PathVariable int student_id)
     {
         return this.studentService.findStudentById(student_id);
     }
 
+    //endpoint to save a student, the user object is assigned using the token
     @PostMapping("/save")
     public Student saveStudent(@RequestBody Student student, @RequestHeader String Authorization)
     {
@@ -69,6 +69,7 @@ public class StudentController {
         return student;
     }
 
+    //endpoint to get the student details using user id, which is extracted from the token
     @GetMapping("/user/getStudent")
     public Student getByUserId(@RequestHeader String Authorization){
         String username = jwtTokenUtil.getUsernameFromToken(Authorization.substring(7));

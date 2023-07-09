@@ -13,33 +13,27 @@ export const getAdminBoard = () => {
 
 export const getBooks = async() => {
     const books = await axios.get(API_URL + "books/getAll", { headers: { Authorization: "Bearer " + authHeader() } });
-    console.log(books.data);
     return books.data;
 }
 
 export const getBookById = async(book_code) => {
     const response = await axios.get(API_URL + "books/getBook/" + book_code, { headers: { Authorization: "Bearer " + authHeader() } });
-    console.log(response.data)
     return response.data;
 }
 
 export const getStudentById = async() => {
     var token = authHeader();
-    console.log(token);
     const response = await axios.get(API_URL + "student/user/getStudent", { headers: { Authorization: "Bearer " + token }});
-    console.log(response.data)
     return response.data;
 }
 
 export const getStudents = async() => {
     const response = await axios.get(API_URL + `student/getAll`, { headers: { Authorization: "Bearer " + authHeader() } });
-    console.log(response.data)
     return response.data;
 }
 
 export const getBooksStudents = async() => {
     const response = await axios.get(API_URL + `bookStudent/getAll`, { headers: { Authorization: "Bearer " + authHeader() } });
-    console.log(response.data)
     return response.data;
 }
 

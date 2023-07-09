@@ -8,7 +8,6 @@ function StudentList(){
 
   const getstudentsComp = async () => {
     const response = await getStudents();
-    console.log(response)
     setStudents(response);
   }
 

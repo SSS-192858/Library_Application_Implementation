@@ -35,7 +35,6 @@ const BookDetails = ({isStudent,isAdmin}) => {
 
     const handleRequest = ()=>{
         setBookInStorage(book);
-        console.log(book);
         navigate("/bookRequest")
     }
 

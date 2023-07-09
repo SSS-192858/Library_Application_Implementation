@@ -20,7 +20,6 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
 
   const setCurrentStudent = async () => {
     const temp = await getStudentById();
-    console.log(temp)
     setStudentInStorage(temp);
     return temp;
   }

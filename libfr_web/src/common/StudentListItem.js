@@ -6,7 +6,6 @@ const StudentListItem = ({student}) => {
     const handleClick = () => {
         setStudentInStorage(student);
         const stud = getStudentFromStorage();
-        console.log(stud)
     }
 
     return (

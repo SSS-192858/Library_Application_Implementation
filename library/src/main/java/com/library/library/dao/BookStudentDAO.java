@@ -5,6 +5,7 @@ import com.library.library.entity.Request;
 
 import java.util.List;
 
+// DAO to access and update values from the bookStudent table in the database
 public interface BookStudentDAO {
 
     public BookStudent deleteBookStudentById(int id);

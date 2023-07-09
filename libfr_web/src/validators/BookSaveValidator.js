@@ -1,6 +1,7 @@
 import { useState } from "react";
-import {stringValidator} from "./validators";
+import { stringValidator } from "./validators";
 
+// checks for errors in the form fields
 const touchErrors = errors => {
     return Object.entries(errors).reduce((acc, [field, fieldError]) => {
         acc[field] = {
@@ -30,6 +31,9 @@ export const useBookSaveValidator = form => {
         }
     });
 
+    // calling the validators from validators.js
+    // and checking whether they can constitute a valid form entry
+
     const validateForm = ({ form, field, errors, forceTouchErrors = false }) => {
         let isValid = true;
 
@@ -41,7 +45,9 @@ export const useBookSaveValidator = form => {
             nextErrors = touchErrors(errors);
         }
 
-        const {bookTitle,author,bookDesc} = form;
+        const { bookTitle, author, bookDesc } = form;
+
+        // checking the validity of data entered in various fields of the add a new book form
 
         if (nextErrors.bookTitle.dirty && (field ? field === "bookTitle" : true)) {
             const message = stringValidator(bookTitle, form);
@@ -63,7 +69,8 @@ export const useBookSaveValidator = form => {
             nextErrors.author.message = authorMessage;
             if (!!authorMessage) isValid = false;
         }
-        
+
+        // in case there are errors, return the error messages
         setErrors(nextErrors);
 
         return {

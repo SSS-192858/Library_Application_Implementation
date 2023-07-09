@@ -22,17 +22,19 @@ public class BookStudentDAOImpl implements BookStudentDAO{
         this.entityManager = entityManager;
     }
 
+    //find bookStudent pairing by id
     @Override
     public BookStudent findBookStudentById(int id) {
         return this.entityManager.find(BookStudent.class,id);
     }
 
+    //while issuing a book, check whether the requested dates overlap with a different record of the same book
     @Override
     public boolean checkOverlap(Request request) {
         Date startDate = request.getStartDate();
         Date endDate = request.getEndDate();
         Integer book = request.getBook().getBookCode();
-
+        // condition that finds overlapping records
         TypedQuery<BookStudent> typedQuery = this.entityManager.createQuery("FROM BookStudent where book.bookCode = :bookId and ((startDate between :startDate and :endDate) or (endDate between :startDate and :endDate) or (startDate < :startDate and endDate > :endDate))", BookStudent.class);
         typedQuery.setParameter("bookId",book);
         typedQuery.setParameter("startDate",startDate);
@@ -41,19 +43,22 @@ public class BookStudentDAOImpl implements BookStudentDAO{
         return !(typedQuery.getResultList().isEmpty());
     }
 
+    // all book issue records
     @Override
     public List<BookStudent> findAllBookStudent() {
         TypedQuery<BookStudent> tpq = this.entityManager.createQuery("FROM BookStudent", BookStudent.class);
         return tpq.getResultList();
     }
 
+    // find all the issue records for a particular book by the book code
     @Override
     public List<BookStudent> findBookStudentByBook(int book_code) {
         TypedQuery<BookStudent> tpq = this.entityManager.createQuery("FROM BookStudent where book.bookCode = :book_code", BookStudent.class);
-        tpq.setParameter("book_code",book_code);
+        tpq.setParameter("book_code", book_code);
         return tpq.getResultList();
     }
 
+    // find all the times a particular student issued any book
     @Override
     public List<BookStudent> findBookStudentByStudent(Integer student_id) {
         TypedQuery<BookStudent> tpq = this.entityManager.createQuery("FROM BookStudent where student.id = :id", BookStudent.class);
@@ -61,6 +66,7 @@ public class BookStudentDAOImpl implements BookStudentDAO{
         return tpq.getResultList();
     }
 
+    //delete a bookStudent record
     @Override
     @Transactional
     public BookStudent deleteBookStudentById(int id) {
@@ -69,6 +75,7 @@ public class BookStudentDAOImpl implements BookStudentDAO{
         return bookStudent;
     }
 
+    // add a new bookStudent record
     @Override
     @Transactional
     public BookStudent makeBookStudent(BookStudent bookStudent) {

@@ -8,22 +8,27 @@ import { deleteBookStudent } from "../services/user_services";
 import { useNavigate } from "react-router-dom";
 import { getBookStudentFromStorage } from "../services/localStorageHandler";
 import dateFormat from "dateformat";
+// this will be used to show book issue details.
 const BookStudentDetails = ({isAdmin}) => {
 
+    // book student that will be used to store the book-student information.
     const [bookStudent, setBookStudent] = useState(() => {
         const temp = getBookStudentFromStorage();
         return temp;
     })
 
+    // open variable that will be used in the working of dialog box.
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
+    // This function will be used when we delete that book-student information.
     const handleToClose = () => {
         deleteBookStudent(bookStudent.slno);
         setOpen(false);
         navigate("/booksStudent");
     };
 
+    // this function will be called when we want to cancel any operation.
     const handleCancel = ()=>{
         setOpen(false);
     }
@@ -60,13 +65,16 @@ const BookStudentDetails = ({isAdmin}) => {
                             End Date :{dateFormat(bookStudent.endDate,"fullDate")}
                         </p>
                 </div>
+                    
                     {isAdmin && 
+                    // Used for deleting a book-student.
                     <button onClick={()=>{setOpen(true)}} className="btn btn-danger" type="submit">
                         Delete BookStudent
                     </button>
                     }
                 </div>
         </div> 
+                {/*Dialog box for confirming deleting of book student info.  */}
                 <Dialog open={open} onClose={handleToClose}>
                     <DialogTitle>{"Delete BookStudent"}</DialogTitle>
                     <DialogContent>
@@ -76,10 +84,12 @@ const BookStudentDetails = ({isAdmin}) => {
                     </DialogContent>
                     <DialogActions>
                         <button onClick={handleCancel} color="light" autoFocus>
+                            {/* Button to cancel the operation. */}
                             Cancel
                         </button>
                         <button onClick={handleToClose}
                             color="warning" autoFocus>
+                            {/*Button to delete book student info */}
                             Delete BookStudent
                         </button>
                     </DialogActions>

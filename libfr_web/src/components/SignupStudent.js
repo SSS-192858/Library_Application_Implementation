@@ -10,6 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { useStudentSignupFormValidator } from "../validators/signupStudentValidator";
 import image1 from "../assets/image1.png";
 
+// student signup form
 const SignupStudent = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -28,15 +29,18 @@ const SignupStudent = () => {
 
     const {errors, validateForm} = useStudentSignupFormValidator(form)
 
+    //opens dialog box
     const handleClickToOpen = () => {
         setOpen(true);
     };
- 
+
+    // closes dialog box
     const handleToClose = () => {
         setOpen(false);
         navigate("/login")
     };
 
+    // when any form field is updated, check validity of the field
     const onUpdateField = e => {
         const nextFormState = {
           ...form,
@@ -45,12 +49,20 @@ const SignupStudent = () => {
         setForm(nextFormState);
     };
 
+    // when register button is clicked, perform all validation checks ( including backend checks such as unique username )
+    // and if valid, display dialog box signifying completion and take student to login page to perform actual login, 
+    // else show error message 
+
     const onSubmitForm = e => {
         setMessage("")
         e.preventDefault();    
+        // check validity of form fields
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
+        // if invalid
         if (!isValid) return;
+        // if valid
         registerStudent(form.username, form.password, form.studentName, form.email, form.phone).then(
+            //if successful, open dialog box
             response => {
                 handleClickToOpen()
             },
@@ -68,6 +80,7 @@ const SignupStudent = () => {
     return (
 
         <div className="col-md-12">
+            {/* image of person */}
             <div className="card card-container">
             <img
                 src={image1}
@@ -75,8 +88,10 @@ const SignupStudent = () => {
                 className="profile-img-card"
             />
 
+            {/* actual form */}
             <form onSubmit={onSubmitForm}>
                 
+                {/* username field */}
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input
@@ -93,6 +108,7 @@ const SignupStudent = () => {
                             ) : null}
                     </div>
 
+                {/* password field */}
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
@@ -109,6 +125,7 @@ const SignupStudent = () => {
                             ) : null}
                     </div>
 
+                    {/* confirm password field */}
                     <div className="form-group">
                         <label htmlFor="password">Confirm Password</label>
                         <input
@@ -125,6 +142,7 @@ const SignupStudent = () => {
                             ) : null}
                     </div>
 
+                {/* student name field */}
                     <div className="form-group">
                     <label htmlFor="studentName">Name</label>
                     <input
@@ -141,6 +159,7 @@ const SignupStudent = () => {
                             ) : null}
                     </div>
 
+                {/* email field */}
                     <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
@@ -157,6 +176,7 @@ const SignupStudent = () => {
                             ) : null}
                     </div>
 
+                {/* phone field */}
                     <div className="form-group">
                     <label htmlFor="phone">Phone</label>
                     <input
@@ -173,9 +193,12 @@ const SignupStudent = () => {
                             ) : null}
                     </div>
 
+                    {/* register button */}
                     <div className="form-group">
-                        <button className="btn-block form-button1">Sign Up</button>
+                        <button className="btn btn-block form-button1">Sign Up</button>
                     </div>
+
+                    {/* display error message (if exists) */}
 
                     {message ? 
                         <div className="alert alert-danger" role="alert">{message}</div>
@@ -183,6 +206,7 @@ const SignupStudent = () => {
                 </form>
             </div>
 
+            {/* Display dialog box when student has been successfully registered */}
             <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Signup successful"}</DialogTitle>
                 <DialogContent>
@@ -191,6 +215,7 @@ const SignupStudent = () => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
+                    {/* close dialog box and go to login page, use same credentials entered here to login as a student */}
                     <button onClick={handleToClose}
                         color="primary" autoFocus>
                         Go to Login Page

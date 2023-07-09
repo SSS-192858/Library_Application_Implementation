@@ -17,6 +17,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+// contains all the various end points relating to authentication,
+// managed using appropriate configuration methods
+
 @RestController
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
@@ -30,6 +33,8 @@ public class AuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    // authenticate / login a user, returns the jwt token if login is successful
+    // else returns invalid username or password error message
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         final String token = tokenGenerator(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -39,7 +44,9 @@ public class AuthenticationController {
         }
         return ResponseEntity.ok(new JwtResponse(token, user));
     }
-
+    
+    // register a new student and their details can be registered at a separate endpoint (in the student controller file)
+    // if the username is unique, returns response ok
     @Transactional
     @RequestMapping(value = "/register_student", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody JwtRequest user) throws Exception {
@@ -51,6 +58,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token, user1));
     }
 
+    // register a new admin, if the username is unique, returns response ok
     @RequestMapping(value = "/register_admin", method = RequestMethod.POST)
     @Transactional
     public ResponseEntity<?> saveAdmin(@RequestBody JwtRequest user) throws Exception {
@@ -62,6 +70,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token, user1));
     }
 
+    // dummy endpoints created only for testing purposes
+    // ----------------------------------------------------------------------------------------------------------
     @RequestMapping(value = "/dummy_students", method = RequestMethod.GET)
     public String userPage(){
         return "Hello Student";
@@ -71,7 +81,10 @@ public class AuthenticationController {
     public String adminPage(){
         return "Hello Admin";
     }
+    // ----------------------------------------------------------------------------------------------------------
 
+    // perform the actual task of authentication
+    // ----------------------------------------------------------------------------------------------------------
     private void authenticate(String username, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -89,4 +102,5 @@ public class AuthenticationController {
 
         return jwtTokenUtil.generateToken(userDetails);
     }
+    // ----------------------------------------------------------------------------------------------------------
 }

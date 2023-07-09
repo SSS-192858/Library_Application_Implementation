@@ -5,25 +5,32 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+// book student entity that will be used to map to student book tabke.
 @Table(name = "student_book")
 public class BookStudent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "slno")
+//    serial number for book student
     private int slno;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "student_id")
+//    name of the student in the book-student 
     private Student student;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "book_code")
+//    name of the book in the book student.
     private Book book;
     @Column(name="start_date")
+    
+//    the start date of issue of the book
     private Date startDate;
 
     @Column(name = "end_date")
+//    the end date of issue of the book
     private Date endDate;
 
 

@@ -1,3 +1,10 @@
+// The following items are stored in local storage, and retrieved, updated or deleted when required.
+// 1. Book
+// 2. Student
+// 3. Request
+// 4. BookStudent
+
+//these are stored so that the data to display on screen is not lost in case of a refresh
 export const setBookInStorage = (book) => {
     localStorage.setItem("book", JSON.stringify(book));
 }
@@ -46,6 +53,6 @@ export const getBookStudentFromStorage = () => {
     return bookStudent;
 }
 
-export const removeBookStudentFromStorage = async () => {
+export const removeBookStudentFromStorage = async() => {
     localStorage.removeItem("bookStudent");
 }

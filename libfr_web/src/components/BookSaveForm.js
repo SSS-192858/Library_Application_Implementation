@@ -10,31 +10,24 @@ import {saveBook} from '../services/user_services';
 import { removeBookFromStorage } from "../services/localStorageHandler";
 import image from "../assets/image.png";
 
+//component to create a new book in the library
 const BookSaveForm = () => {
-  
+
+    //dialog box state
     const [open,setOpen] = React.useState(false);
 
+    //form state
     const [form, setForm] = useState({
         bookTitle: "",
         author: "",
         bookDesc:""
-  });
+    });
 
   const navigate = useNavigate();
 
+  //functions to handle open and close of dialog box
   const handleClickToOpen = () => {
     setOpen(true);
-};
-  const [message, setMessage] = useState("");
-
-  const {errors, validateForm} = useBookSaveValidator(form)
-
-  const onUpdateField = e => {
-    const nextFormState = {
-      ...form,
-      [e.target.name]: e.target.value,
-    };
-    setForm(nextFormState);
   };
 
   const handleToClose = () => {
@@ -43,13 +36,32 @@ const BookSaveForm = () => {
     removeBookFromStorage();
   };
 
+  const [message, setMessage] = useState("");
+
+  const {errors, validateForm} = useBookSaveValidator(form)
+
+  //function to handle the form state variable
+  const onUpdateField = e => {
+    const nextFormState = {
+      ...form,
+      [e.target.name]: e.target.value,
+    };
+    setForm(nextFormState);
+  };
+
+  //function called when the submit button is clicked
   const onSubmitForm = e => {
     setMessage("")
-    e.preventDefault();    
+    e.preventDefault();
+    
+    //if valid, continue, else stop
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
     if (!isValid) return;
+
+    //send request to backend
     saveBook(form.bookTitle, form.bookDesc, form.author).then(
         response => {
+          // if successful, open dialog box, else show error
             handleClickToOpen()
         },
         error => {
@@ -73,6 +85,7 @@ const BookSaveForm = () => {
                 className="profile-img-card"
               />
 
+              {/* book name input */}
             <form onSubmit={onSubmitForm}>
                 <div className="form-group">
                     <label htmlFor="bookTitle">Book Title</label>
@@ -91,6 +104,7 @@ const BookSaveForm = () => {
                             ) : null}
                 </div>
 
+                {/* description input */}
                 <div className="form-group">
                     <label htmlFor="bookDesc">Book Desc</label>
                     <textarea
@@ -108,6 +122,7 @@ const BookSaveForm = () => {
                             ) : null}
                 </div>
 
+                {/* author input */}
                 <div className="form-group">
                     <label htmlFor="author">Author</label>
                     <input
@@ -130,11 +145,15 @@ const BookSaveForm = () => {
                     </button>
                 </div>
 
+                {/* show error message if not successful */}
                 {message ? 
                   <div className="alert alert-danger" role="alert">{message}</div>
                 : null}
             </form>
         </div>
+
+
+        {/* show dialog box in case of success */}
         <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Book Saved successfully"}</DialogTitle>
                 <DialogContent>

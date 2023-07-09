@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// contains all the end points and functionalities relation to Requests and BookStudents.
 @RestController
 @CrossOrigin(origins = "*")
 public class RequestController {
@@ -31,26 +32,31 @@ public class RequestController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
+//    get all requests.
     @GetMapping("/requests/allRequests")
     public List<Request> getAllRequests(){
         return requestService.findAllRequests();
     }
 
+//    get requests by student id.
     @GetMapping("/requests/student/{student_id}")
     public List<Request> getAllRequestsByStudentId(@PathVariable int student_id){
         return requestService.getRequestbyStudentID(student_id);
     }
 
+//    get requests by request id.
     @GetMapping("/requests/{id}")
     public Request getRequestById(@PathVariable int id){
         return requestService.getRequestbyID(id);
     }
 
+//    get requests by book id.
     @GetMapping("/requests/book/{id}")
     public List<Request> getAllRequestsByBookCode(@PathVariable int id){
         return requestService.getRequestsByBookCode(id);
     }
 
+// save requests.
     @PostMapping("/requests/save")
     public Request saveRequest(@RequestBody Request request, @RequestHeader String Authorization){
         request.setSlno(0);
@@ -61,44 +67,48 @@ public class RequestController {
         return requestService.saveRequest(request);
     }
 
+//    delete requests by request id.
     @DeleteMapping("/requests/delete/{id}")
     public Request deleteRequest(@PathVariable Integer id){
         return requestService.deleteRequestbyId(id);
     }
 
+//    get all bookStudents (book issue infos)
     @GetMapping("/bookStudent/getAll")
     public List<BookStudent> getAllBooksOfStudent(){
         return this.bookStudentService.getAllBookStudents();
     }
-
+// get bookStudent by book student ID.
     @GetMapping("/bookStudent/{id}")
     public BookStudent getBookStudentById(@PathVariable Integer id){
         return bookStudentService.getBookStudentById(id);
     }
-
+// get bookStudent by bookStudent Id.
     @GetMapping("/bookStudent/students/{student_id}")
     public List<BookStudent> getByStudentId(@PathVariable Integer student_id){
         List<BookStudent> list = bookStudentService.getBookStudentByStudentId(student_id);
         System.out.println(list);
         return list;
     }
-
+// get bookStudent by book id.
     @GetMapping("/bookStudent/book/{id}")
     public List<BookStudent> getBookStudentByBookId(@PathVariable Integer id){
         return bookStudentService.getBookStudentByBookId(id);
     }
-    
+
+//    save book student.
     @PostMapping("/bookStudent/save")
     public BookStudent saveBookStudent(@RequestBody BookStudent bookStudent){
         bookStudent.setSlno(0);
         return bookStudentService.addNewBookStudentPair(bookStudent);
     }
-
+// delete book student by bookStudent id.
     @DeleteMapping("/bookStudent/delete/{id}")
     public void deleteBookStudentById(@PathVariable Integer id){
         this.bookStudentService.deleteById(id);
     }
 
+//   accept request and saving it as book student
     @PostMapping("/bookStudent/accept")
     @Transactional
     public BookStudent accept(@RequestBody Request request){

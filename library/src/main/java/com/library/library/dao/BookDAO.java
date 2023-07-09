@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+// DAO to access and update values from the books table in the database
 @Repository
 public interface BookDAO  {
     public Book saveBook(Book book);

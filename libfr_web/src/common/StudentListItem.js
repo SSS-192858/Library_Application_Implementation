@@ -1,13 +1,14 @@
 import React from "react";
-import { getStudentFromStorage, setStudentInStorage } from "../services/localStorageHandler";
+import { setStudentInStorage } from "../services/localStorageHandler";
 
 const StudentListItem = ({student}) => {
 
+    //to set the student in storage for the details page
     const handleClick = () => {
         setStudentInStorage(student);
-        const stud = getStudentFromStorage();
     }
 
+    //clickable list item to navigate to the details page
     return (
         <a href="/studentDetail">
             <div className="card1" onClick={handleClick}>

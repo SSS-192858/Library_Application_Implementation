@@ -8,11 +8,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "student")
+// student entity that will be used to map to student table
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
+//    student id number
     private Integer id;
 
     public Integer getId() {
@@ -25,15 +27,19 @@ public class Student {
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
+//    the user
     private User user;
 
     @Column(name = "student_name")
+//    name of the studnet.
     private String studentName;
 
     @Column(name = "student_email")
+//    email id of the student
     private String email;
 
     @Column(name = "student_phno")
+//    phone number of the student.
     private String phone;
 
     public List<Request> getRequests() {

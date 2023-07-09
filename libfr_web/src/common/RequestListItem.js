@@ -4,6 +4,7 @@ import dateFormat from "dateformat";
 
 const RequestListItem = ({request}) => {
 
+    //functioning similar to the BookStudentListItem
     const handleClick = () => {
         setRequestInStorage(request);
     }

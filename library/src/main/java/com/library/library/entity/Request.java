@@ -5,25 +5,31 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+// request entity that will be used to map to request table.
 @Table(name = "request")
 public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "slno")
+//    serial number for the request
     private int slno;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "student_id")
+//    the student who is request the book.
     private Student student;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "book_code")
+//    the book that is being requested.
     private Book book;
 
     @Column(name = "start_date")
+//    start date for the request.
     private Date startDate;
 
+// end date for the request.
     @Column(name = "end_date")
     private Date endDate;
 

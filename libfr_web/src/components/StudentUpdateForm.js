@@ -11,8 +11,10 @@ import { useStudentUpdateFormValidator } from "../validators/StudentUpdateValida
 import { getStudentFromStorage, setStudentInStorage } from "../services/localStorageHandler";
 import image1 from "../assets/image1.png";
 
+// form to update student
 const UpdateStudent = () => {
 
+    // get student from storage, the details of whom will be displayed here
     const [open, setOpen] = React.useState(false);
     const [student, setStudent] = useState(() => {
         const temp = getStudentFromStorage();
@@ -30,17 +32,20 @@ const UpdateStudent = () => {
 
     const {errors, validateForm} = useStudentUpdateFormValidator(form)
 
+    // open dialog box ( when details successfully updated )
     const handleClickToOpen = () => {
         const temp = {id: student.id, studentName: form.studentName, email: form.email, phone: form.phone}
         setStudentInStorage(temp);
         setOpen(true);
     };
- 
+
+    // close dialog box
     const handleToClose = () => {
         setOpen(false);
         navigate("/studentDetail")
     };
 
+    // when any form field is updated, check validity of the field
     const onUpdateField = e => {
         const nextFormState = {
           ...form,
@@ -49,6 +54,9 @@ const UpdateStudent = () => {
         setForm(nextFormState);
     };
 
+    // when update button is clicked, perform all validation checks
+    // and if valid, display dialog box signifying completion and take user
+    // to student detail / profile page, else show errors 
     const onSubmitForm = e => {
         setMessage("")
         e.preventDefault();    
@@ -79,8 +87,10 @@ const UpdateStudent = () => {
                 className="profile-img-card"
             />
 
+            {/* actual form */}
             <form onSubmit={onSubmitForm}>
 
+                {/* student name field */}
                     <div className="form-group">
                     <label htmlFor="studentName">Name</label>
                     <input
@@ -97,6 +107,7 @@ const UpdateStudent = () => {
                             ) : null}
                     </div>
 
+                {/* email */}
                     <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
@@ -113,6 +124,7 @@ const UpdateStudent = () => {
                             ) : null}
                     </div>
 
+                {/* phone */}
                     <div className="form-group">
                     <label htmlFor="phone">Phone</label>
                     <input
@@ -129,16 +141,19 @@ const UpdateStudent = () => {
                             ) : null}
                     </div>
 
+                {/* update button */}
                     <div className="form-group">
                         <button className="btn btn-success btn-block form-button">Update details</button>
                     </div>
 
+                {/* display error message ( if exists )*/}
                     {message ? 
                         <div className="alert alert-danger" role="alert">{message}</div>
                         : null}
                 </form>
             </div>
 
+            {/* Display dialog box when update has been successfully registered */}
             <Dialog open={open} onClose={handleToClose}>
                 <DialogTitle>{"Update successful"}</DialogTitle>
                 <DialogContent>
@@ -147,6 +162,7 @@ const UpdateStudent = () => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
+                    {/* close and navigat eback to student details / profile page */}
                     <button onClick={handleToClose}
                         color="primary" autoFocus>
                         Close

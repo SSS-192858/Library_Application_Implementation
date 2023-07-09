@@ -23,6 +23,8 @@ import { removeBookFromStorage, removeBookStudentFromStorage, removeRequestFromS
 
 function App() {
 
+  // isAdmin variable used to check if the current user logged in is Admin .
+  // Using UseState function to get the current user from local storage.
   const [isAdmin, setIsAdmin] = useState(() => {
     const user = getCurrentUser();
     if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "ADMIN"){
@@ -32,6 +34,8 @@ function App() {
     }
   });
 
+  // isStudent variable used to check if the current user logged in is Student .
+  // Using UseState function to get the current user from local storage.
   const [isStudent, setIsStudent] = useState(() => {
     const user = getCurrentUser();
     if (user && user.user && user.user.roles[0] && user.user.roles[0].name && user.user.roles[0].name === "STUDENT"){
@@ -41,11 +45,14 @@ function App() {
     }
   });
 
+  // currentUser variable that is used to set the current user who is logged in. This also
+  // takes the current user with the help of local storage.
   const [currentUser, setCurrentUser] = useState(() => {
     const temp = getCurrentUser();
     return temp;
   });
 
+  // resolve login function that is used to set the parameters.
   const resolveLogin = () => {
     const user = getCurrentUser();
     if (user) {
@@ -55,8 +62,10 @@ function App() {
     }
   };
 
+  // Applogout function that will clear the local storage(logout()) and all the variables are set to the 
+  // initial state.
   const Applogout = () => {
-    logout();
+    logout(); // removes the userDetails from the local storage.
     setCurrentUser(null);
     setIsAdmin(false);
     setIsStudent(false);
@@ -66,6 +75,7 @@ function App() {
     removeStudentFromStorage();
   }
 
+  // useEffect function that will be used to run the resolveLogin.
   useEffect(() => {
     resolveLogin();
   }, []);
@@ -73,6 +83,7 @@ function App() {
   return (
       <div>
         <nav className="navbar navbar-expand navbar-dark nav">
+          {/* this shall get you back to the home page */}
           <Link to={"/"} className="navbar-brand">
             Library
           </Link>
@@ -81,6 +92,7 @@ function App() {
             {isAdmin && (
               <>
               <li className="nav-item">
+                {/* this will be used to save a book. */}
               <Link to={"/booksSave"} className="nav-link">
                 Save a Book
               </Link>
@@ -91,6 +103,7 @@ function App() {
             {currentUser ? (
             <li className="nav-item">
               <Link to={"/books"} className="nav-link">
+                {/* this will be used to see a set of books */}
                 Books
               </Link>
             </li>
@@ -101,15 +114,18 @@ function App() {
               <>
                 <li className="nav-item">
                   <Link to={"/allRequests"} className="nav-link">
+                    {/* this will be used to see the list of requests. */}
                     Requests
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to={"/students"} className="nav-link">
+                    {/* This will be used to see the list of students */}
                     Students
                   </Link>
                 </li>
                 <li className="nav-item">
+                  {/* this will be used to see the book issue info. */}
                   <Link to={"/bookStudentList"} className="nav-link">Book Issue info</Link>
                 </li>
               </>
@@ -123,6 +139,7 @@ function App() {
               
               {isAdmin && (
                 <li>
+                  {/*  This will be used to redirect you to the form for registering a new admin*/}
                   <a href = "/registerAdmin" className="nav-link">
                     Register New Admin
                   </a>
@@ -132,6 +149,7 @@ function App() {
               {isStudent &&(
                 <>
                 <li className="nav-item">
+                  {/* This will be used to see the requests for that particilar student(logged in) */}
                   <Link to={"/requestsForStudent"} className="nav-link">
                     Pending Requests
                   </Link>
@@ -139,12 +157,14 @@ function App() {
 
 
                 <li className="nav-item">
+                  {/* This will be used to get book issue info for that student */}
                   <Link to={"/bookStudentByStudent"} className="nav-link">
                     Issued Books
                   </Link>
                 </li>
 
                 <li className="nav-item">
+                  {/* This will be used see the studentDetails  */}
                   <Link to={"/studentDetail"} className="nav-link">
                     Profile
                   </Link>
@@ -154,6 +174,7 @@ function App() {
 
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={Applogout}>
+                  {/* This is used for Logging out */}
                   Log out
                 </a>
               </li>
@@ -163,12 +184,14 @@ function App() {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
+                  {/* This will be used to login after entering the credentials. */}
                   Login
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link to={"/registerStudent"} className="nav-link">
+                  {/* This will be used for sign up. */}
                   Sign Up
                 </Link>
               </li>
@@ -178,6 +201,7 @@ function App() {
 
         <div className="container mt-3">
           <Routes>
+            {/* the various pages present in the website */}
             <Route path="/" element={<Home currentUser={currentUser}/>} />
             <Route path="/home" element={<Home currentUser={currentUser}/>} />
             <Route path="/login" element={<LoginForm setCurrentUser = {setCurrentUser} setIsAdmin = {setIsAdmin} setIsStudent = {setIsStudent}/>} />

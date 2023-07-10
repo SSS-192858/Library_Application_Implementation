@@ -162,7 +162,7 @@ const UpdateStudent = () => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    {/* close and navigat eback to student details / profile page */}
+                    {/* close and navigate back to student details / profile page */}
                     <button onClick={handleToClose}
                         color="primary" autoFocus>
                         Close

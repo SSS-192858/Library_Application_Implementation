@@ -35,7 +35,7 @@ const LoginForm = ({setCurrentUser, setIsAdmin, setIsStudent}) => {
     setForm(nextFormState);
   };
 
-  // when Submit button is clicked, perform all validation checks
+  // when Login button is clicked, perform all validation checks
   // and if valid, login the user/admin and display the books page, else display the error message 
   const onSubmitForm = e => {
     setMessage("")

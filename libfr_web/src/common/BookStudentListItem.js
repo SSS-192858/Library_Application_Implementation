@@ -1,7 +1,7 @@
 import React from 'react'
 import { setBookStudentInStorage } from '../services/localStorageHandler';
 import dateFormat from 'dateformat';
-
+import {Link} from 'react-router-dom'
 export const BookStudentListItem = ({bookStudent}) => {
     
     //function to handle click of the list item, sets the BookStudent in local storage
@@ -11,7 +11,7 @@ export const BookStudentListItem = ({bookStudent}) => {
 
     return (
         //clickable link to go to BookStudent Details page
-    <a href="/bookStudentDetail">
+    <Link to={"/bookStudentDetail"}>
     <div className="card1" onClick={handleClick}>
         <div className="card-body">
             <h3>Book- {bookStudent.book.bookTitle}</h3>
@@ -26,6 +26,6 @@ export const BookStudentListItem = ({bookStudent}) => {
             </p>
         </div>
     </div>
-    </a>
+    </Link>
   )
 }

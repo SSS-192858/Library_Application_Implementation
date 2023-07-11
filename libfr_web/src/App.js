@@ -140,9 +140,9 @@ function App() {
               {isAdmin && (
                 <li>
                   {/*  This will be used to redirect you to the form for registering a new admin*/}
-                  <a href = "/registerAdmin" className="nav-link">
+                  <Link to = {"/registerAdmin"} className="nav-link">
                     Register New Admin
-                  </a>
+                  </Link>
                 </li>
               )}
 
@@ -173,10 +173,10 @@ function App() {
               )}
 
               <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={Applogout}>
+                <Link to={"/login"} className="nav-link" onClick={Applogout}>
                   {/* This is used for Logging out */}
                   Log out
-                </a>
+                </Link>
               </li>
 
             </div>

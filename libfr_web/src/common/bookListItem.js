@@ -1,6 +1,6 @@
 import React from "react";
 import { setBookInStorage } from "../services/localStorageHandler";
-
+import {Link} from 'react-router-dom'
 const BookListItem = ({book}) => {
 
     //when we click on the list item, it sets the book in local storage, and migrates there
@@ -10,7 +10,7 @@ const BookListItem = ({book}) => {
 
     return (
         //clickable list item, which shows the book info, and takes to BookDetails page when clicked
-        <a href="/moreInfo">
+        <Link to={"/moreInfo"}>
             <div className="card1" onClick={handleClick}>
                 <div className="card-body">
                     <h1>{book.bookTitle}</h1>
@@ -19,7 +19,7 @@ const BookListItem = ({book}) => {
                     <p>{book.bookDesc}</p>
                 </div>
             </div>
-        </a>
+        </Link>
     )
 }
 export default BookListItem;

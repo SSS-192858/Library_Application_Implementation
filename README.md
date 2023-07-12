@@ -169,8 +169,7 @@ The various endpoints are -
 
 * **/bookStudent/delete/\*\*** - Used to delete a book student record. Accessible to all users.
 * **/bookStudent/accept** - Used to a accept the request and then save it as a bookStudent record in the table. Accessible only to the admins.
-* **/studentSubject/getForStudentAndInstructor/** - used to get the list of student subject records for a given instructor and student combo. This endpoint in exclusive for a instructor.
-
+* 
 * **/requests/allRequests** - See all requests for all books and students. Only admin has access to this endpoint.
 * **/requests/\*\*** - Get details of a request made by its id. Can be viewed by any type of user under certain conditons. (A student can only see his own requests, not others').
 * **/requests/student/\*\*** - Get all requests that belong to a particular student (The *student id* will be pass as *id - (Path Variable)*). Only admin (to view for all students) and students (to view all their pending requests) can access this endpoint.
@@ -191,7 +190,7 @@ The frontend of the application is written in React.js. The folder containing th
     2. **StudentUpdateValidator.js** - the validator for the form shown to update an student's details.
     3. **loginFormValidator.js** - the validator for the form shown to login to the application.
     4. **signupStudentValidator.js** - the validator for the form shown to register a new student account to the application.
-    5. **signupAdminValidato.js** - the validator for the form shown to register a new admin.
+    5. **signupAdminValidator.js** - the validator for the form shown to register a new admin.
     6. **BookSaveValidator.js** - the validator for the form shown to save/update a book.
     7. **RequestBookValidator.js**- the validator for the requests made by the student.
     
@@ -205,6 +204,6 @@ The frontend of the application is written in React.js. The folder containing th
 
 3. **List items** - These contain the list items shown on screen as a part of the list components. All list item components are clickable, and show a summary of the items they represent, and provide links to see full details of the item. Kindly refer to the files to find comments to explain the working of the same. They are present in the common subdirectory of the src directory.
 
-4. **Components** - These are the screens of the application which are shown to the user. They contain forms to create/ update data present in the db, lists to see lists of various entities requested by the user (students, books, requests etc) and details components to see the details of a particular entity. The names of the files can be used to identify which screen serves which purpose. We only show screens to the user which he is allowed to access. Kindly refer to the comments present in various screens to find details of implementation. They are present in the components subdirectory of the src folder.
+4. **Components** - These are the screens of the application which are shown to the user. They contain forms to create/ update data present in the db, lists to see lists of various entities requested by the user (students, books, requests etc) and details components to see the details of a particular entity. The names of the files can be used to identify which screen serves which purpose. We only show screens to the user which he/she is allowed to access. Kindly refer to the comments present in various screens to find details of implementation. They are present in the components subdirectory of the src folder.
 
 5. **Dockerfile** - The dockerfile is also available for the frontend. It builds the project, installs required node modules, and runs the command to provide an image for the frontend.

@@ -103,7 +103,7 @@ respective documentation.
 
 ## Database
 
-1. The .pdf file contains the visual representation of the schema that our database follows. 
+1. The Database Schema-Library.pdf file contains the visual representation of the schema that our database follows. 
 2. The sql folder contains an sql script to initialise the database and the various tables, along with some sample data for testing purposes and to streamline the process of testing.
 3. The sql folder also contains a Dockerfile to initialise a docker image, which runs the create script at the time of running the image.
 4. A description of the tables in the database is provided.

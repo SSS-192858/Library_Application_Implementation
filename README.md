@@ -151,77 +151,60 @@ The various endpoints are -
 * **/register_student** - Endpoint to be used by a student to create a new student account to access the library. Open to all.
 * **/authenticate** - Any person who has been registered with the database can use this endpoint to login with valid credentials. If the user is logged in successfully, they recieve a jwt token which is stored locally and auto logs in the user until it expires, after which user must log in again.
 
-* **/student/getAll** - See all students registered with the organization. Only an instructor and an admin have access to this endpoint.
-* **/student/getbyID/\*\*** - Get details of a particular student by their student id. This can be used by an instructor or admin to view details of the student or by a student to view their personal details.
-* **/student/delete/\*\*** - Delete a student record from the database(The *student id* will be pass as *id - (Path Variable)*). Only admin has access to this endpoint
-* **/student/save** - Save details of a student when registering them. Admin can access this endpoint.
-* **/student/update** - Update details of an already registered student. Can be done by admin, or by a student wanting to update their own details.
+* **/student/getAll** - See all students registered with the organization. Only an admin has access to this endpoint.
+* **/student/getStudent/\*\*** - Get details of a particular student by their student id. This can be used by an admin to view details of the student or by a student to view their personal details.
+* **/student/deleteStudent/\*\*** - Delete a student record from the database(The *student id* will be pass as *id - (Path Variable)*). Only admin has access to this endpoint.
+* **/student/save** - Save details of a student when registering them. Student can access this endpoint.
+* **/student/updateStudent** - Update details of an already registered student. Can be done by a student wanting to update their own details.
 * **/student/user/getStudent** - Get details of a student from user id, which is obtained by sending the jwt token as part of an authorization header, using which the student details can be accesed. Only accessible to a student trying to see their personal details.
 
-* **/subject/allSubjects** - Show all subjects offered by the organisation. Can be viewed by everyone who has logged in.
-* **/subject/\*\*** - Endpoint to get the particular subject by subject-code. All the users have access to this endpoint.
+* **/books/getAll** - Show all books offered by the library. Can be viewed by everyone who has logged in.
+* **/books/getBook/\*\*** - Endpoint to get the particular book by book-code. All the users have access to this endpoint.
 * **/books/deleteBook/** - Endpoint to delete the book. Only Admins have access to this functionality and endpoint.
 * **/books/save** - Used to save a book in the database. Only Admins have access to this endpoint.
 * **/books/updateBook** - Used to update a particular existing book in the database. Admins have access to this endpoint.
-* **/subject/getByInstructorId/\*\*** - Used to return the list of subjects taught by the instructor(whose *id* will be passes as a *Path Variable*).This endpoint is accessible by all users.
-* **/subject/getInstructor/\*\*** - Used to return the instructor who teaches a particular subject(The *subject code* will be pass as *id - (Path Variable)*). This endpoint is accessible by all users.
-* **/subject/assignInstructor/\*\*** - Used to assign a instructor to the subject whose id is equal to *id* in the *Path Variable*. Only Admins have access to this endpoint
-* **/subject/removeInstructor/\*\*** - Used to remove an assigned instructor for a particular subject. Only admins have acces to this endpoint.
-* **/studentSubject/getAll** - Used to get all the student subject relations. Accessible to Admins and Instructors.
-* **/studentSubject/getbyID/\*\*** - Used to get a particular student subject record whose *id* is passed as *Path Variable - id*. This endpoint is accessible by all users.
-* **/studentSubject/save** - Used to save a student subject relation in the database. Only Accessible by admins.
-* **/studentSubject/delete/\*\*** - Used to delete a student subject record. Accessible to all users.
-* **/studentSubject/getByInstructor/\*\*** - used to get the list of student subject records of students who are enrolled under the subjects that are taught by a particular instructor.
-All users have access to this endpoint.
-* **/studentSubject/getByStudent/\*\*** - used to get the list of student subject records of subjects that the student has enrollend himself in.All users have access to this endpoint.
-* **/studentSubject/getBySubject/\*\*** - used to get the list of studnet subject records of subject whose subject_code will be passed as *Path Variable*.All users have access to this endpoint.
-* **/studentSubject/accept** - Used to a accept the request and then save it as a studentSubject record in the table. Accessible only to the admins.
+* **/bookStudent/getAll** - Used to get all the book student relations. Accessible to Admins only.
+* **/bookStudent/\*\*** - Used to get a particular book student record whose *id* is passed as *Path Variable - id*. This endpoint is accessible by admins only.
+* **/bookStudent/save** - Used to save a book student relation in the database. Only Accessible by admins.
+
+* **/bookStudent/delete/\*\*** - Used to delete a book student record. Accessible to all users.
+* **/bookStudent/accept** - Used to a accept the request and then save it as a bookStudent record in the table. Accessible only to the admins.
 * **/studentSubject/getForStudentAndInstructor/** - used to get the list of student subject records for a given instructor and student combo. This endpoint in exclusive for a instructor.
 
-* **/request/getAll** - See all requests across all subjects. Only admin has access to this endpoint.
-* **/requestbyID/\*\*** - Get details of a request made for a subject by its id. Can be viewed by any type of user under certain conditons.
-* **/request/getbyStudent/\*\*** - Get all requests that belong to a particular student (The *student id* will be pass as *id - (Path Variable)*). Only admin (to view for all students) and students (to view all their pending requests) can access this endpoint.
-* **/request/getbyInstructorId/\*\*** - Get all requests that belong to any subject taught by a particular instructor (The *instructor id* will be pass as *id - (Path Variable)*). Only admin (to view for all instructors) and instructors (to view all their pending requests) can access this endpoint.
-* **/request/getbySubjectId/\*\*** - Get all requests for a particular subject by its subject code. Only admin (to view for all subjects) and instructors (provided its a subject they teach) can access this endpoint.
+* **/requests/allRequests** - See all requests for all books and students. Only admin has access to this endpoint.
+* **/requests/\*\*** - Get details of a request made by its id. Can be viewed by any type of user under certain conditons. (A student can only see his own requests, not others').
+* **/requests/student/\*\*** - Get all requests that belong to a particular student (The *student id* will be pass as *id - (Path Variable)*). Only admin (to view for all students) and students (to view all their pending requests) can access this endpoint.
+* **/requests/book/\*\*** - Get all requests for a particular book by its book code. Only admin can access this endpoint.
 * **/request/save** - Make a new request. Students can make a request.
 * **/request/delete** - Delete a request. Students can access this endpoint if they want to delete a request they made or admin can do it for them.
 
-* **/instructor/getAll** - View all instructors on the platform. Can be seen by everyone.
-* **/instructor/getbyId/\*\*** - View a particular instructor by their id. This can be used by an student or admin to view details of the instructor or by a instructor to view their personal details.
-* **/instructor/delete/\*\*** - Delete an instructor record from the database(The *instructor id* will be pass as *id - (Path Variable)*). Only admin has access to this endpoint.
-* **/instructor/save** - Save details of a instructor when registering them. Admin can access this endpoint.
-* **/instructor/update** - Update details of an already registered instrcutor. Can be done by admin, or by a instructor wanting to update their own details.
-* **/instructor/user/getInstructor** - Get details of a instructor from user id, which is obtained by sending the jwt token as part of an authorization header, using which the instructor details can be accesed. Only accessible to a instructor trying to see their personal details.
-
-The ElectiveManagement folder also contains a Dockerfile to initialise a docker image, which runs the backend.
+The library folder also contains a Dockerfile to initialise a docker image, which runs the backend.
 Also, in order to view all the json object formats of the requests that can be made to the backend, refer to the Formats directory.
 
 ## Frontend
 
-The frontend of the application is written in React.js. The folder containing the same is **elecfr_web** There is a single nav bar which shows options based on who is logged in, (student, instructor, admin or no one), and provides to links to go to these web pages. The components are roughly classified into the following types:
+The frontend of the application is written in React.js. The folder containing the same is **libfr_web** There is a single nav bar which shows options based on who is logged in, (student, instructor, admin or no one), and provides to links to go to these web pages. The components are roughly classified into the following types:
 
 1. **Validation functions** - These are used to validate the entries filled in the various forms, and enforce validation rules on the inputs being sent, and display error messages to the respective components for any invalid inputs. They are stored in the validators subdirectory in src. The files are as follows - 
 
     1. **validators.js** - the common validators to be used by all the components
-    2. **InstructorUpdateValidator.js** - the validator for the form shown to update an instructor's details.
+    2. **StudentUpdateValidator.js** - the validator for the form shown to update an student's details.
     3. **loginFormValidator.js** - the validator for the form shown to login to the application.
-    4. **signupAdminValidator.js** - the validator for the form shown to register a new admin account to the application.
-    5. **signupInstructorValidator.js** - the validator for the form shown to register a new instructor account to the application.
-    6. **signupStudentValidator.js** - the validator for the form shown to register a new student account to the application.
-    7. **SubjectRequestValidator.js** - the validator for the form shown to register a new request by a given student.
-    8. **SubjectSaveValidator.js** - the validator for the form shown to save/update a subject.
-
+    4. **signupStudentValidator.js** - the validator for the form shown to register a new student account to the application.
+    5. **signupAdminValidato.js** - the validator for the form shown to register a new admin.
+    6. **BookSaveValidator.js** - the validator for the form shown to save/update a book.
+    7. **RequestBookValidator.js**- the validator for the requests made by the student.
+    
 2. **Services** - These contain services used by the application to handle variables in local storage, and to send requests to the backend, which runs on localhost:8080. They are stored in services subdirectory of src, and are as follows - 
 
     1. **auth_header.js** - a single function to extract the jwt token stored in local storage, to send in requests as a header.
     2. **auth_services.js** - contains all functions to handle authentication services in the application (login, signup, token management etc.)
-    3. **localStorage_services.js** - a number of variables are stored in local storage to prevent loss in case of page refresh, this file contains all functions to handle the same.
+    3. **localStorageHandler.js** - a number of variables are stored in local storage to prevent loss in case of page refresh, this file contains all functions to handle the same.
     4. **user_services.js** - all the other functions to send varied requests to the backend are stored here.
+    5. **request_services** - all functions to handle requests have been stored here.
 
 3. **List items** - These contain the list items shown on screen as a part of the list components. All list item components are clickable, and show a summary of the items they represent, and provide links to see full details of the item. Kindly refer to the files to find comments to explain the working of the same. They are present in the common subdirectory of the src directory.
 
-4. **Components** - These are the screens of the application which are shown to the user. They contain forms to create/ update data present in the db, lists to see lists of various entities requested by the user (students, subjects, requests etc) and details components to see the details of a particular entity. The names of the files can be used to identify which screen serves which purpose. We only show screens to the user which he is allowed to access. Kindly refer to the comments present in various screens to find details of implementation. They are present in the components subdirectory of the src folder.
+4. **Components** - These are the screens of the application which are shown to the user. They contain forms to create/ update data present in the db, lists to see lists of various entities requested by the user (students, books, requests etc) and details components to see the details of a particular entity. The names of the files can be used to identify which screen serves which purpose. We only show screens to the user which he is allowed to access. Kindly refer to the comments present in various screens to find details of implementation. They are present in the components subdirectory of the src folder.
 
 5. **Dockerfile** - The dockerfile is also available for the frontend. It builds the project, installs required node modules, and runs the command to provide an image for the frontend.
-
-

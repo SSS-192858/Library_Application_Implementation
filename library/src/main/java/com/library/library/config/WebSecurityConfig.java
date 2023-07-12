@@ -52,8 +52,6 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((configurer)->{
             configurer.requestMatchers("/authenticate","/register_student", "/bookStudent/students/**").permitAll()
                     .requestMatchers(HttpMethod.POST,"/register_admin").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET,"/dummy_students").hasRole("STUDENT")
-                    .requestMatchers(HttpMethod.GET,"/dummy_admin").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET,"/books/save/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT,"/books/updateBook/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/books/deleteBook/**").hasRole("ADMIN")

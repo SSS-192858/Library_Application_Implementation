@@ -66,7 +66,7 @@ Possible errors encountered while runnning may include -
 1. Permission denied for mvnw file - This occurs when we are not allowed to access the mvnw file in the backend code. This can be resolved by running the following commands - 
 
 ```
-cd ElectiveManagement/
+cd library/
 chmod +x mvnw
 cd ..
 ```
@@ -91,7 +91,7 @@ respective documentation.
 2. Download the four softwares suitable for your operating system.
 3. Next clone this repository.
 4. First go to the sql folder present at the same level `cd sql` or any other equivalent in your OS.
-5. Then run the follwing command in your terminal `source create.sql`. This shall create the necessary database in you local computer. This can also be done by opening the script in workbench, and running it.
+5. Then run the follwing command in your terminal `source create_script.sql`. This shall create the necessary database in you local computer. This can also be done by opening the script in workbench, and running it.
 6. Next go to elecfr_web and type the following in the terminal. `npm install` This shall download all the necessary packages required to run the front-end in your local system.
 7. Now go to the ElectiveManagement folder and then to src/main/resources. `cd src/main/resources`/ it's equivalent in your OS.
 8. Go to *application.properties* file and then **comment in the first three lines**.
@@ -103,7 +103,7 @@ respective documentation.
 
 ## Database
 
-1. The Database-Schema-Subject-Electives.pdf file contains the visual representation of the schema that our database follows. 
+1. The Database-Schema-Library.pdf file contains the visual representation of the schema that our database follows. 
 2. The sql folder contains an sql script to initialise the database and the various tables, along with some sample data for testing purposes and to streamline the process of testing.
 3. The sql folder also contains a Dockerfile to initialise a docker image, which runs the create script at the time of running the image.
 4. A description of the tables in the database is provided.
@@ -121,21 +121,17 @@ respective documentation.
 
 4. **student** - This table is used to store the student details (**student_name**, **student_email** and **student_phno**) for a given user who is a student. It contains a foreign key mapping to the **user_id** of the user which it references, along with other fields. This mapping is unique to ensure one-one mapping.
 
-5. **instructor** - This table caters to the instructor entity in the backend. It contains all the necessary details pertaining to the instructor. For eg.
-it contains columns such as **instructor_name**,**instructor_phone** . This also contains the **user_id** column that shall map to a unique *user* in the **user** table.
+5. **books** - This table stores a record of all the books in the database. It contains the **book_code**, **book_title**, **book_author** and **book_desc** fields.  
 
-6. **subjects** - This table stores a record of all the subjects in the database. It contains the **subject_code**, **subject_name** and **subject_desc** fields. It also contains an **instructor_id** to map to the instructor which teaches the subject. 
+7. **request** - This table stores the information of all the requests made by the students. It contains necessary information such as **student_id** (this shall map this record to a unique *student* in the **student** table.), **book_code**(this shall map this record to a unique *book* in the **books** table.). This also contains the **start_date** and **end_date** representing the request period.
 
-7. **request** - This table stores the information of all the requests made by the students. It contains necessary information such as **student_id** (this shall map this record to a unique *student* in the **student** table.),**subject_code**(this shall map this record to a unique *subject* in the **subject** table.). This also contains the **start_date** and **end_date** representing the request period.
-
-8. **student_subject** - This table stores the information of all the student subject assignments, i.e. which student takes which courses, and the duration of the same. It basically represents a request which has been approved by the admin or the instructor for the given subject.
+8. **student_book** - This table stores the information of all the student book assignments, i.e. which book has been issued to which student, and the duration of the same. It basically represents a request which has been approved by the admin.
 
 ## Backend
 
-The app can consist of various users broadly categorised into 3 roles, depending on their function :- 
-1. **Student** - They request for subjects / electives for specified time periods.
-2. **Instructor** - Each elective has instructors assigned to them who take the course.
-3. **Admin** - Manages overall system and has the task of mainly registering students and instructors; Has unrestricted access.
+The app can consist of various users broadly categorised into 2 roles, depending on their function :- 
+1. **Student** - They request for books for specified time periods.
+2. **Admin** - Manages overall system and has the task of approving requests. Has unrestricted access.
 
 Most of the backend functionality is achieved through various pre-defined end points, and controlling the access to these endpoints, allows us to achieve the desired output. The backend is written in spring boot.
 
@@ -151,7 +147,8 @@ They are responsible for communicating with the database. All the operations to 
 
 The various endpoints are - 
 
-* **/register_admin /register_instructor /register_student** - Only admin has access to these endpoints. They allow the admin to register a student / instructor / a new admin user and store their details in the database.
+* **/register_admin** - Only admin has access to this endpoint. They allow the admin to register a new admin user.
+* **/register_student** - Endpoint to be used by a student to create a new student account to access the library. Open to all.
 * **/authenticate** - Any person who has been registered with the database can use this endpoint to login with valid credentials. If the user is logged in successfully, they recieve a jwt token which is stored locally and auto logs in the user until it expires, after which user must log in again.
 
 * **/student/getAll** - See all students registered with the organization. Only an instructor and an admin have access to this endpoint.
@@ -163,10 +160,9 @@ The various endpoints are -
 
 * **/subject/allSubjects** - Show all subjects offered by the organisation. Can be viewed by everyone who has logged in.
 * **/subject/\*\*** - Endpoint to get the particular subject by subject-code. All the users have access to this endpoint.
-* **/subject/delete/** - Endpoint to delete the subject.
-Only Admins have access to this functionality and endpoint.
-* **/subject/save** - Used to save a subject in the database. Only Admins have access to this endpoint.
-* **subject/update** - Used to update a particular existing subject in the database. Admins and Instructors have access to this endpoint.
+* **/books/deleteBook/** - Endpoint to delete the book. Only Admins have access to this functionality and endpoint.
+* **/books/save** - Used to save a book in the database. Only Admins have access to this endpoint.
+* **/books/updateBook** - Used to update a particular existing book in the database. Admins have access to this endpoint.
 * **/subject/getByInstructorId/\*\*** - Used to return the list of subjects taught by the instructor(whose *id* will be passes as a *Path Variable*).This endpoint is accessible by all users.
 * **/subject/getInstructor/\*\*** - Used to return the instructor who teaches a particular subject(The *subject code* will be pass as *id - (Path Variable)*). This endpoint is accessible by all users.
 * **/subject/assignInstructor/\*\*** - Used to assign a instructor to the subject whose id is equal to *id* in the *Path Variable*. Only Admins have access to this endpoint

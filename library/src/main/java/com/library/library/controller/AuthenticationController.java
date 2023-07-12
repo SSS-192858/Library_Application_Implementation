@@ -70,19 +70,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token, user1));
     }
 
-    // dummy endpoints created only for testing purposes
-    // ----------------------------------------------------------------------------------------------------------
-    @RequestMapping(value = "/dummy_students", method = RequestMethod.GET)
-    public String userPage(){
-        return "Hello Student";
-    }
-
-    @RequestMapping(value = "/dummy_admin", method = RequestMethod.GET)
-    public String adminPage(){
-        return "Hello Admin";
-    }
-    // ----------------------------------------------------------------------------------------------------------
-
     // perform the actual task of authentication
     // ----------------------------------------------------------------------------------------------------------
     private void authenticate(String username, String password) throws Exception {

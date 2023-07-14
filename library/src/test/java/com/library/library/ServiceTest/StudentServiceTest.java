@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -48,9 +50,19 @@ public class StudentServiceTest {
 
     @Test
     public void givenStudentToAddShouldReturnAddedStudent(){
-        when(this.studentDAO.saveStudent(any())).thenReturn(this.student);
-        this.studentService.saveStudent(this.student);
+        when(studentDAO.saveStudent(any())).thenReturn(this.student);
+        Student student1 = this.studentService.saveStudent(this.student);
+        assertThat(student1).isEqualTo(student);
         verify(studentDAO,times(1)).saveStudent(any());
+    }
+
+    @Test
+    public void givenGetAllStudentsShouldReturnListOfAllStudents(){
+        when(studentDAO.findAllStudents()).thenReturn(this.studentList);
+        List<Student> students = studentService.findAll();
+
+        assertEquals(students, studentList);
+        verify(studentDAO, times(1)).findAllStudents();
     }
 
 }

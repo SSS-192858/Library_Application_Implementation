@@ -50,19 +50,18 @@ public class BookServiceTest {
     @Test
     public void givenBookToAddShouldReturnAddedBook(){
         when(bookDAO.saveBook(any())).thenReturn(book1);
-        bookService.addBook(book1);
+        Book book = bookService.addBook(book1);
+        assertThat(book).isEqualTo(book1);
         verify(bookDAO, times(1)).saveBook(any());
     }
 
     @Test
     public void GivenGetAllBooksShouldReturnListOfAllBooks(){
-        bookDAO.saveBook(book1);
 
         when(bookDAO.findAllbooks()).thenReturn(books);
         List<Book> bookList = bookService.findAllBooks();
 
         assertEquals(books,bookList);
-        verify(bookDAO,times(1)).saveBook(book1);
         verify(bookDAO,times(1)).findAllbooks();
     }
 

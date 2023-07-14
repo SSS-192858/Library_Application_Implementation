@@ -68,7 +68,6 @@ public class BookServiceTest {
     @Test
     public void GivenIdWillReturnBook(){
         when(bookDAO.findBookById(1)).thenReturn(book1);
-
         Book newBook = bookService.findBookByCode(1);
         assertThat(newBook).isEqualTo(book1);
     }
@@ -100,7 +99,7 @@ public class BookServiceTest {
         assertThrows(BookNotFoundException.class, () -> bookService.findBookByCode(1));
         assertThrows(BookNotFoundException.class, () -> bookService.updateBook(book1));
         assertThrows(BookNotFoundException.class, () -> bookService.deleteBookByCode(1));
-        verify(bookDAO, never()).updateBook(book1);
+        verify(bookDAO, never()).updateBook(any());
         verify(bookDAO, never()).deleteById(1);
         verify(bookDAO, times(3)).findBookById(1);
     }

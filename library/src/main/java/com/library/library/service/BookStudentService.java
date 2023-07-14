@@ -71,7 +71,6 @@ public class BookStudentService {
         }
     }
 
-
     public Boolean doesRequestOverlap(Request request){
         return this.bookStudentDAO.checkOverlap(request);
     }

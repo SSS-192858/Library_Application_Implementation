@@ -113,7 +113,6 @@ public class RequestController {
     @Transactional
     public BookStudent accept(@RequestBody Request request){
         if(bookStudentService.doesRequestOverlap(request)){
-
             throw new UnavailableForGivenDatesException();
         }else{
             BookStudent bs = new BookStudent();

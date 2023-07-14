@@ -61,7 +61,7 @@ public class RequestService {
         if (request == null){
             throw new RequestNotFoundException();
         }
-        return this.requestDAO.getRequestById(theID);
+        return request;
     }
 
     //to get requests by student id

@@ -31,7 +31,7 @@ const RequestList = ({choice}) => {
 
     useEffect(() => {
         getRequests();
-    }, [])
+    }, [choice])
 
     return (
     <>

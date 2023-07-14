@@ -31,7 +31,7 @@ const BookStudentList = ({choice}) => {
 
   useEffect(() => {
     getRecords();
-  },[])
+  },[choice])
     
   return (
     <>

@@ -13,7 +13,7 @@ const StudentListItem = ({student}) => {
         <Link to={"/studentDetail"}>
             <div className="card1" onClick={handleClick}>
                 <div className="card-body">
-                    <h1>{student.studentName}</h1>
+                    <h1>Name - {student.studentName}</h1>
                     <br />
                     <h6>Email- {student.email}</h6>
                     <h6>Phone- {student.phone}</h6>

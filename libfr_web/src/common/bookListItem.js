@@ -13,9 +13,9 @@ const BookListItem = ({book}) => {
         <Link to={"/moreInfo"}>
             <div className="card1" onClick={handleClick}>
                 <div className="card-body">
-                    <h1>{book.bookTitle}</h1>
+                    <h1>Book Title - {book.bookTitle}</h1>
                     <br />
-                    <h4>{book.author}</h4>
+                    <h4>Book Author-{book.author}</h4>
                     <p>{book.bookDesc}</p>
                 </div>
             </div>

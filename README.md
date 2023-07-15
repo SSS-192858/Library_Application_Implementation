@@ -62,6 +62,22 @@ The running containers can be stopped using the command
 sudo docker-compose down
 ```
 
+The commands to delete all the exited docker containers and images to rebuild everything are as follows - 
+```
+docker rm $(docker ps -a -f status=exited -q)
+docker rmi $(docker images -a -q)
+```
+
+The command to remove only a particular docker container is as follows - 
+```
+docker rm <container_name>
+```
+
+Correspondingly, the command to remove a single docker image is as follows - 
+```
+docker rmi <image_name>
+```
+
 Possible errors encountered while runnning may include -
 1. Permission denied for mvnw file - This occurs when we are not allowed to access the mvnw file in the backend code. This can be resolved by running the following commands - 
 
@@ -207,3 +223,8 @@ The frontend of the application is written in React.js. The folder containing th
 4. **Components** - These are the screens of the application which are shown to the user. They contain forms to create/ update data present in the db, lists to see lists of various entities requested by the user (students, books, requests etc) and details components to see the details of a particular entity. The names of the files can be used to identify which screen serves which purpose. We only show screens to the user which he/she is allowed to access. Kindly refer to the comments present in various screens to find details of implementation. They are present in the components subdirectory of the src folder.
 
 5. **Dockerfile** - The dockerfile is also available for the frontend. It builds the project, installs required node modules, and runs the command to provide an image for the frontend.
+
+## Other Links
+
+1. The link to the digital asset engineering guide is as follows - https://docs.google.com/document/d/1cFKj3P29J-JkyX3x5flS6IWnTE6GJt9SdBS4ZewAlro/edit?usp=sharing
+2. The link to the folder containing the demo videos is as follows - https://drive.google.com/drive/u/0/folders/1cv94AmvWgTYDokt-_pNo8sPMR-lpHDFC
